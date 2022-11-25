@@ -21,7 +21,9 @@
       "@components/*": ["./components/*"],
       "@services/*": ["./services/*"],
       "@utils/*": ["./utils/*"],
-      "@styles/*": ["./styles/*"]
+      "@styles/*": ["./styles/*"],
+      "@icons/*": ["./icons/*"],
+      "@images/*": ["./../public/images/*"]
     },
     "plugins": [
       {

@@ -1,18 +1,19 @@
 "use client";
 
+import { Database } from "types/database";
+
+import Banner from "./Banner";
+
+type Category = Database["public"]["Tables"]["categories"]["Row"];
+
 interface IHomePageProps {
-  users: any[];
+  categories: Omit<Category, "services">[];
 }
 
-const HomePage: React.FC<IHomePageProps> = ({ users }) => {
+const HomePage: React.FC<IHomePageProps> = ({ categories }) => {
   return (
     <>
-      {users.map((user) => (
-        <div key={user.id}>
-          <p>{user.username}</p>
-          <p>{user.email}</p>
-        </div>
-      ))}
+      <Banner />
     </>
   );
 };
