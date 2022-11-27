@@ -2,32 +2,49 @@
 
 import Button from "@components/Button";
 import Input from "@components/Input";
+import InputPassword from "@components/InputPassword";
 import supabase from "@utils/supabase/supabase-browser";
 import Link from "next/link";
-import { useEffect } from "react";
+import { useForm } from "react-hook-form";
+
+interface LoginInputs {
+  email: string;
+  password: string;
+}
 
 const Login: React.FC = () => {
-  const onSubmit = async () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginInputs>();
+
+  const onSubmit = async ({ email, password }: LoginInputs) => {
     const { data, error } = await supabase.auth.signInWithPassword({
-      email: "example@email.com",
-      password: "example-password",
+      email,
+      password,
     });
 
     console.log(data, error);
   };
 
   return (
-    <div className="items-center flex flex-col">
+    <form
+      className="items-center flex flex-col"
+      onSubmit={handleSubmit(onSubmit)}
+    >
       <h1 className="mb-2">Se connecter</h1>
-      <Input label="Email" name="email" autoComplete="email" type="email" />
       <Input
-        label="Mot de passe"
-        name="password"
-        autoComplete="password"
-        type="password"
+        label="Email"
+        autoComplete="email"
+        type="email"
+        {...register("email")}
+        errors={errors}
       />
 
-      <Button className="w-full mt-6" onClick={onSubmit}>
+      <InputPassword errors={errors} {...register("password")} />
+
+      <Button className="w-full mt-6" type="submit">
         Continuer
       </Button>
 
@@ -35,7 +52,7 @@ const Login: React.FC = () => {
         Vous n&lsquo;avez pas encore de compte ?{" "}
         <Link href="/sign-up">S&lsquo;inscrire</Link>
       </p>
-    </div>
+    </form>
   );
 };
 

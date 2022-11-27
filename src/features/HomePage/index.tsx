@@ -1,13 +1,11 @@
 "use client";
 
-import { Database } from "types/database";
+import { ICategory } from "types/category";
 
 import Banner from "./Banner";
 
-type Category = Database["public"]["Tables"]["categories"]["Row"];
-
 interface IHomePageProps {
-  categories: Omit<Category, "services">[];
+  categories: Omit<ICategory, "services">[];
 }
 
 const HomePage: React.FC<IHomePageProps> = ({ categories }) => {

@@ -1,5 +1,6 @@
 "use client";
 
+import { logger } from "@utils/logger";
 import React from "react";
 
 import { useEffect } from "react";
@@ -13,7 +14,7 @@ export default function Error({
 }) {
   useEffect(() => {
     // Log the error to an error reporting service
-    console.error(error);
+    logger.error(error);
   }, [error]);
 
   return (

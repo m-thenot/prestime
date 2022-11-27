@@ -1,0 +1,15 @@
+import supabase from "@utils/supabase/supabase-server";
+
+const CATEGORY_TABLE = "category";
+
+export const getAllCategories = async () => {
+  const { data: categories, error } = await supabase()
+    .from(CATEGORY_TABLE)
+    .select("id, title, image");
+
+  if (categories) {
+    return categories;
+  } else {
+    throw error;
+  }
+};

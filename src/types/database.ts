@@ -1,16 +1,27 @@
+import { ICategory } from "./category";
+import { ICustomer, InsertCustomer } from "./customer";
+
 export interface Database {
   public: {
     Tables: {
-      categories: {
-        Row: {
-          id: number;
-          title: string;
-          image: string;
-          services: any;
-        }; // The data expected to be returned from a "select" statement.
-        Insert: {}; // The data expected passed to an "insert" statement.
-        Update: {}; // The data expected passed to an "update" statement.
+      category: {
+        Row: ICategory;
+        Insert: {};
+        Update: {};
       };
+      customer: {
+        Row: ICustomer;
+        Insert: InsertCustomer;
+      };
+    };
+    Views: {
+      [_ in never]: never;
+    };
+    Functions: {
+      [_ in never]: never;
+    };
+    Enums: {
+      [_ in never]: never;
     };
   };
 }

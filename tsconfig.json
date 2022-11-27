@@ -19,6 +19,7 @@
       "@features/*": ["./features/*"],
       "@hooks/*": ["./hooks/*"],
       "@components/*": ["./components/*"],
+      "@constants/*": ["./components/*"],
       "@services/*": ["./services/*"],
       "@utils/*": ["./utils/*"],
       "@styles/*": ["./styles/*"],

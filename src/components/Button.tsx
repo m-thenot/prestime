@@ -19,10 +19,12 @@ const Button: React.FC<IButtonProps> = ({
   children,
   variant = "primary",
   className,
+  type,
   ...props
 }) => {
   return (
     <button
+      type={type || "button"}
       className={`${classnames[variant]} max-w-md rounded-lg px-4 font-semibold h-11 transition duration-200 ease-in-out ${className}`}
       {...props}
     >
