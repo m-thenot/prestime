@@ -1,8 +1,8 @@
 import HomePage from "@features/HomePage";
-import { supabase } from "@utils/initSupabase";
+import supabase from "@utils/supabase/supabase-server";
 
 async function getCategories() {
-  const { data: categories, error } = await supabase
+  const { data: categories, error } = await supabase()
     .from("category")
     .select("title, image, id");
 
@@ -15,6 +15,7 @@ async function getCategories() {
 
 export default async function Page() {
   const categories = await getCategories();
+
   return (
     <>
       <HomePage categories={categories} />

@@ -15,7 +15,7 @@ module.exports = {
       neutral: colors.neutral,
       primary: {
         100: "#FF6A45",
-        200: "#FF8668",
+        200: "#FF8277",
       },
     },
     extend: {
@@ -30,5 +30,5 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/forms")],
 };

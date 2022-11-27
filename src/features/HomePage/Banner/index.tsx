@@ -8,7 +8,7 @@ const Banner: React.FC = () => {
   return (
     <div className="mt-16 flex items-center justify-between">
       <div className="md:max-w-[45%] lg:max-w-md xl:max-w-lg mr-8">
-        <h1>Des services de qualité, à la demande</h1>
+        <h1 className="text-3xl">Des services de qualité, à la demande</h1>
         <p className="mt-5 text-slate-500">
           Easy service vous fait profiter de son réseau de professionels à
           Djibouti, afin que vous puissiez réserver une prestation en quelques

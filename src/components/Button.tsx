@@ -10,7 +10,7 @@ interface IButtonProps
 }
 
 const classnames = {
-  primary: "bg-primary-100 text-white",
+  primary: "bg-primary-100 text-white hover:bg-primary-200",
   secondary: "bg-white",
   transparent: "bg-transparent",
 };
@@ -23,7 +23,7 @@ const Button: React.FC<IButtonProps> = ({
 }) => {
   return (
     <button
-      className={`${classnames[variant]} rounded-lg px-4 font-semibold h-11 ${className}`}
+      className={`${classnames[variant]} max-w-md rounded-lg px-4 font-semibold h-11 transition duration-200 ease-in-out ${className}`}
       {...props}
     >
       {children}

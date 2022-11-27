@@ -17,6 +17,6 @@
     "**/$KNOWN_TOOLS$/**",
     "!**/ios/Pods/**"
   ],
-  "typescript.tsdk": "./node_modules/typescript/lib",
+  "typescript.tsdk": "node_modules/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true
 }
