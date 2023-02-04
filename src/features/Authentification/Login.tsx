@@ -70,7 +70,9 @@ const Login: React.FC = () => {
 
       <p className="mt-3">
         Vous n&lsquo;avez pas encore de compte ?{" "}
-        <Link href="/sign-up">S&lsquo;inscrire</Link>
+        <Link href="/sign-up" className="font-semibold">
+          S&lsquo;inscrire
+        </Link>
       </p>
     </form>
   );

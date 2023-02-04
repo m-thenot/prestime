@@ -45,7 +45,7 @@ const Header: React.FC = () => {
         </div>
       ) : (
         <div>
-          <Link href="/login" className="mr-6">
+          <Link href="/login" className="mr-6 font-semibold">
             Se connecter
           </Link>
           <Button>Devenir professionnel</Button>

@@ -12,16 +12,17 @@ interface IButtonProps
 }
 
 const classnames = {
-  primary: "bg-primary-100 text-white hover:bg-primary-200",
-  secondary: "bg-white",
-  transparent: "bg-transparent",
-  link: "bg-transparent h-auto px-0 hover:opacity-50 text-left",
+  primary:
+    "bg-primary-100 text-white hover:bg-primary-200 px-4 font-semibold h-11",
+  secondary: "bg-white px-4 font-semibold h-11",
+  transparent: "bg-transparent px-4 font-semibold h-11",
+  link: "bg-transparent font-normal h-auto px-0 hover:opacity-50 text-left",
 };
 
 const Button: React.FC<IButtonProps> = ({
   children,
   variant = "primary",
-  className,
+  className = "",
   type,
   isLoading = false,
   ...props
@@ -29,7 +30,7 @@ const Button: React.FC<IButtonProps> = ({
   return (
     <button
       type={type || "button"}
-      className={`max-w-md rounded-lg px-4 font-semibold h-11 transition duration-200 ease-in-out ${classnames[variant]}  ${className}`}
+      className={`max-w-md rounded-lg  transition duration-200 ease-in-out ${classnames[variant]}  ${className}`}
       {...props}
     >
       {!isLoading ? children : <Loader />}

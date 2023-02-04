@@ -4,6 +4,7 @@ import Header from "./header";
 import supabase from "@utils/supabase/supabase-server";
 import { UserProvider } from "@contexts/user";
 import QueryProvider from "@contexts/query";
+import Footer from "./footer";
 
 export const revalidate = 0;
 
@@ -29,6 +30,7 @@ export default async function RootLayout({
           <UserProvider accessToken={session?.access_token}>
             <Header />
             {children}
+            <Footer />
           </UserProvider>
         </QueryProvider>
       </body>

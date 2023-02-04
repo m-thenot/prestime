@@ -99,7 +99,10 @@ const SignUp: React.FC = () => {
       </Button>
 
       <p className="mt-3">
-        Déjà inscrit ? <Link href="/login">Se connecter</Link>
+        Déjà inscrit ?{" "}
+        <Link href="/login" className="font-semibold">
+          Se connecter
+        </Link>
       </p>
     </form>
   );

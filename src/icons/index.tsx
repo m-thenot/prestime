@@ -8,3 +8,5 @@ export * from "./SearchIcon";
 export * from "./Select";
 export * from "./CurvedArrowDown";
 export * from "./CurvedArrowUp";
+export * from "./Facebook";
+export * from "./Twitter";

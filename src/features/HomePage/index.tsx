@@ -3,6 +3,7 @@
 import { ICategory } from "types/category";
 
 import Banner from "./Banner";
+import BecomePro from "./BecomePro";
 import HowItWorks from "./HowItWorks";
 
 interface IHomePageProps {
@@ -14,6 +15,7 @@ const HomePage: React.FC<IHomePageProps> = ({ categories }) => {
     <>
       <Banner />
       <HowItWorks />
+      <BecomePro />
     </>
   );
 };

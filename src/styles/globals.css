@@ -11,5 +11,9 @@ h2 {
 }
 
 a {
-  @apply font-semibold hover:underline;
+  @apply hover:underline;
+}
+
+.section-bg {
+  @apply py-12 bg-background w-screen -translate-x-5 sm:-translate-x-10 px-10 max-w-[1320px] mt-6 rounded;
 }
