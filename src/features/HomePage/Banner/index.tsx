@@ -44,7 +44,6 @@ const Banner: React.FC = () => {
             src={HouseKeeperImage}
             alt=""
             placeholder="blur"
-            layout="fill"
             priority
             style={{ objectFit: "cover" }}
             className="rounded-2xl"

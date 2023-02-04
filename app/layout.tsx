@@ -1,7 +1,9 @@
+import "server-only";
 import "../src/styles/globals.css";
 import Header from "./header";
-import SupabaseListener from "@hooks/supabaseListener";
 import supabase from "@utils/supabase/supabase-server";
+import { UserProvider } from "@contexts/user";
+import QueryProvider from "@contexts/query";
 
 export const revalidate = 0;
 
@@ -23,9 +25,12 @@ export default async function RootLayout({
   return (
     <html lang="fr">
       <body className="container my-4 px-5 sm:px-10">
-        <SupabaseListener accessToken={session?.access_token} />
-        <Header />
-        {children}
+        <QueryProvider>
+          <UserProvider accessToken={session?.access_token}>
+            <Header />
+            {children}
+          </UserProvider>
+        </QueryProvider>
       </body>
     </html>
   );

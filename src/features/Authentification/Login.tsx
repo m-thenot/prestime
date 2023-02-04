@@ -1,11 +1,15 @@
 "use client";
 
 import Button from "@components/Button";
+import FormError from "@components/FormError";
 import Input from "@components/Input";
 import InputPassword from "@components/InputPassword";
+import useRedirectToReferrer from "@hooks/useRedirectToReferrer";
 import supabase from "@utils/supabase/supabase-browser";
 import Link from "next/link";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useMutation } from "react-query";
 
 interface LoginInputs {
   email: string;
@@ -18,14 +22,25 @@ const Login: React.FC = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<LoginInputs>();
+  const [areInvalidCredentials, setAreInvalidCredentials] = useState(false);
+  const redirectToReferrer = useRedirectToReferrer();
+  const { mutate, isLoading } = useMutation(
+    async ({ email, password }: LoginInputs) => {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
 
-  const onSubmit = async ({ email, password }: LoginInputs) => {
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
+      setAreInvalidCredentials(Boolean(error));
 
-    console.log(data, error);
+      if (data) {
+        redirectToReferrer();
+      }
+    }
+  );
+
+  const onSubmit = (inputs: LoginInputs) => {
+    mutate(inputs);
   };
 
   return (
@@ -34,6 +49,11 @@ const Login: React.FC = () => {
       onSubmit={handleSubmit(onSubmit)}
     >
       <h1 className="mb-2">Se connecter</h1>
+
+      {areInvalidCredentials && (
+        <FormError errorMessage="Email ou mot de passe incorrect" />
+      )}
+
       <Input
         label="Email"
         autoComplete="email"
@@ -44,7 +64,7 @@ const Login: React.FC = () => {
 
       <InputPassword errors={errors} {...register("password")} />
 
-      <Button className="w-full mt-6" type="submit">
+      <Button className="w-full mt-6" type="submit" isLoading={isLoading}>
         Continuer
       </Button>
 

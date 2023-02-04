@@ -1,3 +1,5 @@
+import "server-only";
+
 import HomePage from "@features/HomePage";
 import { getAllCategories } from "@services/category";
 
