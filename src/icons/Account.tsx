@@ -1,7 +1,7 @@
 import React from "react";
 import { IconProps } from "./types";
 
-const Account: React.FC<IconProps> = ({ width, height }) => {
+export const Account: React.FC<IconProps> = ({ width, height }) => {
   return (
     <svg
       width={width || 32}
@@ -19,5 +19,3 @@ const Account: React.FC<IconProps> = ({ width, height }) => {
     </svg>
   );
 };
-
-export default Account;

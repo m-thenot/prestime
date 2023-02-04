@@ -1,5 +1,4 @@
-import Eye from "@icons/Eye";
-import EyeBar from "@icons/EyeBar";
+import { Eye, EyeBar } from "@icons";
 import React from "react";
 import {
   DetailedHTMLProps,

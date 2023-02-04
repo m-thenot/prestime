@@ -1,6 +1,6 @@
 import { IconProps } from "./types";
 
-const SearchIcon: React.FC<IconProps> = ({ width, height }) => {
+export const SearchIcon: React.FC<IconProps> = ({ width, height }) => {
   return (
     <svg
       width={width || 24}
@@ -18,5 +18,3 @@ const SearchIcon: React.FC<IconProps> = ({ width, height }) => {
     </svg>
   );
 };
-
-export default SearchIcon;

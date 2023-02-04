@@ -4,7 +4,7 @@ import Button from "@components/Button";
 import { useUser } from "@contexts/user";
 import Link from "next/link";
 import supabase from "@utils/supabase/supabase-browser";
-import Account from "@icons/Account";
+import { Account } from "@icons";
 
 const Header: React.FC = () => {
   const { user } = useUser();

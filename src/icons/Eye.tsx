@@ -1,6 +1,6 @@
 import { IconProps } from "./types";
 
-const Eye: React.FC<IconProps> = ({ width, height }) => {
+export const Eye: React.FC<IconProps> = ({ width, height }) => {
   return (
     <svg
       width={width || 19}
@@ -32,5 +32,3 @@ const Eye: React.FC<IconProps> = ({ width, height }) => {
     </svg>
   );
 };
-
-export default Eye;

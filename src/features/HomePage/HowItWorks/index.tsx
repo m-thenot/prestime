@@ -1,0 +1,69 @@
+import React from "react";
+import {
+  Bill,
+  Calendar,
+  Quote,
+  Select,
+  CurvedArrowDown,
+  CurvedArrowUp,
+} from "@icons";
+
+const steps = [
+  {
+    icon: Quote,
+    label: "Choisissez un service",
+    description: "Donnez nous les détails sur ce dont vous avez besoin",
+  },
+  {
+    icon: Calendar,
+    label: "Donnez-nous vos disponibilités",
+    description:
+      "Vous pouvez nous fournir plusieurs dates qui vous arrangent afin que nous vous trouvions un professionel facilement",
+  },
+  {
+    icon: Select,
+    label: "Choisissez un prestataire",
+    description:
+      "Choisissez un prestataire ou faîtes nous confiance et laissez nous choisir pour vous",
+  },
+  {
+    icon: Bill,
+    label: "Obtenez votre prestation",
+    description:
+      "Payez, obtenez votre prestation puis évaluez la qualité de celle-ci sur notre plateforme",
+  },
+];
+
+const HowItWorks: React.FC = () => {
+  return (
+    <section className="py-12 bg-background w-screen -translate-x-5 sm:-translate-x-10 px-10 max-w-[1320px] mt-6 rounded">
+      <h2 className="mb-8">Comment ça fonctionne ?</h2>
+      <div className="flex justify-between items-center sm:items-start flex-col sm:flex-row">
+        {steps.map((step, index) => {
+          const Icon = step.icon;
+          return (
+            <>
+              <div
+                key={index}
+                className="mb-8 sm:mb-0 max-w-[320px] sm:w-1/5 flex flex-col items-center"
+              >
+                <div className="bg-white rounded-full drop-shadow-lg p-4">
+                  <Icon />
+                </div>
+                <p className="font-semibold my-4 text-center">{step.label}</p>
+                <p className="text-slate-500 text-center">{step.description}</p>
+              </div>
+              {index !== steps.length - 1 && (
+                <div className="hidden place-self-center mx-2 sm:flex">
+                  {index % 2 === 0 ? <CurvedArrowUp /> : <CurvedArrowDown />}
+                </div>
+              )}
+            </>
+          );
+        })}
+      </div>
+    </section>
+  );
+};
+
+export default HowItWorks;

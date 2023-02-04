@@ -1,8 +1,8 @@
 import Button from "@components/Button";
-import SearchIcon from "@icons/SearchIcon";
 import Image from "next/image";
 import HouseKeeperImage from "@images/housekeeper.png";
 import ElectricianImage from "@images/electrician.jpg";
+import { SearchIcon } from "@icons";
 
 const Banner: React.FC = () => {
   return (
