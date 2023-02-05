@@ -5,6 +5,7 @@ import { useUser } from "@contexts/user";
 import Link from "next/link";
 import supabase from "@utils/supabase/supabase-browser";
 import { Account } from "@icons";
+import { HamburgerMenu } from "icons/HamburgerMenu";
 
 const Header: React.FC = () => {
   const { user } = useUser();
@@ -19,8 +20,21 @@ const Header: React.FC = () => {
         Easy Service
       </Link>
 
+      {!user && (
+        <Button
+          variant="link"
+          className="block sm:hidden font-semibold underline"
+        >
+          Devenir pro
+        </Button>
+      )}
+
+      <Button variant="transparent" className="block sm:hidden">
+        <HamburgerMenu width={32} height={32} />
+      </Button>
+
       {user ? (
-        <div className="flex flex-col relative">
+        <div className="hidden sm:flex flex-col relative">
           <Link href="/account" className="peer flex items-center">
             <p className="mx-3 font-semibold	">{user.firstname}</p>
             <Account />
@@ -44,7 +58,7 @@ const Header: React.FC = () => {
           </div>
         </div>
       ) : (
-        <div>
+        <div className="hidden sm:flex items-center">
           <Link href="/login" className="mr-6 font-semibold">
             Se connecter
           </Link>

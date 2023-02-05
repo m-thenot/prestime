@@ -15,8 +15,8 @@ const classnames = {
   primary:
     "bg-primary-100 text-white hover:bg-primary-200 px-4 font-semibold h-11",
   secondary: "bg-white px-4 font-semibold h-11",
-  transparent: "bg-transparent px-4 font-semibold h-11",
-  link: "bg-transparent font-normal h-auto px-0 hover:opacity-50 text-left",
+  transparent: "bg-transparent px-4 font-semibold",
+  link: "bg-transparent h-auto px-0 hover:opacity-50 text-left",
 };
 
 const Button: React.FC<IButtonProps> = ({
