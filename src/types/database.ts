@@ -1,5 +1,6 @@
 import { ICategory } from "./category";
 import { ICustomer, InsertCustomer } from "./customer";
+import { IService } from "./service";
 
 export interface Database {
   public: {
@@ -12,6 +13,9 @@ export interface Database {
       customer: {
         Row: ICustomer;
         Insert: InsertCustomer;
+      };
+      service: {
+        Row: IService;
       };
     };
     Views: {

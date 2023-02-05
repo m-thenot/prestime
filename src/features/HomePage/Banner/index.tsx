@@ -1,3 +1,5 @@
+"use client";
+
 import Button from "@components/Button";
 import Image from "next/image";
 import HouseKeeperImage from "@images/housekeeper.png";

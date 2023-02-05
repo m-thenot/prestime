@@ -6,11 +6,11 @@ import React from "react";
 const legalLinks = [
   {
     label: "Mentions légales",
-    href: "",
+    href: "/legal/notices",
   },
   {
     label: "CGU",
-    href: "",
+    href: "/legal/terms-and-conditions",
   },
   {
     label: "Politique de confidentialité",

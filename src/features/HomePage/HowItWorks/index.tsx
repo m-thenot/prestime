@@ -1,3 +1,5 @@
+import "server-only";
+
 import React from "react";
 import {
   Bill,
@@ -36,17 +38,14 @@ const steps = [
 
 const HowItWorks: React.FC = () => {
   return (
-    <section className="section-bg">
+    <section className="section-bg mt-6">
       <h2 className="mb-8">Comment ça fonctionne ?</h2>
       <div className="flex justify-between items-center sm:items-start flex-col sm:flex-row">
         {steps.map((step, index) => {
           const Icon = step.icon;
           return (
-            <>
-              <div
-                key={index}
-                className="mb-8 sm:mb-0 max-w-[320px] sm:w-1/5 flex flex-col items-center"
-              >
+            <React.Fragment key={index}>
+              <div className="mb-8 sm:mb-0 max-w-[320px] sm:w-1/5 flex flex-col items-center">
                 <div className="bg-white rounded-full drop-shadow-lg p-4">
                   <Icon />
                 </div>
@@ -58,7 +57,7 @@ const HowItWorks: React.FC = () => {
                   {index % 2 === 0 ? <CurvedArrowUp /> : <CurvedArrowDown />}
                 </div>
               )}
-            </>
+            </React.Fragment>
           );
         })}
       </div>

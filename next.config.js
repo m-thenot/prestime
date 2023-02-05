@@ -6,6 +6,14 @@ const nextConfig = {
     appDir: true,
     allowMiddlewareResponseBody: true,
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "vntdjmqkmksxybhxvyha.supabase.co",
+      },
+    ],
+  },
 };
 
 module.exports = nextConfig;

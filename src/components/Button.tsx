@@ -14,7 +14,7 @@ interface IButtonProps
 const classnames = {
   primary:
     "bg-primary-100 text-white hover:bg-primary-200 px-4 font-semibold h-11",
-  secondary: "bg-white px-4 font-semibold h-11",
+  secondary: "bg-white text-primary-100 border border-primary-100 px-4  h-11",
   transparent: "bg-transparent px-4 font-semibold",
   link: "bg-transparent h-auto px-0 hover:opacity-50 text-left",
 };

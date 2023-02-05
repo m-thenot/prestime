@@ -10,3 +10,4 @@ export * from "./CurvedArrowDown";
 export * from "./CurvedArrowUp";
 export * from "./Facebook";
 export * from "./Twitter";
+export * from "./Arrow";
