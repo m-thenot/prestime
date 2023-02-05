@@ -29,7 +29,7 @@ export default async function RootLayout({
         <QueryProvider>
           <UserProvider accessToken={session?.access_token}>
             <Header />
-            {children}
+            <main>{children}</main>
             <Footer />
           </UserProvider>
         </QueryProvider>

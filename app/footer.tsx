@@ -34,7 +34,7 @@ const SocialNetworks = ({ label }: { label: string }) => (
 
 const Footer: React.FC = () => {
   return (
-    <footer className="py-12">
+    <footer className="pt-12 pb-6">
       <div className="flex justify-between">
         <p className="font-bold text-xl hidden sm:flex">Easy Service</p>
 
@@ -63,7 +63,7 @@ const Footer: React.FC = () => {
         <SocialNetworks label="Suivez-nous" />
       </div>
 
-      <div className="flex flex-col-reverse sm:flex-row items-center mt-12">
+      <div className="flex flex-col-reverse sm:flex-row items-center mt-16">
         <p className="text-sm mr-6 mt-6 sm:mt-0">Tous droits réservés © 2022</p>
         {legalLinks.map((link) => (
           <Link href={link.href} key={link.href} className="text-sm mr-6">

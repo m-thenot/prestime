@@ -34,9 +34,12 @@ const CarouselServicesClient: React.FC<ICarouselServicesClientProps> = ({
       >
         {services.map((service) => (
           <SwiperSlide key={service.id}>
-            <div className="drop-shadow-lg bg-white my-4 rounded-lg w-fit mx-2">
+            <div
+              className="drop-shadow-lg bg-white my-4 rounded-lg w-fit mx-2 max-h-80"
+              style={{ position: "relative" }}
+            >
               <Image
-                src="https://vntdjmqkmksxybhxvyha.supabase.co/storage/v1/object/sign/services-images/services/paint.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJzZXJ2aWNlcy1pbWFnZXMvc2VydmljZXMvcGFpbnQucG5nIiwiaWF0IjoxNjc1NTg4OTA5LCJleHAiOjE2NzYxOTM3MDl9.zBPdwetWbOgPTswgMU_w1Ojc6SS8sSrOIz0u0JinuXU&t=2023-02-05T09%3A21%3A49.099Z"
+                src={service.image}
                 alt=""
                 width={270}
                 height={320}

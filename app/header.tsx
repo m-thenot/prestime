@@ -15,7 +15,7 @@ const Header: React.FC = () => {
   };
 
   return (
-    <div className="items-center flex justify-between mb-8">
+    <header className="items-center flex justify-between mb-8">
       <Link href="/" className="text-2xl font-extrabold hover:no-underline">
         Easy Service
       </Link>
@@ -65,7 +65,7 @@ const Header: React.FC = () => {
           <Button>Devenir professionnel</Button>
         </div>
       )}
-    </div>
+    </header>
   );
 };
 

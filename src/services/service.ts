@@ -5,7 +5,7 @@ const SERVICE_TABLE = "service";
 export const getAllServicesByCategory = async (categoryId: number) => {
   const { data: services, error } = await supabase()
     .from(SERVICE_TABLE)
-    .select("id, title, category")
+    .select("id, title, category, image")
     .eq("category", categoryId);
 
   if (services) {

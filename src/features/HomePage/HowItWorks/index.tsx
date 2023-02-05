@@ -38,7 +38,7 @@ const steps = [
 
 const HowItWorks: React.FC = () => {
   return (
-    <section className="section-bg mt-6">
+    <section className="section-bg mt-12">
       <h2 className="mb-8">Comment ça fonctionne ?</h2>
       <div className="flex justify-between items-center sm:items-start flex-col sm:flex-row">
         {steps.map((step, index) => {
