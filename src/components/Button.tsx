@@ -9,6 +9,7 @@ interface IButtonProps
   children: React.ReactNode;
   variant?: "primary" | "secondary" | "transparent" | "link";
   isLoading?: boolean;
+  hasMinWidth?: boolean;
 }
 
 const classnames = {
@@ -23,6 +24,7 @@ const Button: React.FC<IButtonProps> = ({
   children,
   variant = "primary",
   className = "",
+  hasMinWidth = false,
   type,
   isLoading = false,
   ...props
@@ -30,7 +32,9 @@ const Button: React.FC<IButtonProps> = ({
   return (
     <button
       type={type || "button"}
-      className={`max-w-md rounded-lg  transition duration-200 ease-in-out ${classnames[variant]}  ${className}`}
+      className={`max-w-md rounded-lg  transition duration-200 ease-in-out ${
+        classnames[variant]
+      } ${hasMinWidth ? "min-w-[220px]" : ""}  ${className}`}
       {...props}
     >
       {!isLoading ? children : <Loader />}

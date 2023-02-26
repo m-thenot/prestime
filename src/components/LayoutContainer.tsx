@@ -1,10 +1,8 @@
 import "server-only";
-import "../src/styles/globals.css";
-import Header from "./header";
+import "../styles/globals.css";
 import supabase from "@utils/supabase/supabase-server";
 import { UserProvider } from "@contexts/user";
 import QueryProvider from "@contexts/query";
-import Footer from "./footer";
 
 export const revalidate = 0;
 
@@ -16,24 +14,29 @@ async function getSession() {
   return session;
 }
 
-export default async function RootLayout({
-  children,
-}: {
+interface ILayoutContainerProps {
   children: React.ReactNode;
-}) {
+  classNames?: string;
+}
+
+//@ts-expect-error Server Component
+const LayoutContainer: React.FC<ILayoutContainerProps> = async ({
+  children,
+  classNames = "container px-5 my-4 sm:px-10",
+}) => {
   const session = await getSession();
 
   return (
     <html lang="fr">
-      <body className="container my-4 px-5 sm:px-10">
+      <body className={`${classNames}`}>
         <QueryProvider>
           <UserProvider accessToken={session?.access_token}>
-            <Header />
-            <main>{children}</main>
-            <Footer />
+            {children}
           </UserProvider>
         </QueryProvider>
       </body>
     </html>
   );
-}
+};
+
+export default LayoutContainer;
