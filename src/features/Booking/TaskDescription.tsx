@@ -1,12 +1,39 @@
 "use client";
 
 import { useBooking } from "@contexts/booking";
-import React from "react";
+import { useRouter } from "next/navigation";
+import React, { useState } from "react";
+import StepContent from "./StepContent";
 
 const TaskDescription: React.FC = () => {
-  const { booking } = useBooking();
+  const { booking, setBooking } = useBooking();
+  const router = useRouter();
+  const [text, setText] = useState<string | null>(null);
 
-  return <p>description</p>;
+  const onSubmit = () => {
+    setBooking({
+      ...booking,
+      comment: text,
+    });
+    booking?.service &&
+      router.push(`/booking/${booking.service.slug}/provider`);
+  };
+
+  return (
+    <StepContent
+      percentProgress={30}
+      onSubmit={onSubmit}
+      title="Dîtes-nous en plus (optionnel)"
+    >
+      <textarea
+        id="message"
+        rows={4}
+        onChange={({ target }) => setText(target.value)}
+        className="block p-2.5 w-full text-sm bg-gray-50 border rounded-md border-gray-300"
+        placeholder="Décrivez nous exactement ce dont vous avez besoin..."
+      ></textarea>
+    </StepContent>
+  );
 };
 
 export default TaskDescription;

@@ -8,7 +8,7 @@ export interface IBooking {
   address?: IAddress;
   appointmentDate?: string;
   cartContent?: ITask;
-  comment?: string;
+  comment?: string | null;
   customer?: ICustomer;
   duration?: number;
   paymentMethod?: any;

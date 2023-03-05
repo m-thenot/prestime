@@ -1,12 +1,11 @@
 "use client";
-import Button from "@components/Button";
 import RadioGroup from "@components/RadioGroup";
 import { useBooking } from "@contexts/booking";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { IService } from "types/service";
 import { ITask } from "types/task";
-import Progress from "./Progress";
+import StepContent from "./StepContent";
 
 interface ISelectTaskProps {
   tasks: ITask[];
@@ -28,23 +27,18 @@ const SelectTask: React.FC<ISelectTaskProps> = ({ tasks, service }) => {
   };
 
   return (
-    <section className="section-booking w-full">
-      <Progress percent={15} />
-      <h2 className="text-center mb-8 mt-6">
-        {service.title} - Quel est votre besoin ?
-      </h2>
+    <StepContent
+      percentProgress={15}
+      onSubmit={onSelect}
+      title={`${service.title} - Quel est votre besoin ?`}
+    >
       <RadioGroup
         options={tasks.map((task) => {
           return { value: task.id, label: task.name };
         })}
         onChange={(value) => setTaskSelected(value)}
       />
-      <div className="flex justify-end mt-8">
-        <Button hasMinWidth onClick={onSelect}>
-          Continuer
-        </Button>
-      </div>
-    </section>
+    </StepContent>
   );
 };
 
