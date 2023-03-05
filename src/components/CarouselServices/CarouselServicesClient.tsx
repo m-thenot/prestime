@@ -3,7 +3,7 @@
 import { SwiperSlide } from "swiper/react";
 import Carousel from "../Carousel";
 import Image from "next/image";
-import Button from "../Button";
+import { LinkButton } from "../Button";
 import { IService } from "types/service";
 
 interface ICarouselServicesClientProps {
@@ -47,9 +47,13 @@ const CarouselServicesClient: React.FC<ICarouselServicesClientProps> = ({
               />
               <div className="px-4 py-3">
                 <p className="font-medium">{service.title}</p>
-                <Button variant="secondary" className="w-full mt-3">
+                <LinkButton
+                  href={`/booking/${service.slug}`}
+                  variant="secondary"
+                  className="w-full mt-3"
+                >
                   Réserver
-                </Button>
+                </LinkButton>
               </div>
             </div>
           </SwiperSlide>

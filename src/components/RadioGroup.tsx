@@ -19,7 +19,7 @@ const RadioGroup: FC<RadioGroupProps> = ({
   onChange,
 }) => {
   const [selectedValue, setSelectedValue] = useState<number>(
-    defaultValue || options[0].value
+    defaultValue || options[0]?.value
   );
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

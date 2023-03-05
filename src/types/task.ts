@@ -1,10 +1,12 @@
-import { IService } from "./service";
-
-type ITaskService = Pick<IService, "title">;
+export interface ITaskDB {
+  id: number;
+  service: number;
+  name: string;
+  recommended_price: number | null;
+}
 
 export interface ITask {
   id: number;
-  service: ITaskService;
   name: string;
-  recommended_price: number;
+  recommended_price: number | null;
 }

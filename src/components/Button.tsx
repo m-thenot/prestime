@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { ButtonHTMLAttributes, DetailedHTMLProps } from "react";
 import Loader from "./Loader";
 
@@ -10,6 +11,14 @@ interface IButtonProps
   variant?: "primary" | "secondary" | "transparent" | "link";
   isLoading?: boolean;
   hasMinWidth?: boolean;
+}
+
+interface ILinkButtonProps {
+  href: string;
+  children: React.ReactNode;
+  variant?: "primary" | "secondary" | "transparent" | "link";
+  hasMinWidth?: boolean;
+  className: string;
 }
 
 const classnames = {
@@ -32,13 +41,32 @@ const Button: React.FC<IButtonProps> = ({
   return (
     <button
       type={type || "button"}
-      className={`max-w-md rounded-lg  transition duration-200 ease-in-out ${
+      className={`max-w-md rounded-lg transition duration-200 ease-in-out ${
         classnames[variant]
       } ${hasMinWidth ? "min-w-[220px]" : ""}  ${className}`}
       {...props}
     >
       {!isLoading ? children : <Loader />}
     </button>
+  );
+};
+
+export const LinkButton: React.FC<ILinkButtonProps> = ({
+  children,
+  variant = "primary",
+  className = "",
+  hasMinWidth = false,
+  href,
+}) => {
+  return (
+    <Link
+      href={href}
+      className={`max-w-md rounded-lg flex items-center justify-center !no-underline	transition duration-200 ease-in-out ${
+        classnames[variant]
+      } ${hasMinWidth ? "min-w-[220px]" : ""}  ${className}`}
+    >
+      {children}
+    </Link>
   );
 };
 

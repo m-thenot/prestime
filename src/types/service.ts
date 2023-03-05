@@ -3,4 +3,5 @@ export interface IService {
   title: string;
   category: number;
   image: string;
+  slug: string;
 }
