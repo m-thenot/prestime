@@ -28,6 +28,7 @@ const TaskDescription: React.FC = () => {
       <textarea
         id="message"
         rows={4}
+        defaultValue={booking?.comment || ""}
         onChange={({ target }) => setText(target.value)}
         className="block p-2.5 w-full text-sm bg-gray-50 border rounded-md border-gray-300"
         placeholder="Décrivez nous exactement ce dont vous avez besoin..."

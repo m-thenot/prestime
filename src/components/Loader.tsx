@@ -1,6 +1,10 @@
 import React from "react";
 
-const Loader: React.FC = () => {
+interface ILoaderProps {
+  color?: string;
+}
+
+const Loader: React.FC<ILoaderProps> = ({ color = "#fff" }) => {
   return (
     <>
       <div className="lds-ring">
@@ -23,10 +27,10 @@ const Loader: React.FC = () => {
             position: absolute;
             width: 16px;
             height: 16px;
-            border: 2px solid #fff;
+            border: 2px solid ${color};
             border-radius: 50%;
             animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-            border-color: #fff transparent transparent transparent;
+            border-color: ${color} transparent transparent transparent;
           }
           .lds-ring div:nth-child(1) {
             animation-delay: -0.45s;

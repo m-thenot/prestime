@@ -1,9 +1,9 @@
-interface IReviewStarsProps {
+interface IStarsProps {
   averageRating: number;
 }
 
-const ReviewStars: React.FC<IReviewStarsProps> = ({ averageRating }) => {
-  const allStars = [...Array(5)];
+const Stars: React.FC<IStarsProps> = ({ averageRating }) => {
+  const allStars = [1, 2, 3, 4, 5];
 
   return (
     <div className={`w-17 h-[14px] flex`}>
@@ -36,4 +36,4 @@ const ReviewStars: React.FC<IReviewStarsProps> = ({ averageRating }) => {
   );
 };
 
-export default ReviewStars;
+export default Stars;

@@ -5,41 +5,36 @@ import { useBooking } from "@contexts/booking";
 import { getAllTaskProvidersByTask } from "@services/task-provider";
 import { sum } from "radash";
 import React, { useEffect, useMemo, useState } from "react";
-import { ITaskProvider } from "types/provider";
 import StepContent from "./StepContent";
 import Image from "next/image";
 import AvatarImage from "@images/avatar.svg";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useQuery } from "react-query";
+import Loader from "@components/Loader";
 
 const SelectProvider: React.FC = () => {
   const { booking, setBooking } = useBooking();
-  const [taskProviders, setTaskProviders] = useState<
-    ITaskProvider[] | undefined
-  >();
   const [taskProvider, setTaskProvider] = useState<number>();
   const router = useRouter();
-
-  useEffect(() => {
-    const getTaskProviders = async () => {
-      if (!booking?.cartContent) {
-        return;
-      }
-      const taskProviders = await getAllTaskProvidersByTask(
-        booking.cartContent.id
-      );
-      setTaskProviders(taskProviders);
-    };
-
-    getTaskProviders();
-  }, [booking?.cartContent]);
+  const {
+    isIdle,
+    isLoading,
+    data: taskProviders,
+  } = useQuery(
+    ["taskProviders", booking?.task?.id],
+    () => getAllTaskProvidersByTask(booking!.task!.id),
+    {
+      enabled: Boolean(booking?.task?.id),
+    }
+  );
 
   const onSelect = () => {
     setBooking({
       ...booking,
       taskProvider:
         taskProvider === 0
-          ? "default"
+          ? null
           : taskProviders?.find((tp) => tp.id === taskProvider),
     });
     router.push(`/booking/${booking!.service!.slug}/schedule`);
@@ -111,20 +106,30 @@ const SelectProvider: React.FC = () => {
       title="Sélectionner votre prestataire"
       onSubmit={onSelect}
     >
-      {options && (
-        <RadioGroup
-          columns={1}
-          center={false}
-          options={options}
-          defaultValue={0}
-          onChange={(value) => setTaskProvider(value)}
-          dividers={[
-            {
-              id: 0,
-              node: <p className="my-4 text-center">Ou</p>,
-            },
-          ]}
-        />
+      {isIdle || isLoading ? (
+        <div className="h-[250px] flex items-center justify-center">
+          <Loader color="black" />
+        </div>
+      ) : (
+        options && (
+          <RadioGroup
+            hasTwoColumns={false}
+            center={false}
+            options={options!}
+            defaultValue={booking?.taskProvider?.id || 0}
+            onChange={(value) => setTaskProvider(value)}
+            dividers={[
+              {
+                id: 0,
+                node: (
+                  <p className="my-4 text-center" key={0}>
+                    Ou
+                  </p>
+                ),
+              },
+            ]}
+          />
+        )
       )}
     </StepContent>
   );

@@ -8,8 +8,8 @@ export interface IBooking {
   service?: IService;
   address?: IAddress;
   appointmentDate?: string;
-  cartContent?: ITask;
-  taskProvider?: ITaskProvider | "default";
+  task?: ITask;
+  taskProvider?: ITaskProvider | null;
   comment?: string | null;
   customer?: ICustomer;
   duration?: number;

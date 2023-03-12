@@ -1,5 +1,5 @@
 "use client";
-import React, { FC, useState } from "react";
+import React, { FC, Fragment, useEffect, useState } from "react";
 import { sort } from "radash";
 
 interface RadioOption {
@@ -16,8 +16,8 @@ interface IDivider {
 interface RadioGroupProps {
   options: RadioOption[];
   defaultValue?: number;
-  onChange?: (value: number) => void;
-  columns?: number;
+  onChange: (value: number) => void;
+  hasTwoColumns?: boolean;
   center?: boolean;
   dividers?: IDivider[];
 }
@@ -26,7 +26,7 @@ const RadioGroup: FC<RadioGroupProps> = ({
   options,
   defaultValue,
   onChange,
-  columns = 2,
+  hasTwoColumns = true,
   center = true,
   dividers,
 }) => {
@@ -37,17 +37,23 @@ const RadioGroup: FC<RadioGroupProps> = ({
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = Number(event.target.value);
     setSelectedValue(value);
-    if (onChange) {
-      onChange(value);
-    }
+    onChange(value);
   };
 
+  useEffect(() => {
+    if (defaultValue) {
+      setSelectedValue(defaultValue);
+      onChange(defaultValue);
+    }
+  }, [defaultValue]);
+
   return (
-    <div className={`grid gap-x-4 gap-y-2 grid-cols-${columns}`}>
+    <div
+      className={`grid gap-x-4 gap-y-2 ${hasTwoColumns ? "grid-cols-2" : ""}`}
+    >
       {sort(options, (o) => o.value).map((option) => (
-        <>
+        <Fragment key={option.value}>
           <label
-            key={option.value}
             className={`inline-flex w-full py-2 px-4 cursor-pointer border ${
               center ? "items-center" : "items-start"
             } rounded border-gray-300`}
@@ -74,7 +80,7 @@ const RadioGroup: FC<RadioGroupProps> = ({
               .map((divider) => {
                 return divider.node;
               })}
-        </>
+        </Fragment>
       ))}
     </div>
   );

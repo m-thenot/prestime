@@ -2,7 +2,7 @@
 import RadioGroup from "@components/RadioGroup";
 import { useBooking } from "@contexts/booking";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IService } from "types/service";
 import { ITask } from "types/task";
 import StepContent from "./StepContent";
@@ -21,7 +21,7 @@ const SelectTask: React.FC<ISelectTaskProps> = ({ tasks, service }) => {
     setBooking({
       ...booking,
       service: service,
-      cartContent: tasks.find((task) => task.id === taskSelected),
+      task: tasks.find((task) => task.id === taskSelected),
     });
     router.push(`/booking/${service.slug}/description`);
   };
@@ -37,6 +37,7 @@ const SelectTask: React.FC<ISelectTaskProps> = ({ tasks, service }) => {
           return { value: task.id, label: task.name };
         })}
         onChange={(value) => setTaskSelected(value)}
+        defaultValue={booking?.task?.id}
       />
     </StepContent>
   );

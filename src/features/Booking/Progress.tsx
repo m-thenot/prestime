@@ -13,7 +13,10 @@ const Progress: FC<ProgressProps> = ({
 
   return (
     <div className={`bg-gray-100 rounded-lg w-full h-3`}>
-      <div className={`rounded-lg	 ${barColor} h-full`} style={{ width }} />
+      <div
+        className={`rounded-lg transition ${barColor} h-full`}
+        style={{ width }}
+      />
     </div>
   );
 };
