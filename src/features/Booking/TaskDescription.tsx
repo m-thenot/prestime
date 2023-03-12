@@ -16,7 +16,7 @@ const TaskDescription: React.FC = () => {
       comment: text,
     });
     booking?.service &&
-      router.push(`/booking/${booking.service.slug}/provider`);
+      router.push(`/booking/${booking.service.slug}/providers`);
   };
 
   return (

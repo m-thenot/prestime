@@ -17,6 +17,23 @@ const BookingSummary: React.FC = () => {
       ) : (
         <p className="text-sm text-gray-500">Quel est votre besoin ?</p>
       )}
+
+      {booking?.cartContent && (
+        <>
+          <h3 className="font-semibold mt-2">Prestataire</h3>
+          {booking?.taskProvider ? (
+            <p className="text-sm">
+              {booking.taskProvider === "default"
+                ? "EasyService"
+                : `${booking.taskProvider.provider.firstname} ${booking.taskProvider.provider.lastname}`}
+            </p>
+          ) : (
+            <p className="text-sm text-gray-500">
+              Choisissez votre prestataire
+            </p>
+          )}
+        </>
+      )}
     </section>
   );
 };
