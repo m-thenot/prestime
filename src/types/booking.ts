@@ -17,3 +17,11 @@ export interface IBooking {
   paymentMethod?: any;
   weeklyRecurrence?: number;
 }
+
+export enum BOOKING_STEPS {
+  TASK = "",
+  DESCRIPTION = "description",
+  PROVIDERS = "providers",
+  SCHEDULE = "schedule",
+  ADDRESS = "address",
+}

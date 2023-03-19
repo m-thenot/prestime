@@ -5,14 +5,28 @@ import { useUser } from "@contexts/user";
 import Link from "next/link";
 import supabase from "@utils/supabase/supabase-browser";
 import { Account, Arrow } from "@icons";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { BOOKING_STEPS } from "types/booking";
+import { steps } from "constants/booking";
 
 const Header: React.FC = () => {
   const { user } = useUser();
   const router = useRouter();
+  const pathname = usePathname();
+  const step = pathname.split("/").pop() as BOOKING_STEPS;
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
+  };
+
+  const onClickBack = () => {
+    if (steps.includes(step)) {
+      router.push(
+        `${pathname.split(step)[0]}${steps[steps.indexOf(step) - 1]}`
+      );
+    } else {
+      router.push("/");
+    }
   };
 
   return (
@@ -20,7 +34,7 @@ const Header: React.FC = () => {
       <div className="container items-center flex justify-between mb-8 py-6 px-5 sm:px-10">
         <Button
           variant="transparent"
-          onClick={() => router.back()}
+          onClick={onClickBack}
           className="flex items-center"
         >
           <Arrow headDirection="left" />

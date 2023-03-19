@@ -33,13 +33,13 @@ const Loader: React.FC<ILoaderProps> = ({ color = "#fff" }) => {
             border-color: ${color} transparent transparent transparent;
           }
           .lds-ring div:nth-child(1) {
-            animation-delay: -0.45s;
-          }
-          .lds-ring div:nth-child(2) {
             animation-delay: -0.3s;
           }
-          .lds-ring div:nth-child(3) {
+          .lds-ring div:nth-child(2) {
             animation-delay: -0.15s;
+          }
+          .lds-ring div:nth-child(3) {
+            animation-delay: 0s;
           }
           @keyframes lds-ring {
             0% {

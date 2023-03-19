@@ -5,21 +5,25 @@ import { IBooking } from "types/booking";
 interface IBookingContext {
   booking: IBooking | null;
   setBooking: React.Dispatch<React.SetStateAction<IBooking | null>>;
+  isLoading: boolean;
 }
 
 export const BookingContext = createContext<IBookingContext>({
   booking: null,
   setBooking: () => {},
+  isLoading: true,
 });
 
 const BookingProvider = ({ children }: { children: React.ReactNode }) => {
   const [booking, setBooking] = useState<IBooking | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const storedData = localStorage.getItem("booking");
     if (storedData) {
       setBooking(JSON.parse(storedData));
     }
+    setIsLoading(false);
   }, []);
 
   useEffect(() => {
@@ -30,7 +34,7 @@ const BookingProvider = ({ children }: { children: React.ReactNode }) => {
   }, [booking]);
 
   return (
-    <BookingContext.Provider value={{ booking, setBooking }}>
+    <BookingContext.Provider value={{ booking, setBooking, isLoading }}>
       {children}
     </BookingContext.Provider>
   );
