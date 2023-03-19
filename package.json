@@ -13,6 +13,7 @@
     "@supabase/auth-helpers-nextjs": "^0.5.2",
     "@supabase/supabase-js": "^2.1.0",
     "@tailwindcss/line-clamp": "^0.4.2",
+    "dayjs": "^1.11.7",
     "i": "^0.3.7",
     "next": "^13.2.1",
     "npm": "^9.1.2",

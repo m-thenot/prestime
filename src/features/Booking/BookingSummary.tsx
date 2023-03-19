@@ -1,9 +1,11 @@
 "use client";
 import { useBooking } from "@contexts/booking";
-import React from "react";
+import React, { Fragment } from "react";
 
 const BookingSummary: React.FC = () => {
   const { booking } = useBooking();
+
+  console.log(booking);
 
   return (
     <section className="section-booking ml-16 min-w-[250px]">
@@ -21,7 +23,7 @@ const BookingSummary: React.FC = () => {
       {booking?.task && booking.comment !== undefined && (
         <>
           <h3 className="font-semibold mt-2">Prestataire</h3>
-          {booking?.taskProvider ? (
+          {booking?.taskProvider !== undefined ? (
             <p className="text-sm">
               {booking.taskProvider === null
                 ? "EasyService"
@@ -30,6 +32,32 @@ const BookingSummary: React.FC = () => {
           ) : (
             <p className="text-sm text-gray-500">
               Choisissez votre prestataire
+            </p>
+          )}
+        </>
+      )}
+
+      {booking?.taskProvider !== undefined && (
+        <>
+          <h3 className="font-semibold mt-2">Disponibilités</h3>
+          {booking?.schedules ? (
+            booking.schedules.map((schedule) => (
+              <Fragment key={schedule.value}>
+                <p className="capitalize text-sm mt-2 mb-1">
+                  {schedule.display}
+                </p>
+                <div className="flex items-center flex-wrap">
+                  {schedule.timeSlots.map((t) => (
+                    <p key={t.value} className="text-sm mr-2 p-1 bg-gray-100">
+                      {t.display}h
+                    </p>
+                  ))}
+                </div>
+              </Fragment>
+            ))
+          ) : (
+            <p className="text-sm text-gray-500">
+              Choisissez vos disponibilités
             </p>
           )}
         </>

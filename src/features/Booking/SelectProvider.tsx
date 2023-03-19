@@ -4,7 +4,7 @@ import Stars from "@components/Stars";
 import { useBooking } from "@contexts/booking";
 import { getAllTaskProvidersByTask } from "@services/task-provider";
 import { sum } from "radash";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import StepContent from "./StepContent";
 import Image from "next/image";
 import AvatarImage from "@images/avatar.svg";
@@ -15,7 +15,7 @@ import Loader from "@components/Loader";
 
 const SelectProvider: React.FC = () => {
   const { booking, setBooking } = useBooking();
-  const [taskProvider, setTaskProvider] = useState<number>();
+  const [taskProvider, setTaskProvider] = useState<number>(0);
   const router = useRouter();
   const {
     isIdle,
