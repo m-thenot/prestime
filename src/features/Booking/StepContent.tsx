@@ -44,11 +44,13 @@ const StepContent: React.FC<IStepContentProps> = ({
         </div>
       ) : (
         <>
-          <Progress percent={percentProgress} />
-          <h2 className="text-center mb-8 mt-6">{title}</h2>
+          <div className="hidden sm:block">
+            <Progress percent={percentProgress} />
+          </div>
+          <h2 className="sm:text-center mt-2 mb-6 sm:mb-8 sm:mt-6">{title}</h2>
           {children}
-          <div className="flex justify-end mt-8">
-            <Button hasMinWidth onClick={onSubmit}>
+          <div className="sm:flex sm:relative sm:justify-end mt-8 fixed bottom-0 py-4 px-5 bg-white w-screen -translate-x-5 shadow-[0px_-2px_10px_rgba(0,0,0,0.1)] sm:shadow-none sm:px-0 sm:py-0 sm:w-auto sm:translate-x-0">
+            <Button hasMinWidth onClick={onSubmit} className="w-full sm:w-fit">
               Continuer
             </Button>
           </div>

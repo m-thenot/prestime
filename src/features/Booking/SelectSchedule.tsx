@@ -91,11 +91,11 @@ const SelectSchedule: React.FC<ISelectScheduleProps> = ({ schedules }) => {
       title="Quelles sont vos disponibilités ?"
     >
       {isDateView ? (
-        <div className="flex flex-wrap">
+        <div className="sm:flex sm:flex-wrap grid grid-cols-2 gap-3">
           {schedules.map((schedule) => (
             <button
               type="button"
-              className="border rounded-md border-gray-300 hover:border-primary-100 p-4 mr-4 mb-4 transition"
+              className="border rounded-md border-gray-300 hover:border-primary-100 p-4 sm:mr-4 sm:mb-4 transition "
               key={schedule.value}
               onClick={() => onDateSelect(schedule)}
             >
@@ -106,20 +106,27 @@ const SelectSchedule: React.FC<ISelectScheduleProps> = ({ schedules }) => {
         </div>
       ) : (
         <>
-          <div className="flex overflow-x">
+          <div className="flex overflow-x-auto">
+            <button
+              type="button"
+              onClick={() => setIsDateView(true)}
+              className="bg-primary-100 hover:bg-primary-200 rounded-full min-w-[32px] h-8 text-2xl text-white mt-5 transition duration-200"
+            >
+              +
+            </button>
             {sort(schedulesSelected || [], (o) => o.value)?.map((s) => {
               const isSelected = s.value === currentSelection?.value;
 
               return (
                 <div
                   key={s.value}
-                  className="flex flex-col mb-4 w-fit items-center mr-4"
+                  className="flex flex-col mb-4 items-center ml-4"
                 >
                   <button
                     type="button"
                     className={`border rounded-md ${
                       isSelected ? "border-primary-100" : "border-gray-300"
-                    }  p-4 transition relative`}
+                    }  p-4 transition relative w-32`}
                     onClick={() => {
                       setCurrentSelection(
                         schedules.find((sc) => sc.display === s.display)!
@@ -142,17 +149,9 @@ const SelectSchedule: React.FC<ISelectScheduleProps> = ({ schedules }) => {
                 </div>
               );
             })}
-
-            <button
-              type="button"
-              onClick={() => setIsDateView(true)}
-              className="bg-primary-100 hover:bg-primary-200 rounded-full w-8 h-8 text-2xl text-white mt-5 transition duration-200"
-            >
-              +
-            </button>
           </div>
 
-          <div className="flex flex-wrap">
+          <div className="flex flex-wrap min-h-[148px]">
             {currentSelection?.timeSlots.map((timeSlot) => {
               const isSelected = booking?.schedules
                 ?.find((s) => s.display === currentSelection.display)
@@ -161,7 +160,7 @@ const SelectSchedule: React.FC<ISelectScheduleProps> = ({ schedules }) => {
               return (
                 <button
                   type="button"
-                  className={`border rounded-md border-gray-300 hover:border-primary-100 p-4 mr-4 mb-4 transition ${
+                  className={`border rounded-md border-gray-300 hover:border-primary-100 p-4 mr-4 mb-4 transition h-fit ${
                     isSelected ? "bg-primary-100" : "bg-transparent"
                   }`}
                   key={timeSlot.value}

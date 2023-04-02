@@ -10,7 +10,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <LayoutContainer classNames="bg-background">
+    <LayoutContainer classNames="sm:bg-background">
       <Header />
       <main className="px-5 mb-4 sm:px-10 container">
         <div className="flex justify-between">

@@ -49,12 +49,14 @@ const RadioGroup: FC<RadioGroupProps> = ({
 
   return (
     <div
-      className={`grid gap-x-4 gap-y-2 ${hasTwoColumns ? "grid-cols-2" : ""}`}
+      className={`grid gap-x-4 gap-y-2 ${
+        hasTwoColumns ? "sm:grid-cols-2" : ""
+      }`}
     >
       {sort(options, (o) => o.value).map((option) => (
         <Fragment key={option.value}>
           <label
-            className={`inline-flex w-full py-2 px-4 cursor-pointer border ${
+            className={`inline-flex w-full py-4 sm:py-2 px-4 cursor-pointer border ${
               center ? "items-center" : "items-start"
             } rounded border-gray-300`}
           >

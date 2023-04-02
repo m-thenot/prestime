@@ -83,7 +83,7 @@ const SelectProvider: React.FC = () => {
                 </div>
                 <Link
                   href="/login"
-                  className="text-sm font-semibold"
+                  className="text-sm font-semibold hidden sm:block"
                   target="_blank"
                 >
                   Voir son profil complet

@@ -27,5 +27,11 @@ main {
 }
 
 .section-booking {
-  @apply bg-white shadow-md rounded px-8 py-5;
+  @apply bg-white sm:shadow-md rounded sm:px-8 sm:py-5;
+}
+
+@media (min-width: 768px) {
+  .section-booking {
+    max-width: calc(100% - 250px - 4rem);
+  }
 }

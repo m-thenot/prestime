@@ -30,7 +30,7 @@ const TaskDescription: React.FC = () => {
         rows={4}
         defaultValue={booking?.comment || ""}
         onChange={({ target }) => setText(target.value)}
-        className="block p-2.5 w-full text-sm bg-gray-50 border rounded-md border-gray-300"
+        className="block p-2.5 w-full text-sm bg-gray-50 border rounded-md border-gray-300 h-60 sm:h-40"
         placeholder="Décrivez nous exactement ce dont vous avez besoin..."
       ></textarea>
     </StepContent>

@@ -8,7 +8,7 @@ const BookingSummary: React.FC = () => {
   console.log(booking);
 
   return (
-    <section className="section-booking ml-16 min-w-[250px]">
+    <section className="section-booking ml-16 min-w-[250px] hidden sm:block">
       <h2 className="text-lg text-center mb-4">Mon panier</h2>
 
       <h3 className="font-semibold">Services</h3>
