@@ -16,7 +16,12 @@ interface LoginInputs {
   password: string;
 }
 
-const Login: React.FC = () => {
+interface ILoginProps {
+  isEmbedded?: boolean;
+  onClickSignUp?: () => void;
+}
+
+const Login: React.FC<ILoginProps> = ({ isEmbedded, onClickSignUp }) => {
   const {
     register,
     handleSubmit,
@@ -33,7 +38,7 @@ const Login: React.FC = () => {
 
       setAreInvalidCredentials(Boolean(error));
 
-      if (data) {
+      if (data && !isEmbedded) {
         redirectToReferrer();
       }
     }
@@ -70,9 +75,19 @@ const Login: React.FC = () => {
 
       <p className="mt-3">
         Vous n&lsquo;avez pas encore de compte ?{" "}
-        <Link href="/sign-up" className="font-semibold">
-          S&lsquo;inscrire
-        </Link>
+        {isEmbedded ? (
+          <Button
+            variant="link"
+            onClick={onClickSignUp}
+            className="font-semibold"
+          >
+            S&lsquo;inscrire
+          </Button>
+        ) : (
+          <Link href="/sign-up" className="font-semibold">
+            S&lsquo;inscrire
+          </Link>
+        )}
       </p>
     </form>
   );

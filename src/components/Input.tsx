@@ -12,7 +12,7 @@ interface IInputProps
     HTMLInputElement
   > {
   label: string;
-  errors: FieldErrorsImpl<any>;
+  errors?: FieldErrorsImpl<any>;
 }
 
 const Input = React.forwardRef(
@@ -46,15 +46,17 @@ const Input = React.forwardRef(
           }`}
           {...props}
         ></input>
-        <ErrorMessage
-          errors={errors}
-          name={name!}
-          render={({ message }) => (
-            <p className="text-xs text-red-700 mt-1">
-              {message || "Ce champ est obligatoire."}
-            </p>
-          )}
-        />
+        {errors && (
+          <ErrorMessage
+            errors={errors}
+            name={name!}
+            render={({ message }) => (
+              <p className="text-xs text-red-700 mt-1">
+                {message || "Ce champ est obligatoire."}
+              </p>
+            )}
+          />
+        )}
       </div>
     );
   }

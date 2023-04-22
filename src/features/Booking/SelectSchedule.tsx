@@ -151,7 +151,7 @@ const SelectSchedule: React.FC<ISelectScheduleProps> = ({ schedules }) => {
             })}
           </div>
 
-          <div className="flex flex-wrap min-h-[148px]">
+          <div className="flex flex-wrap">
             {currentSelection?.timeSlots.map((timeSlot) => {
               const isSelected = booking?.schedules
                 ?.find((s) => s.display === currentSelection.display)

@@ -13,6 +13,8 @@ interface IStepContentProps {
   children: React.ReactNode;
   onSubmit: () => void;
   percentProgress: number;
+  hasSubmitButton?: boolean;
+  submitButtonDisabled?: boolean;
 }
 
 const StepContent: React.FC<IStepContentProps> = ({
@@ -20,6 +22,8 @@ const StepContent: React.FC<IStepContentProps> = ({
   children,
   onSubmit,
   percentProgress,
+  hasSubmitButton = true,
+  submitButtonDisabled = false,
 }) => {
   const { booking, isLoading } = useBooking();
   const pathname = usePathname();
@@ -37,7 +41,7 @@ const StepContent: React.FC<IStepContentProps> = ({
   }, [isLoading]);
 
   return (
-    <section className="section-booking w-full">
+    <section className="section-booking w-full flex flex-col">
       {isLoading ? (
         <div className="flex items-center justify-center h-full w-full">
           <Loader color="black" />
@@ -49,11 +53,21 @@ const StepContent: React.FC<IStepContentProps> = ({
           </div>
           <h2 className="sm:text-center mt-2 mb-6 sm:mb-8 sm:mt-6">{title}</h2>
           {children}
-          <div className="sm:flex sm:relative sm:justify-end mt-8 fixed bottom-0 py-4 px-5 bg-white w-screen -translate-x-5 shadow-[0px_-2px_10px_rgba(0,0,0,0.1)] sm:shadow-none sm:px-0 sm:py-0 sm:w-auto sm:translate-x-0">
-            <Button hasMinWidth onClick={onSubmit} className="w-full sm:w-fit">
-              Continuer
-            </Button>
-          </div>
+
+          <div className="flex flex-1" />
+
+          {hasSubmitButton && (
+            <div className="sm:flex sm:relative sm:justify-end mt-8 fixed bottom-0 py-4 px-5 bg-white w-screen -translate-x-5 shadow-[0px_-2px_10px_rgba(0,0,0,0.1)] sm:shadow-none sm:px-0 sm:py-0 sm:w-auto sm:translate-x-0">
+              <Button
+                hasMinWidth
+                onClick={onSubmit}
+                className="w-full sm:w-fit"
+                disabled={submitButtonDisabled}
+              >
+                Continuer
+              </Button>
+            </div>
+          )}
         </>
       )}
     </section>

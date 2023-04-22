@@ -11,3 +11,5 @@ export * from "./CurvedArrowUp";
 export * from "./Facebook";
 export * from "./Twitter";
 export * from "./Arrow";
+export * from "./Close";
+export * from "./Pin";

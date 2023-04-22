@@ -5,8 +5,6 @@ import React, { Fragment } from "react";
 const BookingSummary: React.FC = () => {
   const { booking } = useBooking();
 
-  console.log(booking);
-
   return (
     <section className="section-booking ml-16 min-w-[250px] hidden sm:block">
       <h2 className="text-lg text-center mb-4">Mon panier</h2>
@@ -59,6 +57,17 @@ const BookingSummary: React.FC = () => {
             <p className="text-sm text-gray-500">
               Choisissez vos disponibilités
             </p>
+          )}
+        </>
+      )}
+
+      {booking?.schedules !== undefined && (
+        <>
+          <h3 className="font-semibold mt-2">Adresse</h3>
+          {booking?.address ? (
+            <p className="text-sm">{booking.address.formattedAddress}</p>
+          ) : (
+            <p className="text-sm text-gray-500">Indiquer votre adresse</p>
           )}
         </>
       )}

@@ -17,7 +17,12 @@ interface SignUpInputs {
   password: string;
 }
 
-const SignUp: React.FC = () => {
+interface ISignUpProps {
+  isEmbedded?: boolean;
+  onClickLogin?: () => void;
+}
+
+const SignUp: React.FC<ISignUpProps> = ({ isEmbedded, onClickLogin }) => {
   const {
     register,
     handleSubmit,
@@ -100,9 +105,19 @@ const SignUp: React.FC = () => {
 
       <p className="mt-3">
         Déjà inscrit ?{" "}
-        <Link href="/login" className="font-semibold">
-          Se connecter
-        </Link>
+        {isEmbedded ? (
+          <Button
+            variant="link"
+            onClick={onClickLogin}
+            className="font-semibold"
+          >
+            Se connecter
+          </Button>
+        ) : (
+          <Link href="/login" className="font-semibold">
+            Se connecter
+          </Link>
+        )}
       </p>
     </form>
   );
