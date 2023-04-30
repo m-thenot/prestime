@@ -19,7 +19,7 @@ a {
 }
 
 .section-bg {
-  @apply py-12 bg-background w-screen -translate-x-5 sm:-translate-x-10 px-10 max-w-[1320px] rounded;
+  @apply sm:py-12 bg-background w-screen -translate-x-5 sm:-translate-x-10 sm:px-10 max-w-[1320px] rounded;
 }
 
 main {
