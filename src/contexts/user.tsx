@@ -5,6 +5,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import supabase from "@utils/supabase/supabase-browser";
 import { getCustomer } from "@services/customer";
 import { ICustomer } from "types/customer";
+import { Session } from "@supabase/supabase-js";
 
 const UserContext = createContext<{ user: ICustomer | null }>({
   user: null,
@@ -21,16 +22,16 @@ function UserProvider({
   const [user, setUser] = useState<ICustomer | null>(null);
 
   useEffect(() => {
-    const fetchCustomer = async () => {
+    const fetchCustomer = async (session: Session) => {
       const { data } = await getCustomer();
       if (data) {
-        setUser(data);
+        setUser({ ...data, email: session.user.email });
       }
     };
 
     supabase.auth.getSession().then(({ data: { session } }) => {
       if (session) {
-        fetchCustomer();
+        fetchCustomer(session);
       } else {
         setUser(null);
       }
@@ -40,7 +41,7 @@ function UserProvider({
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
       if (session) {
-        fetchCustomer();
+        fetchCustomer(session);
       } else {
         setUser(null);
       }

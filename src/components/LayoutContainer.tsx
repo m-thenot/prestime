@@ -3,6 +3,7 @@ import "../styles/globals.css";
 import supabase from "@utils/supabase/supabase-server";
 import { UserProvider } from "@contexts/user";
 import QueryProvider from "@contexts/query";
+import ToastProvider from "@contexts/toast";
 
 export const revalidate = 0;
 
@@ -29,6 +30,7 @@ const LayoutContainer: React.FC<ILayoutContainerProps> = async ({
   return (
     <html lang="fr">
       <body className={`${classNames}`}>
+        <ToastProvider />
         <QueryProvider>
           <UserProvider accessToken={session?.access_token}>
             {children}

@@ -9,12 +9,14 @@ import supabase from "@utils/supabase/supabase-browser";
 import { EMAIL_REGEX } from "constants/form";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
+import InputPhoneNumber from "@components/InputPhoneNumber";
 
 interface SignUpInputs {
   firstname: string;
   lastname: string;
   email: string;
   password: string;
+  phoneNumber: string;
 }
 
 interface ISignUpProps {
@@ -26,6 +28,7 @@ const SignUp: React.FC<ISignUpProps> = ({ isEmbedded, onClickLogin }) => {
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
   } = useForm<SignUpInputs>();
 
@@ -34,6 +37,7 @@ const SignUp: React.FC<ISignUpProps> = ({ isEmbedded, onClickLogin }) => {
     password,
     lastname,
     firstname,
+    phoneNumber,
   }: SignUpInputs) => {
     try {
       const { data } = await supabase.auth.signUp({
@@ -46,6 +50,7 @@ const SignUp: React.FC<ISignUpProps> = ({ isEmbedded, onClickLogin }) => {
           user_id: data.user.id,
           firstname,
           lastname,
+          phone_number: phoneNumber,
         });
       }
     } catch (error) {
@@ -73,6 +78,8 @@ const SignUp: React.FC<ISignUpProps> = ({ isEmbedded, onClickLogin }) => {
         autoComplete="family-name"
         {...register("lastname", { required: true })}
       />
+
+      <InputPhoneNumber errors={errors} control={control} />
 
       <Input
         label="Email"
