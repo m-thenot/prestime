@@ -1,10 +1,11 @@
+import theme from "constants/theme";
 import React from "react";
 import { IconProps } from "./types";
 
 export const Calendar: React.FC<IconProps> = ({
   width,
   height,
-  color = "#FF6A45",
+  color = theme.colors.primary[100],
 }) => {
   return (
     <svg

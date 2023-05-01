@@ -15,7 +15,7 @@ const Header: React.FC = () => {
   };
 
   return (
-    <header className="items-center flex justify-between mb-8">
+    <header className="items-center flex justify-between mb-8 sm:mb-12">
       <Link href="/" className="text-2xl font-extrabold hover:no-underline">
         Easy Service
       </Link>

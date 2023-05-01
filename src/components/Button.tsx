@@ -18,7 +18,7 @@ interface ILinkButtonProps {
   children: React.ReactNode;
   variant?: "primary" | "secondary" | "transparent" | "link";
   hasMinWidth?: boolean;
-  className: string;
+  className?: string;
 }
 
 const classnames = {
