@@ -1,0 +1,23 @@
+export const SERVICE_GRAPHQL_FIELDS = `
+slug
+faqCollection{
+    items{
+        question
+        answer{
+          json
+        }
+    }
+}
+banner{
+  title
+  image{
+    url
+    title
+    width
+    height
+  }
+  subtitle{
+    json
+  }
+}
+`;

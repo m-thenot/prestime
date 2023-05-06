@@ -2,19 +2,16 @@
 import { Less } from "icons/Less";
 import { Plus } from "icons/Plus";
 import React, { useState } from "react";
-
-export interface IFaqOption {
-  question: string;
-  answer: string;
-}
+import RichText from "./RichText";
+import { IFaqFields } from "types/contentful";
 
 interface IFaqProps {
-  options: IFaqOption[];
+  options: IFaqFields[];
   hasTitle?: boolean;
 }
 
 interface ILineItemProps {
-  option: IFaqOption;
+  option: IFaqFields;
 }
 
 const LineItem: React.FC<ILineItemProps> = ({ option }) => {
@@ -36,7 +33,12 @@ const LineItem: React.FC<ILineItemProps> = ({ option }) => {
           </h3>
           <div>{isOpen ? <Less /> : <Plus />}</div>
         </div>
-        {isOpen && <p className="text-md text-slate-500">{option.answer}</p>}
+        {isOpen && (
+          <RichText
+            document={option.answer.json}
+            textClassName="text-md text-slate-500 mb-3"
+          />
+        )}
       </div>
     </button>
   );

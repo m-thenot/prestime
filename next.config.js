@@ -12,6 +12,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "vntdjmqkmksxybhxvyha.supabase.co",
       },
+      {
+        protocol: "https",
+        hostname: "images.ctfassets.net",
+      },
     ],
   },
 };

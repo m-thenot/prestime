@@ -1,4 +1,4 @@
-import ServicesList from "@components/ServicesList";
+import ServicesList from "@features/Service/ServicesList";
 import { Facebook, Twitter } from "@icons";
 import Link from "next/link";
 import React from "react";

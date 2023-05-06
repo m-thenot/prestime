@@ -1,4 +1,7 @@
+import { SERVICE_GRAPHQL_FIELDS } from "@queries/service";
+import { fetchGraphQL } from "@utils/contenful";
 import supabase from "@utils/supabase/supabase-server";
+import { IServiceFields } from "types/contentful";
 
 const SERVICE_TABLE = "service";
 
@@ -28,3 +31,19 @@ export const getServiceBySlug = async (slug: string) => {
     throw error;
   }
 };
+
+export async function getServiceContentBySlug(
+  slug: string
+): Promise<IServiceFields> {
+  const entry = await fetchGraphQL(
+    `query {
+        serviceCollection(where: {slug: "${slug}" }, limit:1) {
+          items {
+            ${SERVICE_GRAPHQL_FIELDS}
+          }
+        }
+      }`,
+    false
+  );
+  return entry.data.serviceCollection.items[0];
+}
