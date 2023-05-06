@@ -3,4 +3,5 @@ export interface ICategory {
   title: string;
   image: string;
   services: any;
+  slug: string;
 }

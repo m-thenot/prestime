@@ -13,3 +13,13 @@ export const getAllCategories = async () => {
     throw error;
   }
 };
+
+export const getCategoryBySlug = async (slug: string) => {
+  const { data: category } = await supabase()
+    .from(CATEGORY_TABLE)
+    .select("id, slug")
+    .eq("slug", slug)
+    .single();
+
+  return category;
+};

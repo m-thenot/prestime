@@ -1,5 +1,6 @@
 "use client";
 
+import Button from "@components/Button";
 import { logger } from "@utils/logger";
 import React from "react";
 
@@ -13,14 +14,16 @@ export default function Error({
   reset: () => void;
 }) {
   useEffect(() => {
-    // Log the error to an error reporting service
     logger.error(error);
   }, [error]);
 
   return (
-    <div>
-      <p>Something went wrong!</p>
-      <button onClick={() => reset()}>Reset error boundary</button>
+    <div className="max-w-sm p-4 mx-auto">
+      <p className="mb-3">
+        Une erreur innattendue s&lsquo;est produite, veuillez réssayer. Si
+        l&lsquo;erreur persiste, merci de contacter notre service client.
+      </p>
+      <Button onClick={() => reset()}>Réessayer</Button>
     </div>
   );
 }

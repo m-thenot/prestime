@@ -45,5 +45,5 @@ export async function getServiceContentBySlug(
       }`,
     false
   );
-  return entry.data.serviceCollection.items[0];
+  return entry?.data?.serviceCollection?.items?.[0];
 }
