@@ -3,6 +3,7 @@ import Header from "./header";
 import Footer from "./footer";
 import LayoutContainer from "@components/LayoutContainer";
 import { defaultMetadata } from "@utils/defaultMetadata";
+import { Analytics } from "@vercel/analytics/react";
 
 export default async function RootLayout({
   children,
@@ -11,6 +12,7 @@ export default async function RootLayout({
 }) {
   return (
     <LayoutContainer>
+      <Analytics />
       <Header />
       <main>{children}</main>
       <Footer />

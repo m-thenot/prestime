@@ -53,7 +53,11 @@ const Login: React.FC<ILoginProps> = ({ isEmbedded, onClickSignUp }) => {
       className="items-center flex flex-col"
       onSubmit={handleSubmit(onSubmit)}
     >
-      <h1 className="mb-2">Se connecter</h1>
+      {isEmbedded ? (
+        <h2 className="mb-2">Se connecter</h2>
+      ) : (
+        <h1 className="mb-2">Se connecter</h1>
+      )}
 
       {areInvalidCredentials && (
         <FormError errorMessage="Email ou mot de passe incorrect" />

@@ -63,7 +63,11 @@ const SignUp: React.FC<ISignUpProps> = ({ isEmbedded, onClickLogin }) => {
       className="items-center flex flex-col"
       onSubmit={handleSubmit(onSubmit)}
     >
-      <h1 className="mb-2">Créez votre compte</h1>
+      {isEmbedded ? (
+        <h2 className="mb-2">Créez votre compte</h2>
+      ) : (
+        <h1 className="mb-2">Créez votre compte</h1>
+      )}
 
       <Input
         label="Prénom"
