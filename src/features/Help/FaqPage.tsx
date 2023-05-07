@@ -1,8 +1,9 @@
-import Faq, { IFaqOption } from "@components/Faq";
+import Faq from "@components/Faq";
 import Tag from "@components/Tag";
+import { IFaqFields } from "types/contentful";
 
 interface IFaqPageProps {
-  options: IFaqOption[];
+  options: IFaqFields[];
 }
 
 const FaqPage: React.FC<IFaqPageProps> = ({ options }) => {

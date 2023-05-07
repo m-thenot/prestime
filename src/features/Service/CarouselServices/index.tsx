@@ -3,7 +3,7 @@ import { ICategory } from "types/category";
 import CarouselServicesClient from "./CarouselServicesClient";
 
 interface ICarouselServicesProps {
-  category: Omit<ICategory, "services">;
+  category: Omit<ICategory, "services" | "slug">;
 }
 
 //@ts-expect-error Server Component
