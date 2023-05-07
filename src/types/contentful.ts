@@ -1,4 +1,3 @@
-import { Asset } from "contentful";
 import { Document } from "@contentful/rich-text-types";
 
 export interface IFaqFields {
@@ -11,9 +10,16 @@ export interface IFaqFields {
   };
 }
 
+export interface ISEOFields {
+  title: string;
+  description: string;
+}
+
 export interface IServiceFields {
   /** slug */
   slug: string;
+
+  seo: ISEOFields;
 
   /** banner */
   banner: IServiceBannerFields;

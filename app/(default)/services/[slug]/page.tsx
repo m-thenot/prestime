@@ -10,7 +10,32 @@ import { notFound } from "next/navigation";
 
 export const revalidate = 3600;
 
-export default async function Page({ params }: { params: { slug: string } }) {
+interface IParams {
+  params: {
+    slug: string;
+  };
+}
+
+export async function generateMetadata({ params }: IParams) {
+  const service = await getServiceContentBySlug(params.slug);
+
+  if (!service) {
+    notFound();
+  }
+
+  return {
+    title: service.seo.title,
+    description: service.seo.description,
+    openGraph: {
+      title: service.seo.title,
+      description: service.seo.description,
+      type: "website",
+      siteName: "EasyService",
+    },
+  };
+}
+
+export default async function Page({ params }: IParams) {
   const service = await getServiceContentBySlug(params.slug);
 
   if (!service) {

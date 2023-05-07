@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "contentful-typescript-codegen": "contentful-typescript-codegen --output @types/contentful.ts"
+    "contentful-typescript-codegen": "contentful-typescript-codegen --output ./src/types/contentful-generated.ts"
   },
   "dependencies": {
     "@contentful/rich-text-react-renderer": "^15.16.3",

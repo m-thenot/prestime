@@ -3,6 +3,7 @@ import Header from "./header";
 import LayoutContainer from "@components/LayoutContainer";
 import BookingSummary from "@features/Booking/BookingSummary";
 import { BookingProvider } from "@contexts/booking";
+import { defaultMetadata } from "@utils/defaultMetadata";
 
 export default async function RootLayout({
   children,
@@ -23,3 +24,15 @@ export default async function RootLayout({
     </LayoutContainer>
   );
 }
+
+export const metadata = {
+  ...defaultMetadata,
+  robots: {
+    index: false,
+    nocache: true,
+    googleBot: {
+      index: false,
+      noimageindex: true,
+    },
+  },
+};

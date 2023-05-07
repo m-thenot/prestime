@@ -38,7 +38,7 @@ const Login: React.FC<ILoginProps> = ({ isEmbedded, onClickSignUp }) => {
 
       setAreInvalidCredentials(Boolean(error));
 
-      if (data && !isEmbedded) {
+      if (data && !isEmbedded && !error) {
         redirectToReferrer();
       }
     }

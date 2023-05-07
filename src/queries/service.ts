@@ -8,6 +8,10 @@ faqCollection{
         }
     }
 }
+seo{
+  title
+  description
+}
 banner{
   title
   image{

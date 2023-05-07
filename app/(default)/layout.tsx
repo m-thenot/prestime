@@ -2,6 +2,7 @@ import "server-only";
 import Header from "./header";
 import Footer from "./footer";
 import LayoutContainer from "@components/LayoutContainer";
+import { defaultMetadata } from "@utils/defaultMetadata";
 
 export default async function RootLayout({
   children,
@@ -16,3 +17,5 @@ export default async function RootLayout({
     </LayoutContainer>
   );
 }
+
+export const metadata = defaultMetadata;
