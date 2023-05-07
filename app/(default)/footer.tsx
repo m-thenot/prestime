@@ -14,7 +14,7 @@ const legalLinks = [
   },
   {
     label: "Politique de confidentialité",
-    href: "",
+    href: "/legal/privacy-policy",
   },
 ];
 
@@ -34,7 +34,7 @@ const SocialNetworks = ({ label }: { label: string }) => (
 
 const Footer: React.FC = () => {
   return (
-    <footer className="pt-12 pb-6">
+    <footer className="pt-12 pb-6 bg-background w-screen px-6 -translate-x-5 sm:-translate-x-10 sm:px-10 max-w-[1320px] rounded">
       <div className="flex justify-between">
         <p className="font-bold text-xl hidden sm:flex">Easy Service</p>
 
@@ -64,7 +64,9 @@ const Footer: React.FC = () => {
       </div>
 
       <div className="flex flex-col-reverse sm:flex-row items-center mt-16">
-        <p className="text-sm mr-6 mt-6 sm:mt-0">Tous droits réservés © 2022</p>
+        <p className="text-sm mr-6 mt-6 sm:mt-0 mb-0">
+          Tous droits réservés © 2022
+        </p>
         {legalLinks.map((link) => (
           <Link href={link.href} key={link.href} className="text-sm mr-6">
             {link.label}

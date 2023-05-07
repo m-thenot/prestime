@@ -39,3 +39,7 @@ main {
 .PhoneInputInput {
   @apply mt-1 block w-full rounded-md shadow-sm focus:border-primary-200 focus:ring-primary-200 sm:text-sm !important;
 }
+
+p {
+  @apply mb-2;
+}
