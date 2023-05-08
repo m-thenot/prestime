@@ -52,7 +52,7 @@ const Header: React.FC = () => {
           {user ? (
             <div className="hidden sm:flex flex-col relative">
               <Link href="/account" className="peer flex items-center">
-                <p className="mx-3 font-semibold	">{user.firstname}</p>
+                <p className="mx-3 font-semibold mb-0">{user.firstname}</p>
                 <Account />
               </Link>
               <div

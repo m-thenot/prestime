@@ -10,6 +10,9 @@ import { EMAIL_REGEX } from "constants/form";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import InputPhoneNumber from "@components/InputPhoneNumber";
+import { useMutation } from "react-query";
+import { InsertCustomer } from "types/customer";
+import useRedirectToReferrer from "@hooks/useRedirectToReferrer";
 
 interface SignUpInputs {
   firstname: string;
@@ -31,6 +34,31 @@ const SignUp: React.FC<ISignUpProps> = ({ isEmbedded, onClickLogin }) => {
     control,
     formState: { errors },
   } = useForm<SignUpInputs>();
+  const redirectToReferrer = useRedirectToReferrer();
+  const { mutate, isLoading } = useMutation(
+    async (customer: InsertCustomer) => {
+      const requestOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ customer }),
+      };
+      Promise.all([
+        fetch("/api/sign-up", requestOptions),
+        createCustomer(customer),
+      ])
+        .then(() => {
+          if (!isEmbedded) {
+            redirectToReferrer();
+          }
+        })
+        .catch((e) => {
+          logger.error("Failed to create customer", {
+            error: e,
+            userId: customer.user_id,
+          });
+        });
+    }
+  );
 
   const onSubmit = async ({
     email,
@@ -46,7 +74,7 @@ const SignUp: React.FC<ISignUpProps> = ({ isEmbedded, onClickLogin }) => {
       });
 
       if (data.user) {
-        await createCustomer({
+        mutate({
           user_id: data.user.id,
           firstname,
           lastname,
@@ -110,7 +138,7 @@ const SignUp: React.FC<ISignUpProps> = ({ isEmbedded, onClickLogin }) => {
         })}
       />
 
-      <Button className="w-full mt-6" type="submit">
+      <Button className="w-full mt-6" type="submit" isLoading={isLoading}>
         Continuer
       </Button>
 
