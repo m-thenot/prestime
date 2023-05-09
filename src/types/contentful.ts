@@ -1,5 +1,11 @@
 import { Document } from "@contentful/rich-text-types";
 
+export interface IFaqPageFields {
+  faqItemsCollection: {
+    items: IFaqFields[];
+  };
+}
+
 export interface IFaqFields {
   /** question */
   question: string;

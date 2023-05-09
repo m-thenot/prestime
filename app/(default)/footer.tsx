@@ -4,14 +4,14 @@ import Link from "next/link";
 import React from "react";
 
 const legalLinks = [
-  {
+  /* {
     label: "Mentions légales",
     href: "/legal/notices",
   },
   {
     label: "CGU",
     href: "/legal/terms-and-conditions",
-  },
+  }, */
   {
     label: "Politique de confidentialité",
     href: "/legal/privacy-policy",
