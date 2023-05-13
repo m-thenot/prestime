@@ -18,6 +18,18 @@ export const getAllServicesByCategory = async (categoryId: number) => {
   }
 };
 
+export const getAllServices = async () => {
+  const { data: services, error } = await supabase()
+    .from(SERVICE_TABLE)
+    .select("id, title, slug, category");
+
+  if (services) {
+    return services;
+  } else {
+    throw error;
+  }
+};
+
 export const getServiceBySlug = async (slug: string) => {
   const { data: service, error } = await supabase()
     .from(SERVICE_TABLE)

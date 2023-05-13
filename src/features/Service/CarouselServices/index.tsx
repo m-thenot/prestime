@@ -1,3 +1,5 @@
+import "server-only";
+
 import { getAllServicesByCategory } from "@services/service";
 import { ICategory } from "types/category";
 import CarouselServicesClient from "./CarouselServicesClient";

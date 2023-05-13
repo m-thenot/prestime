@@ -7,6 +7,8 @@ import Faq from "@components/Faq";
 import CarouselServices from "@features/Service/CarouselServices";
 import { getFAQByTag } from "@services/editorial-content";
 
+export const revalidate = 3600;
+
 export default async function Page() {
   const categories = await getAllCategories();
   const faqOptions = await getFAQByTag("home");

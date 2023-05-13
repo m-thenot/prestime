@@ -10,8 +10,8 @@ import ContactCard from "./ContactCard";
 
 const ContactUs = () => {
   return (
-    <div>
-      <div className="flex flex-col items-center">
+    <>
+      <div className="flex flex-col items-center mt-5">
         <Tag text="Contactez-nous" />
         <h1 className="text-center mt-2 max-w-md">
           Quelque chose n&lsquo;est pas clair ? Vous avez besoin d&lsquo;aide ?
@@ -20,7 +20,7 @@ const ContactUs = () => {
           Contactez-nous et nous ferons de notre mieux pour vous aider.
         </p>
       </div>
-      <div className="flex flex-wrap justify-center -mx-4 mt-16">
+      <div className="flex flex-wrap justify-center -mx-4 mt-6 sm:mt-16">
         <ContactCard
           title="Contactez-nous par message"
           description="Vous pouvez nous contacter sur notre What&lsquo;s App au numéro
@@ -50,7 +50,7 @@ const ContactUs = () => {
           </LinkButton>
         </ContactCard>
       </div>
-    </div>
+    </>
   );
 };
 

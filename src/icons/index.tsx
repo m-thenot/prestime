@@ -13,3 +13,4 @@ export * from "./Twitter";
 export * from "./Arrow";
 export * from "./Close";
 export * from "./Pin";
+export * from "./Chevron";

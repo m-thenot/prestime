@@ -5,7 +5,7 @@ import { useUser } from "@contexts/user";
 import Link from "next/link";
 import supabase from "@utils/supabase/supabase-browser";
 import { Account } from "@icons";
-import { HamburgerMenu } from "icons/HamburgerMenu";
+import MobileMenu from "@components/MobileMenu";
 
 const Header: React.FC = () => {
   const { user } = useUser();
@@ -32,9 +32,7 @@ const Header: React.FC = () => {
         </Button>
       )}
 
-      <Button variant="transparent" className="block sm:hidden">
-        <HamburgerMenu width={32} height={32} />
-      </Button>
+      <MobileMenu />
 
       {user ? (
         <div className="hidden sm:flex flex-col relative">

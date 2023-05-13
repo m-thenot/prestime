@@ -3,14 +3,14 @@ import Tag from "@components/Tag";
 
 const PrivacyPolicy: React.FC = () => {
   return (
-    <div>
-      <div className="flex flex-col items-center">
+    <>
+      <div className="flex flex-col items-center mt-5">
         <Tag text="Légal" />
         <h1 className="text-center mt-2 max-w-md">
           Politique de confidentialité
         </h1>
       </div>
-      <div className="fmt-4 max-w-2xl mx-auto my-10">
+      <div className="max-w-2xl mx-auto my-5 sm:my-10">
         <h2 className="text-lg mt-6 mb-2">Politique de confidentialité</h2>
         <p>
           Le site web EasyService est détenu par EasyService, qui est un
@@ -134,7 +134,7 @@ const PrivacyPolicy: React.FC = () => {
           {process.env.NEXT_PUBLIC_CONTACT_EMAIL!}.
         </p>
       </div>
-    </div>
+    </>
   );
 };
 

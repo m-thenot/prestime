@@ -8,7 +8,7 @@ interface IButtonProps
     HTMLButtonElement
   > {
   children: React.ReactNode;
-  variant?: "primary" | "secondary" | "transparent" | "link";
+  variant?: "primary" | "secondary" | "transparent" | "link" | "none";
   isLoading?: boolean;
   hasMinWidth?: boolean;
 }
@@ -16,7 +16,7 @@ interface IButtonProps
 interface ILinkButtonProps {
   href: string;
   children: React.ReactNode;
-  variant?: "primary" | "secondary" | "transparent" | "link";
+  variant?: "primary" | "secondary" | "transparent" | "link" | "none";
   hasMinWidth?: boolean;
   className?: string;
 }
@@ -27,6 +27,7 @@ const classnames = {
   secondary: "bg-white text-primary-100 border border-primary-100 px-4  h-11",
   transparent: "bg-transparent px-4 font-semibold",
   link: "bg-transparent h-auto px-0 hover:opacity-50 text-left",
+  none: "",
 };
 
 const Button: React.FC<IButtonProps> = ({

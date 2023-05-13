@@ -1,4 +1,5 @@
 import supabase from "@utils/supabase/supabase-server";
+import { ICategoryWithServices } from "types/category";
 
 const CATEGORY_TABLE = "category";
 
@@ -9,6 +10,29 @@ export const getAllCategories = async () => {
 
   if (categories) {
     return categories;
+  } else {
+    throw error;
+  }
+};
+
+export const getAllCategoriesWithServices = async () => {
+  const { data: categories, error } = await supabase()
+    .from(CATEGORY_TABLE)
+    .select(
+      `
+    id,
+    title,
+    slug,
+    services:service(
+      id,
+      title,
+      slug
+    )
+    `
+    );
+
+  if (categories) {
+    return categories as ICategoryWithServices[];
   } else {
     throw error;
   }

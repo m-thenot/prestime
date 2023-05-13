@@ -4,11 +4,11 @@ import Tag from "@components/Tag";
 const AboutUs: React.FC = () => {
   return (
     <div>
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center mt-5">
         <Tag text="À Propos" />
         <h1 className="text-center mt-2 max-w-md">Qui sommes-nous ?</h1>
       </div>
-      <div className="fmt-4 max-w-2xl mx-auto my-10">
+      <div className="max-w-2xl mx-auto my-5 sm:my-10">
         <p>
           Nous sommes EasyService, la première plateforme de services à la
           demande à Djibouti.

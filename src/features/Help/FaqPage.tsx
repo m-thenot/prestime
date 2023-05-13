@@ -8,9 +8,11 @@ interface IFaqPageProps {
 
 const FaqPage: React.FC<IFaqPageProps> = ({ options }) => {
   return (
-    <section className="section-bg">
+    <section className="section-bg px-5 py-6">
       <Tag text="Foire aux questions" className="m-auto" />
-      <h1 className="text-center mt-2">Vous demandez ? Nous répondons !</h1>
+      <h1 className="text-center mt-2 mb-3 sm:mb-0">
+        Vous demandez ? Nous répondons !
+      </h1>
       <Faq hasTitle={false} options={options} />
     </section>
   );
