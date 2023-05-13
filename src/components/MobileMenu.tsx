@@ -1,3 +1,5 @@
+"use client";
+
 import { HamburgerMenu } from "icons/HamburgerMenu";
 import React, { useState } from "react";
 import Button from "./Button";
@@ -8,9 +10,13 @@ import { ICategoryWithServices } from "types/category";
 import { WhatsApp } from "icons/WhatsApp";
 import colors from "tailwindcss/colors";
 import Link from "next/link";
+import { useUser } from "@contexts/user";
+import { userAccountRoutes } from "@utils/user";
+import LogOutButton from "@features/Authentification/LogOutButton";
 
-const MobileMenu = () => {
+const MobileMenu: React.FC = () => {
   const { categories } = useServices();
+  const { user } = useUser();
   const [isOpen, setIsOpen] = useState(false);
   const [activeCategory, setActiveCategory] =
     useState<null | ICategoryWithServices>(null);
@@ -52,20 +58,39 @@ const MobileMenu = () => {
         onClick={toggleMenu}
       />
       <nav
-        className={`fixed top-0 left-0 w-9/12 h-full bg-white z-50 transform transition-transform pt-6 px-6 ${
+        className={`fixed top-0 left-0 w-9/12 h-full bg-white z-50 transform duration-300 transition-transform pt-6 px-6 ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
         <div className={`${activeCategory ? "hidden" : "block"}`}>
-          <LinkButton href="/login">Se connecter</LinkButton>
+          {user ? (
+            <>
+              <p className="text-lg font-bold">Bienvenue {user.firstname} !</p>
+              {userAccountRoutes.map((route) => (
+                <Link
+                  key={route.href}
+                  href={route.href}
+                  className="py-2 flex justify-between items-center w-full"
+                >
+                  <span>{route.label}</span>
+                  <Chevron />
+                </Link>
+              ))}
+              <LogOutButton className="py-2" />
+            </>
+          ) : (
+            <>
+              <LinkButton href="/login">Se connecter</LinkButton>
 
-          <LinkButton href="/sign-up" variant="secondary" className="mt-3">
-            S&lsquo;inscrire
-          </LinkButton>
+              <LinkButton href="/sign-up" variant="secondary" className="mt-3">
+                S&lsquo;inscrire
+              </LinkButton>
+            </>
+          )}
 
           <div className="border-t border-slate-200 my-6" />
 
-          <p className="text-xl font-bold">Nos services</p>
+          <p className="text-lg font-bold">Nos services</p>
           {categories.map((category) => (
             <button
               type="button"
@@ -80,7 +105,7 @@ const MobileMenu = () => {
 
           <div className="border-t border-slate-200 my-6" />
 
-          <p className="text-xl font-bold mb-4">Besoin d&lsquo;aide ?</p>
+          <p className="text-lg font-bold mb-4">Besoin d&lsquo;aide ?</p>
 
           <Link
             href={process.env.NEXT_PUBLIC_WHATSAPP_LINK!}
@@ -92,7 +117,7 @@ const MobileMenu = () => {
         </div>
 
         <div
-          className={`w-full h-full bg-white z-50 transform transition-transform ${
+          className={`w-full h-full bg-white z-50 transform duration-300 transition-transform ${
             activeCategory ? "translate-x-0" : "-translate-x-full"
           }`}
         >
