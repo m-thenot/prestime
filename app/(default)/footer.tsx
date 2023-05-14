@@ -1,4 +1,3 @@
-import ServicesList from "@features/Service/ServicesList";
 import { Facebook, Twitter } from "@icons";
 import Link from "next/link";
 import React from "react";
@@ -51,7 +50,6 @@ const Footer: React.FC = () => {
             <Link href="/about-us" className="mb-2">
               Qui sommes-nous ?
             </Link>
-            <ServicesList />
           </div>
           <div className="hidden sm:block ml-16">
             <SocialNetworks label="Réseaux sociaux" />
@@ -65,7 +63,7 @@ const Footer: React.FC = () => {
 
       <div className="flex flex-col-reverse sm:flex-row items-center mt-16">
         <p className="text-sm mr-6 mt-6 sm:mt-0 mb-0">
-          Tous droits réservés © 2022
+          Tous droits réservés © 2023
         </p>
         {legalLinks.map((link) => (
           <Link href={link.href} key={link.href} className="text-sm mr-6">

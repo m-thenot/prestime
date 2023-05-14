@@ -65,7 +65,7 @@ const Search = () => {
   return (
     <div className="relative" ref={searchRef}>
       <input
-        className="shadow-xl h-14 px-4 mt-7 rounded-xl focus-visible:outline-none placeholder:text-slate-400 focus:border-0 w-full"
+        className="appearance-none shadow-xl h-14 px-4 mt-7 rounded-xl focus-visible:outline-none placeholder:text-slate-400 focus:border-0 w-full"
         placeholder="Quel service recherchez-vous ?"
         onChange={handleInputChange}
         value={query}

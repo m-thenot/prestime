@@ -1,7 +1,7 @@
 "use client";
 
 import { HamburgerMenu } from "icons/HamburgerMenu";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "./Button";
 import { LinkButton } from "@components/Button";
 import { useServices } from "@contexts/services";
@@ -13,6 +13,8 @@ import Link from "next/link";
 import { useUser } from "@contexts/user";
 import { userAccountRoutes } from "@utils/user";
 import LogOutButton from "@features/Authentification/LogOutButton";
+import { useRouter } from "next/router";
+import { usePathname } from "next/navigation";
 
 const MobileMenu: React.FC = () => {
   const { categories } = useServices();
@@ -20,6 +22,7 @@ const MobileMenu: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeCategory, setActiveCategory] =
     useState<null | ICategoryWithServices>(null);
+  const pathname = usePathname();
 
   const toggleMenu = () => {
     if (!isOpen) {
@@ -31,6 +34,12 @@ const MobileMenu: React.FC = () => {
     setIsOpen(!isOpen);
     setActiveCategory(null);
   };
+
+  useEffect(() => {
+    if (isOpen) {
+      toggleMenu();
+    }
+  }, [pathname]);
 
   return (
     <>
@@ -58,7 +67,7 @@ const MobileMenu: React.FC = () => {
         onClick={toggleMenu}
       />
       <nav
-        className={`fixed top-0 left-0 w-9/12 h-full bg-white z-50 transform duration-300 transition-transform pt-6 px-6 ${
+        className={`fixed top-0 left-0 w-9/12 h-full bg-white z-50 overflow-auto transform duration-300 transition-transform py-6 px-6 ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
@@ -117,7 +126,7 @@ const MobileMenu: React.FC = () => {
         </div>
 
         <div
-          className={`w-full h-full bg-white z-50 transform duration-300 transition-transform ${
+          className={`w-full bg-white z-50 transform duration-300 transition-transform ${
             activeCategory ? "translate-x-0" : "-translate-x-full"
           }`}
         >

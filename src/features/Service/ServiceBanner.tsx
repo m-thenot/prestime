@@ -12,7 +12,7 @@ interface IBannerProps {
 const Banner: React.FC<IBannerProps> = ({ content }) => {
   return (
     <div className="mt-16 flex items-center justify-between mb-12 ">
-      <div className="md:max-w-[45%] lg:max-w-md xl:max-w-lg mr-8">
+      <div className="md:max-w-[45%] lg:max-w-md xl:max-w-lg sm:mr-8">
         <h1 className="text-3xl">{content.title}</h1>
 
         <RichText
