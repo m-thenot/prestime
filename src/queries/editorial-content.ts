@@ -15,3 +15,14 @@ answer{
     json
 }
 `;
+
+export const PROFESSIONAL_GRAPHQL_FIELDS = `
+title
+argument{
+  json
+}
+seo {
+  title
+  description
+}
+`;

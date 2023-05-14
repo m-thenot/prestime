@@ -43,3 +43,7 @@ main {
 p {
   @apply mb-2;
 }
+
+input {
+  box-shadow: none !important;
+}

@@ -36,6 +36,19 @@ export interface IServiceFields {
   };
 }
 
+export interface IBecomeProfessionalFields {
+  seo: ISEOFields;
+  title: string;
+  argument: {
+    json: Document;
+  };
+
+  /** FAQ */
+  faqCollection: {
+    items: IFaqFields[];
+  };
+}
+
 export interface IServiceBannerFields {
   /** title */
   title: string;

@@ -14,3 +14,4 @@ export * from "./Arrow";
 export * from "./Close";
 export * from "./Pin";
 export * from "./Chevron";
+export * from "./Check";
