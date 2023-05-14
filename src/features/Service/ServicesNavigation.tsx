@@ -4,11 +4,13 @@ import Button from "@components/Button";
 import { useServices } from "@contexts/services";
 import { Arrow } from "@icons";
 import Link from "next/link";
-import { useState } from "react";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 const ServicesNavigation: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { categories } = useServices();
+  const pathname = usePathname();
 
   const toggleMenu = () => {
     if (!isMenuOpen) {
@@ -19,6 +21,12 @@ const ServicesNavigation: React.FC = () => {
 
     setIsMenuOpen((prev) => !prev);
   };
+
+  useEffect(() => {
+    if (isMenuOpen) {
+      toggleMenu();
+    }
+  }, [pathname]);
 
   return (
     <>

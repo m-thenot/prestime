@@ -23,5 +23,6 @@ banner{
   subtitle{
     json
   }
+  bookCta
 }
 `;

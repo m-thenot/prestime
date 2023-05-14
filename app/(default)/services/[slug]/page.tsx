@@ -46,7 +46,7 @@ export default async function Page({ params }: IParams) {
 
   return (
     <>
-      <ServiceBanner content={service.banner} />
+      <ServiceBanner content={service.banner} slug={params.slug} />
       {category && <GalleryServices categoryId={category.id} />}
       <HowItWorks />
       <Faq options={service.faqCollection.items} />

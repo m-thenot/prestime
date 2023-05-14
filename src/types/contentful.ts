@@ -40,6 +40,8 @@ export interface IServiceBannerFields {
   /** title */
   title: string;
 
+  bookCta?: string;
+
   /** subtitle */
   subtitle: {
     json: Document;
