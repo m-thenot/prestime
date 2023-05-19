@@ -58,7 +58,7 @@ const Information = () => {
 
   return (
     <form
-      className="items-center flex flex-col"
+      className="container items-center flex flex-col"
       onSubmit={handleSubmit(onSubmit)}
     >
       <h1 className="mb-2">Mes informations</h1>

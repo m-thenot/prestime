@@ -3,7 +3,7 @@ import Tag from "@components/Tag";
 
 const PrivacyPolicy: React.FC = () => {
   return (
-    <>
+    <div className="container">
       <div className="flex flex-col items-center mt-5">
         <Tag text="Légal" />
         <h1 className="text-center mt-2 max-w-md">
@@ -134,7 +134,7 @@ const PrivacyPolicy: React.FC = () => {
           {process.env.NEXT_PUBLIC_CONTACT_EMAIL!}.
         </p>
       </div>
-    </>
+    </div>
   );
 };
 

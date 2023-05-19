@@ -8,6 +8,7 @@ import { IFaqFields } from "types/contentful";
 interface IFaqProps {
   options: IFaqFields[];
   hasTitle?: boolean;
+  hasParent?: boolean;
 }
 
 interface ILineItemProps {
@@ -44,14 +45,24 @@ const LineItem: React.FC<ILineItemProps> = ({ option }) => {
   );
 };
 
-const Faq: React.FC<IFaqProps> = ({ options, hasTitle = true }) => {
+const Faq: React.FC<IFaqProps> = ({
+  options,
+  hasTitle = true,
+  hasParent = false,
+}) => {
   return (
-    <section className="section-bg flex flex-col items-center">
-      <div className="py-6 sm:pt-16 px-6 sm:px-12 sm:pb-12 bg-white rounded-4xl sm:shadow-lg rounded w-full sm:w-10/12">
-        {hasTitle && <h2 className="mb-8 text-center">FAQ</h2>}
-        {options.map((o) => (
-          <LineItem option={o} key={o.question} />
-        ))}
+    <section className={`${hasParent ? "" : "section-bg"}`}>
+      <div
+        className={`${
+          hasParent ? "" : "container"
+        }  flex flex-col items-center`}
+      >
+        <div className="py-6 sm:pt-16 px-6 sm:px-12 sm:pb-12 bg-white rounded-4xl sm:shadow-lg rounded w-full sm:w-10/12">
+          {hasTitle && <h2 className="mb-8 text-center">FAQ</h2>}
+          {options.map((o) => (
+            <LineItem option={o} key={o.question} />
+          ))}
+        </div>
       </div>
     </section>
   );

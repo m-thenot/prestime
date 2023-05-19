@@ -15,7 +15,7 @@ const icons = [
 
 const ProHowItWorks: React.FC<IProHowItWorksProps> = ({ content }) => {
   return (
-    <section className="py-12 max-w-4xl m-auto flex flex-col items-center">
+    <section className="container py-12 max-w-4xl m-auto flex flex-col items-center">
       <Tag text={content.tagLabel} />
       <h2 className="mt-2 mb-12 text-center">{content.title}</h2>
 

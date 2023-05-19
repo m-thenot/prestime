@@ -21,29 +21,38 @@ const CustomSelect: React.FC<ISelectProps> = ({
   isClearable = true,
 }) => {
   return (
-    <div className="w-full mt-3 max-w-md">
-      {label && (
-        <label className="block text-sm font-medium text-gray-700 mb-1">
-          {label}
-        </label>
-      )}
-      <Select
-        options={options}
-        placeholder={placeholder}
-        isClearable={isClearable}
-        theme={(selectTheme) => ({
-          ...selectTheme,
-          borderRadius: 6,
-          colors: {
-            ...selectTheme.colors,
-            primary: theme.colors.primary[200],
-            primary50: colors.slate[100],
-            primary25: colors.slate[100],
-            primary75: colors.slate[100],
-          },
-        })}
-      />
-    </div>
+    <>
+      <div className="select w-full mt-3 max-w-md">
+        {label && (
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            {label}
+          </label>
+        )}
+        <Select
+          options={options}
+          placeholder={placeholder}
+          isClearable={isClearable}
+          theme={(selectTheme) => ({
+            ...selectTheme,
+            borderRadius: 6,
+            colors: {
+              ...selectTheme.colors,
+              primary: theme.colors.primary[200],
+              primary50: colors.slate[100],
+              primary25: colors.slate[100],
+              primary75: colors.slate[100],
+            },
+          })}
+        />
+      </div>
+      <style jsx>
+        {`
+          .select :global(input) {
+            box-shadow: none !important;
+          }
+        `}
+      </style>
+    </>
   );
 };
 

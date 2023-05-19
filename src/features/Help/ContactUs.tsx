@@ -11,7 +11,7 @@ import ContactCard from "./ContactCard";
 const ContactUs = () => {
   return (
     <>
-      <div className="flex flex-col items-center mt-5">
+      <div className="container flex flex-col items-center mt-5">
         <Tag text="Contactez-nous" />
         <h1 className="text-center mt-2 max-w-md">
           Quelque chose n&lsquo;est pas clair ? Vous avez besoin d&lsquo;aide ?

@@ -3,7 +3,7 @@ import Tag from "@components/Tag";
 
 const AboutUs: React.FC = () => {
   return (
-    <div>
+    <div className="container">
       <div className="flex flex-col items-center mt-5">
         <Tag text="À Propos" />
         <h1 className="text-center mt-2 max-w-md">Qui sommes-nous ?</h1>

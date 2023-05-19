@@ -15,7 +15,7 @@ const CarouselServicesClient: React.FC<ICarouselServicesClientProps> = ({
   title,
 }) => {
   return (
-    <section className="py-6 sm:py-12">
+    <section className="container py-6 sm:py-12">
       <Carousel
         slidesPerView={1.3}
         spaceBetween={10}

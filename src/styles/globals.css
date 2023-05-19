@@ -19,7 +19,7 @@ a {
 }
 
 .section-bg {
-  @apply sm:py-12 bg-background w-screen -translate-x-5 sm:-translate-x-10 sm:px-10 max-w-[1320px] rounded;
+  @apply py-8 sm:py-12 bg-background w-screen;
 }
 
 main {
@@ -44,6 +44,6 @@ p {
   @apply mb-2;
 }
 
-input {
-  box-shadow: none !important;
+.container {
+  @apply px-5 sm:px-10;
 }

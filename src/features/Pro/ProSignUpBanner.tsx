@@ -27,64 +27,70 @@ const ProSignUpBanner: React.FC<IProSignUpBannerProps> = ({
     formState: { errors },
   } = useForm<any>();
   return (
-    <section className="flex flex-col md:flex-row items-center justify-between max-w-4xl m-auto mb-8">
-      <div className="md:w-1/2 max-w-md md:mr-3">
-        <h1 className="text-center md:text-left mb-8">{title}</h1>
-        <RichText document={claims} textClassName="mb-0" iconList={<Check />} />
-      </div>
-      <div className="md:w-1/2 w-full max-w-sm bg-white px-6 py-8 shadow-lg">
-        <form
-          className="items-center flex flex-col"
-          //onSubmit={handleSubmit(onSubmit)}
-        >
-          <Input
-            label="Prénom"
-            autoComplete="given-name"
-            errors={errors}
-            {...register("firstname", { required: true })}
+    <section className="container mb-8">
+      <div className="flex flex-col md:flex-row items-center justify-between max-w-4xl m-auto">
+        <div className="md:w-1/2 max-w-md md:mr-3">
+          <h1 className="text-center md:text-left mb-8">{title}</h1>
+          <RichText
+            document={claims}
+            textClassName="mb-0"
+            iconList={<Check />}
           />
+        </div>
+        <div className="md:w-1/2 w-full max-w-sm bg-white px-6 py-8 shadow-lg">
+          <form
+            className="items-center flex flex-col"
+            //onSubmit={handleSubmit(onSubmit)}
+          >
+            <Input
+              label="Prénom"
+              autoComplete="given-name"
+              errors={errors}
+              {...register("firstname", { required: true })}
+            />
 
-          <Input
-            label="Nom"
-            errors={errors}
-            autoComplete="family-name"
-            {...register("lastname", { required: true })}
-          />
+            <Input
+              label="Nom"
+              errors={errors}
+              autoComplete="family-name"
+              {...register("lastname", { required: true })}
+            />
 
-          <CustomSelect label="Profession" />
+            <CustomSelect label="Profession" />
 
-          <InputPhoneNumber errors={errors} control={control} />
+            <InputPhoneNumber errors={errors} control={control} />
 
-          <Input
-            label="Email"
-            errors={errors}
-            autoComplete="email"
-            type="email"
-            {...register("email", {
-              required: true,
-              pattern: {
-                value: EMAIL_REGEX,
-                message: "Le format de l'email est incorrect.",
-              },
-            })}
-          />
+            <Input
+              label="Email"
+              errors={errors}
+              autoComplete="email"
+              type="email"
+              {...register("email", {
+                required: true,
+                pattern: {
+                  value: EMAIL_REGEX,
+                  message: "Le format de l'email est incorrect.",
+                },
+              })}
+            />
 
-          <InputPassword
-            errors={errors}
-            {...register("password", {
-              required: true,
-              minLength: {
-                value: 8,
-                message:
-                  "Votre mot de passe doit contenir au moins 8 caractères.",
-              },
-            })}
-          />
+            <InputPassword
+              errors={errors}
+              {...register("password", {
+                required: true,
+                minLength: {
+                  value: 8,
+                  message:
+                    "Votre mot de passe doit contenir au moins 8 caractères.",
+                },
+              })}
+            />
 
-          <Button className="w-full mt-6" type="submit">
-            S&lsquo;inscrire gratuitement
-          </Button>
-        </form>
+            <Button className="w-full mt-6" type="submit">
+              S&lsquo;inscrire gratuitement
+            </Button>
+          </form>
+        </div>
       </div>
     </section>
   );

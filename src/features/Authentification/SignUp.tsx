@@ -88,7 +88,7 @@ const SignUp: React.FC<ISignUpProps> = ({ isEmbedded, onClickLogin }) => {
 
   return (
     <form
-      className="items-center flex flex-col"
+      className={`items-center flex flex-col ${isEmbedded ? "" : "container"} `}
       onSubmit={handleSubmit(onSubmit)}
     >
       {isEmbedded ? (

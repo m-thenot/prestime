@@ -1,6 +1,6 @@
 "use client";
 
-import Button, { LinkButton } from "@components/Button";
+import { LinkButton } from "@components/Button";
 import { useUser } from "@contexts/user";
 import Link from "next/link";
 import { Account } from "@icons";
@@ -13,7 +13,7 @@ const Header: React.FC = () => {
   const { user } = useUser();
 
   return (
-    <header className="items-center flex justify-between mb-8 sm:mb-12">
+    <header className="container items-center flex justify-between mb-8 sm:mb-12">
       <Link
         href="/"
         className="text-xl sm:text-2xl font-extrabold hover:no-underline"
@@ -59,7 +59,7 @@ const Header: React.FC = () => {
           <Link href="/login" className="mr-6 font-semibold">
             Se connecter
           </Link>
-          <Button>Devenir professionnel</Button>
+          <LinkButton href="/pro/sign-up">Devenir professionnel</LinkButton>
         </div>
       )}
     </header>
