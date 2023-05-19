@@ -1,6 +1,6 @@
 "use client";
 
-import Button from "@components/Button";
+import Button, { LinkButton } from "@components/Button";
 import { useUser } from "@contexts/user";
 import Link from "next/link";
 import { Account } from "@icons";
@@ -24,12 +24,14 @@ const Header: React.FC = () => {
       <ServicesNavigation />
 
       {!user && (
-        <Button
+        <LinkButton
           variant="link"
-          className="block sm:hidden font-semibold underline"
+          isUnderlined
+          className="block sm:hidden font-semibold"
+          href="/pro/sign-up"
         >
           Devenir pro
-        </Button>
+        </LinkButton>
       )}
 
       <MobileMenu />

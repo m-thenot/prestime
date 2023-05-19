@@ -27,12 +27,12 @@ const ProSignUpBanner: React.FC<IProSignUpBannerProps> = ({
     formState: { errors },
   } = useForm<any>();
   return (
-    <section className="flex items-center justify-between max-w-4xl m-auto">
-      <div className="w-1/2 max-w-md">
-        <h1 className="mb-8">{title}</h1>
+    <section className="flex flex-col md:flex-row items-center justify-between max-w-4xl m-auto mb-8">
+      <div className="md:w-1/2 max-w-md md:mr-3">
+        <h1 className="text-center md:text-left mb-8">{title}</h1>
         <RichText document={claims} textClassName="mb-0" iconList={<Check />} />
       </div>
-      <div className="w-1/2 max-w-sm bg-white px-6 py-8 shadow-lg">
+      <div className="md:w-1/2 w-full max-w-sm bg-white px-6 py-8 shadow-lg">
         <form
           className="items-center flex flex-col"
           //onSubmit={handleSubmit(onSubmit)}

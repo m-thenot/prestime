@@ -3,6 +3,8 @@ import "server-only";
 import { notFound } from "next/navigation";
 import { getProfessionalPage } from "@services/editorial-content";
 import ProSignUpBanner from "@features/Pro/ProSignUpBanner";
+import ProHowItWorks from "@features/Pro/ProHowItWorks";
+import Faq from "@components/Faq";
 
 export const revalidate = 3600;
 
@@ -35,7 +37,8 @@ export default async function Page() {
   return (
     <>
       <ProSignUpBanner title={page.title} claims={page.argument.json} />
-      {/* <Faq options={service.faqCollection.items} /> */}
+      <ProHowItWorks content={page.howItWorks} />
+      <Faq options={page.faqCollection.items} />
     </>
   );
 }

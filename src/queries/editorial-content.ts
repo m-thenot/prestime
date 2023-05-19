@@ -25,4 +25,24 @@ seo {
   title
   description
 }
+howItWorks{
+  title
+  tagLabel
+  itemsCollection{
+    items{
+      title
+      text{
+        json
+      }
+    }
+  }
+}
+faqCollection{
+  items{
+      question
+      answer{
+          json
+      }
+  }
+}
 `;

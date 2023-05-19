@@ -19,6 +19,7 @@ interface ILinkButtonProps {
   variant?: "primary" | "secondary" | "transparent" | "link" | "none";
   hasMinWidth?: boolean;
   className?: string;
+  isUnderlined?: boolean;
 }
 
 const classnames = {
@@ -57,14 +58,17 @@ export const LinkButton: React.FC<ILinkButtonProps> = ({
   variant = "primary",
   className = "",
   hasMinWidth = false,
+  isUnderlined = false,
   href,
 }) => {
   return (
     <Link
       href={href}
-      className={`max-w-md rounded-lg flex items-center justify-center !no-underline	transition duration-200 ease-in-out ${
-        classnames[variant]
-      } ${hasMinWidth ? "min-w-[220px]" : ""}  ${className}`}
+      className={`max-w-md rounded-lg flex items-center justify-center ${
+        isUnderlined ? "underline" : "!no-underline"
+      } 	transition duration-200 ease-in-out ${classnames[variant]} ${
+        hasMinWidth ? "min-w-[220px]" : ""
+      }  ${className}`}
     >
       {children}
     </Link>

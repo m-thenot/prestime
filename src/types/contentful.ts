@@ -36,19 +36,6 @@ export interface IServiceFields {
   };
 }
 
-export interface IBecomeProfessionalFields {
-  seo: ISEOFields;
-  title: string;
-  argument: {
-    json: Document;
-  };
-
-  /** FAQ */
-  faqCollection: {
-    items: IFaqFields[];
-  };
-}
-
 export interface IServiceBannerFields {
   /** title */
   title: string;
@@ -69,4 +56,33 @@ interface IContentfulImage {
   width: number;
   height: number;
   title: string;
+}
+
+export interface IBecomeProfessionalFields {
+  seo: ISEOFields;
+  title: string;
+  argument: {
+    json: Document;
+  };
+  howItWorks: IHowItWorksFields;
+
+  /** FAQ */
+  faqCollection: {
+    items: IFaqFields[];
+  };
+}
+
+export interface IHowItWorksFields {
+  title: string;
+  tagLabel: string;
+  itemsCollection: {
+    items: IHowItWorksItemsFields[];
+  };
+}
+
+export interface IHowItWorksItemsFields {
+  title: string;
+  text: {
+    json: Document;
+  };
 }
