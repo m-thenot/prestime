@@ -7,9 +7,20 @@ import InputPhoneNumber from "@components/InputPhoneNumber";
 import RichText from "@components/RichText";
 import CustomSelect from "@components/Select";
 import { Document } from "@contentful/rich-text-types";
+import useSignUp from "@hooks/useSignUp";
 import { Check } from "@icons";
 import { EMAIL_REGEX } from "constants/form";
-import { useForm } from "react-hook-form";
+import { useController, useForm } from "react-hook-form";
+import { UserType } from "types/user";
+
+interface SignUpInputs {
+  firstname: string;
+  lastname: string;
+  email: string;
+  password: string;
+  phoneNumber: string;
+  jobs: any;
+}
 
 interface IProSignUpBannerProps {
   title: string;
@@ -22,10 +33,15 @@ const ProSignUpBanner: React.FC<IProSignUpBannerProps> = ({
 }) => {
   const {
     register,
-    //handleSubmit,
+    handleSubmit,
     control,
     formState: { errors },
-  } = useForm<any>();
+  } = useForm<SignUpInputs>();
+  const { onSubmit, isLoading } = useSignUp(UserType.PROVIDER);
+  const {
+    field: { value: jobsValue, onChange: jobsOnChange },
+  } = useController({ name: "jobs", control });
+
   return (
     <section className="container mb-8">
       <div className="flex flex-col md:flex-row items-center justify-between max-w-4xl m-auto">
@@ -40,7 +56,7 @@ const ProSignUpBanner: React.FC<IProSignUpBannerProps> = ({
         <div className="md:w-1/2 w-full max-w-sm bg-white px-6 py-8 shadow-lg">
           <form
             className="items-center flex flex-col"
-            //onSubmit={handleSubmit(onSubmit)}
+            onSubmit={handleSubmit(onSubmit)}
           >
             <Input
               label="Prénom"
@@ -56,7 +72,12 @@ const ProSignUpBanner: React.FC<IProSignUpBannerProps> = ({
               {...register("lastname", { required: true })}
             />
 
-            <CustomSelect label="Profession" />
+            <CustomSelect
+              label="Profession"
+              onChange={jobsOnChange}
+              value={jobsValue}
+              required
+            />
 
             <InputPhoneNumber errors={errors} control={control} />
 
@@ -86,7 +107,7 @@ const ProSignUpBanner: React.FC<IProSignUpBannerProps> = ({
               })}
             />
 
-            <Button className="w-full mt-6" type="submit">
+            <Button className="w-full mt-6" type="submit" isLoading={isLoading}>
               S&lsquo;inscrire gratuitement
             </Button>
           </form>

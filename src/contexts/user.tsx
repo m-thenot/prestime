@@ -4,10 +4,11 @@ import { useRouter } from "next/navigation";
 import { createContext, useContext, useEffect, useState } from "react";
 import supabase from "@utils/supabase/supabase-browser";
 import { getCustomer } from "@services/customer";
-import { ICustomer } from "types/customer";
 import { Session } from "@supabase/supabase-js";
+import { IUser, UserType } from "types/user";
+import { getProvider } from "@services/provider";
 
-const UserContext = createContext<{ user: ICustomer | null }>({
+const UserContext = createContext<{ user: IUser | null }>({
   user: null,
 });
 
@@ -19,13 +20,16 @@ function UserProvider({
   children: React.ReactNode;
 }) {
   const router = useRouter();
-  const [user, setUser] = useState<ICustomer | null>(null);
+  const [user, setUser] = useState<IUser | null>(null);
 
   useEffect(() => {
     const fetchCustomer = async (session: Session) => {
-      const { data } = await getCustomer();
+      const type: UserType = session.user.user_metadata.type;
+
+      const { data } =
+        type === UserType.CUSTOMER ? await getCustomer() : await getProvider();
       if (data) {
-        setUser({ ...data, email: session.user.email });
+        setUser({ ...data, type, email: session.user.email });
       }
     };
 

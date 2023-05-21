@@ -1,24 +1,32 @@
 import theme from "constants/theme";
 import React from "react";
-import Select from "react-select";
+import Select, { ActionMeta, MultiValue } from "react-select";
 import colors from "tailwindcss/colors";
 
 const options = [
-  { value: "chocolate", label: "Chocolate" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" },
+  { value: "plumber", label: "Plombier" },
+  { value: "electrician", label: "Électricien" },
+  { value: "hairdresser", label: "Coiffeur" },
 ];
 
 interface ISelectProps {
   label?: string;
   placeholder?: string;
   isClearable?: boolean;
+  required?: boolean;
+  value?: any;
+  onChange?:
+    | ((newValue: MultiValue<any>, actionMeta: ActionMeta<any>) => void)
+    | undefined;
 }
 
 const CustomSelect: React.FC<ISelectProps> = ({
   label,
   placeholder = "",
   isClearable = true,
+  required,
+  value,
+  onChange,
 }) => {
   return (
     <>
@@ -32,6 +40,10 @@ const CustomSelect: React.FC<ISelectProps> = ({
           options={options}
           placeholder={placeholder}
           isClearable={isClearable}
+          value={value}
+          onChange={onChange}
+          isMulti
+          required={required}
           theme={(selectTheme) => ({
             ...selectTheme,
             borderRadius: 6,

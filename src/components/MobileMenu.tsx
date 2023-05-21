@@ -13,8 +13,8 @@ import Link from "next/link";
 import { useUser } from "@contexts/user";
 import { userAccountRoutes } from "@utils/user";
 import LogOutButton from "@features/Authentification/LogOutButton";
-import { useRouter } from "next/router";
 import { usePathname } from "next/navigation";
+import { UserType } from "types/user";
 
 const MobileMenu: React.FC = () => {
   const { categories } = useServices();
@@ -75,16 +75,17 @@ const MobileMenu: React.FC = () => {
           {user ? (
             <>
               <p className="text-lg font-bold">Bienvenue {user.firstname} !</p>
-              {userAccountRoutes.map((route) => (
-                <Link
-                  key={route.href}
-                  href={route.href}
-                  className="py-2 flex justify-between items-center w-full"
-                >
-                  <span>{route.label}</span>
-                  <Chevron />
-                </Link>
-              ))}
+              {user.type === UserType.CUSTOMER &&
+                userAccountRoutes.map((route) => (
+                  <Link
+                    key={route.href}
+                    href={route.href}
+                    className="py-2 flex justify-between items-center w-full"
+                  >
+                    <span>{route.label}</span>
+                    <Chevron />
+                  </Link>
+                ))}
               <LogOutButton className="py-2" />
             </>
           ) : (

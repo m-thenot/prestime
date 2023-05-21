@@ -5,7 +5,6 @@ export interface ICustomer {
   lastname: string;
   phone_number: string;
   user_id: string;
-  email: string;
 }
 
 export type InsertCustomer = Pick<

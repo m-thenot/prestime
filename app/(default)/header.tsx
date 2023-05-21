@@ -8,6 +8,7 @@ import MobileMenu from "@components/MobileMenu";
 import ServicesNavigation from "@features/Service/ServicesNavigation";
 import { userAccountRoutes } from "@utils/user";
 import LogOutButton from "@features/Authentification/LogOutButton";
+import { UserType } from "types/user";
 
 const Header: React.FC = () => {
   const { user } = useUser();
@@ -46,11 +47,12 @@ const Header: React.FC = () => {
             className="hidden absolute top-8 right-0 p-3 z-20 hover:flex rounded peer-hover:flex w-64	
  flex-col bg-white drop-shadow-lg"
           >
-            {userAccountRoutes.map((route) => (
-              <Link key={route.href} href={route.href} className="mb-3">
-                {route.label}
-              </Link>
-            ))}
+            {user.type === UserType.CUSTOMER &&
+              userAccountRoutes.map((route) => (
+                <Link key={route.href} href={route.href} className="mb-3">
+                  {route.label}
+                </Link>
+              ))}
             <LogOutButton />
           </div>
         </div>

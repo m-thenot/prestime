@@ -3,16 +3,12 @@
 import Button from "@components/Button";
 import Input from "@components/Input";
 import InputPassword from "@components/InputPassword";
-import { createCustomer } from "@services/customer";
-import { logger } from "@utils/logger";
-import supabase from "@utils/supabase/supabase-browser";
 import { EMAIL_REGEX } from "constants/form";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import InputPhoneNumber from "@components/InputPhoneNumber";
-import { useMutation } from "react-query";
-import { InsertCustomer } from "types/customer";
-import useRedirectToReferrer from "@hooks/useRedirectToReferrer";
+import useSignUp from "@hooks/useSignUp";
+import { UserType } from "types/user";
 
 interface SignUpInputs {
   firstname: string;
@@ -27,64 +23,17 @@ interface ISignUpProps {
   onClickLogin?: () => void;
 }
 
-const SignUp: React.FC<ISignUpProps> = ({ isEmbedded, onClickLogin }) => {
+const SignUp: React.FC<ISignUpProps> = ({
+  isEmbedded = false,
+  onClickLogin,
+}) => {
   const {
     register,
     handleSubmit,
     control,
     formState: { errors },
   } = useForm<SignUpInputs>();
-  const redirectToReferrer = useRedirectToReferrer();
-  const { mutate, isLoading } = useMutation(
-    async (customer: InsertCustomer) => {
-      const requestOptions = {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ customer }),
-      };
-      Promise.all([
-        fetch("/api/sign-up", requestOptions),
-        createCustomer(customer),
-      ])
-        .then(() => {
-          if (!isEmbedded) {
-            redirectToReferrer();
-          }
-        })
-        .catch((e) => {
-          logger.error("Failed to create customer", {
-            error: e,
-            userId: customer.user_id,
-          });
-        });
-    }
-  );
-
-  const onSubmit = async ({
-    email,
-    password,
-    lastname,
-    firstname,
-    phoneNumber,
-  }: SignUpInputs) => {
-    try {
-      const { data } = await supabase.auth.signUp({
-        email,
-        password,
-      });
-
-      if (data.user) {
-        mutate({
-          user_id: data.user.id,
-          firstname,
-          lastname,
-          phone_number: phoneNumber,
-        });
-      }
-    } catch (error) {
-      logger.error(error);
-    }
-  };
+  const { onSubmit, isLoading } = useSignUp(UserType.CUSTOMER, isEmbedded);
 
   return (
     <form
