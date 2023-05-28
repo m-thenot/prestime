@@ -49,7 +49,7 @@ const SelectProvider: React.FC = () => {
             <div className="ml-3 w-full">
               <p className="font-bold mb-1">Faîtes nous confiance</p>
               <p>
-                EasyService sélectionnera le meilleur prestataire selon vos
+                Deg Deg sélectionnera le meilleur prestataire selon vos
                 disponibilités
               </p>
             </div>

@@ -36,7 +36,7 @@ const Footer: React.FC = () => {
     <footer className="bg-background w-screen">
       <div className="pt-12 pb-6 container bg-background rounded">
         <div className="flex justify-between">
-          <p className="font-bold text-xl hidden sm:flex">Easy Service</p>
+          <p className="font-bold text-xl hidden sm:flex">Deg Deg</p>
 
           <div className="flex justify-between w-full sm:w-auto">
             <div className="flex flex-col sm:ml-16">

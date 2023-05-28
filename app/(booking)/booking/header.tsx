@@ -46,7 +46,7 @@ const Header: React.FC = () => {
             href="/"
             className="text-lg sm:text-2xl font-extrabold hover:no-underline"
           >
-            Easy Service
+            Deg Deg
           </Link>
 
           {user ? (

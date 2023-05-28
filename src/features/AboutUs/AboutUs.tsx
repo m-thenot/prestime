@@ -10,8 +10,8 @@ const AboutUs: React.FC = () => {
       </div>
       <div className="max-w-2xl mx-auto my-5 sm:my-10">
         <p>
-          Nous sommes EasyService, la première plateforme de services à la
-          demande à Djibouti.
+          Nous sommes Deg Deg, la première plateforme de services à la demande à
+          Djibouti.
         </p>
         <p>
           Nous sommes une plateforme de mise en relation qui connecte les

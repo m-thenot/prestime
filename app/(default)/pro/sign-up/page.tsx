@@ -22,7 +22,7 @@ export async function generateMetadata() {
       title: page.seo.title,
       description: page.seo.description,
       type: "website",
-      siteName: "EasyService",
+      siteName: "Deg Deg",
     },
   };
 }
