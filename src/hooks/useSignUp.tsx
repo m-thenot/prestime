@@ -24,8 +24,7 @@ export type UserMutation =
       jobs: string[];
     });
 
-const useSignUp = (type: UserType, isEmbedded?: boolean) => {
-  const redirectToReferrer = useRedirectToReferrer();
+const useSignUp = (type: UserType, onSignUp: () => void) => {
   const [isLoading, setIsLoading] = useState(false);
   const { mutate } = useMutation(async (user: UserMutation) => {
     const requestOptions = {
@@ -46,9 +45,7 @@ const useSignUp = (type: UserType, isEmbedded?: boolean) => {
     ])
       .then(() => {
         setIsLoading(false);
-        if (!isEmbedded) {
-          redirectToReferrer();
-        }
+        onSignUp();
       })
       .catch((e) => {
         logger.error("Failed to create customer", {

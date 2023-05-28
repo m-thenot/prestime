@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import InputPhoneNumber from "@components/InputPhoneNumber";
 import useSignUp from "@hooks/useSignUp";
 import { UserType } from "types/user";
+import useRedirectToReferrer from "@hooks/useRedirectToReferrer";
 
 interface SignUpInputs {
   firstname: string;
@@ -33,7 +34,15 @@ const SignUp: React.FC<ISignUpProps> = ({
     control,
     formState: { errors },
   } = useForm<SignUpInputs>();
-  const { onSubmit, isLoading } = useSignUp(UserType.CUSTOMER, isEmbedded);
+  const redirectToReferrer = useRedirectToReferrer();
+
+  const onSignUp = () => {
+    if (!isEmbedded) {
+      redirectToReferrer();
+    }
+  };
+
+  const { onSubmit, isLoading } = useSignUp(UserType.CUSTOMER, onSignUp);
 
   return (
     <form

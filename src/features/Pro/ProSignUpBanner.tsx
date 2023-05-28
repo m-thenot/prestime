@@ -10,6 +10,8 @@ import { Document } from "@contentful/rich-text-types";
 import useSignUp from "@hooks/useSignUp";
 import { Check } from "@icons";
 import { EMAIL_REGEX } from "constants/form";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import { useController, useForm } from "react-hook-form";
 import { UserType } from "types/user";
 
@@ -37,10 +39,20 @@ const ProSignUpBanner: React.FC<IProSignUpBannerProps> = ({
     control,
     formState: { errors },
   } = useForm<SignUpInputs>();
-  const { onSubmit, isLoading } = useSignUp(UserType.PROVIDER);
+  const router = useRouter();
+
+  const onSignUp = () => {
+    router.push("/pro/confirmation");
+  };
+
+  const { onSubmit, isLoading } = useSignUp(UserType.PROVIDER, onSignUp);
   const {
     field: { value: jobsValue, onChange: jobsOnChange },
   } = useController({ name: "jobs", control });
+
+  useEffect(() => {
+    router.prefetch("/pro/confirmation");
+  }, []);
 
   return (
     <section className="container mb-8">
