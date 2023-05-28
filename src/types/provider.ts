@@ -41,9 +41,10 @@ export interface IProvider {
   is_individual: boolean;
   description?: string;
   company_name?: string;
+  financial_id: string;
 }
 
 export type IInsertProvider = Pick<
   IProvider,
-  "firstname" | "lastname" | "user_id" | "phone_number"
+  "firstname" | "lastname" | "user_id" | "phone_number" | "financial_id"
 >;

@@ -1,13 +1,11 @@
 import { logger } from "@utils/logger";
 import { useMutation } from "react-query";
 import { InsertCustomer } from "types/customer";
-import useRedirectToReferrer from "./useRedirectToReferrer";
 import supabase from "@utils/supabase/supabase-browser";
-import { createCustomer } from "@services/customer";
-import { createProvider } from "@services/provider";
 import { IInsertProvider } from "types/provider";
 import { UserType } from "types/user";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 interface SignUpInputs {
   firstname: string;
@@ -18,43 +16,39 @@ interface SignUpInputs {
   jobs?: { value: string; label: string }[];
 }
 
-export type UserMutation =
-  | InsertCustomer
-  | (IInsertProvider & {
-      jobs: string[];
-    });
+export type UserMutation = (
+  | Omit<InsertCustomer, "financial_id">
+  | (Omit<IInsertProvider, "financial_id"> & {
+      jobs?: string[];
+    })
+) & { email: string };
 
 const useSignUp = (type: UserType, onSignUp: () => void) => {
   const [isLoading, setIsLoading] = useState(false);
-  const { mutate } = useMutation(async (user: UserMutation) => {
-    const requestOptions = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ user, type }),
-    };
-    Promise.all([
-      fetch("/api/sign-up", requestOptions),
-      type === UserType.CUSTOMER
-        ? createCustomer(user)
-        : createProvider({
-            firstname: user.firstname,
-            lastname: user.lastname,
-            phone_number: user.phone_number,
-            user_id: user.user_id,
-          }),
-    ])
-      .then(() => {
-        setIsLoading(false);
-        onSignUp();
-      })
-      .catch((e) => {
-        logger.error("Failed to create customer", {
-          error: e,
-          userId: user.user_id,
-        });
-        setIsLoading(false);
-      });
+  const { mutate } = useMutation({
+    mutationFn: async (user: UserMutation & { email: string }) => {
+      const requestOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ user, type }),
+      };
+      const response = await fetch("/api/sign-up", requestOptions);
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+      return response.json();
+    },
   });
+
+  const onSignUpError = (error: any, errorMessage: string) => {
+    logger.error(errorMessage, {
+      error,
+    });
+    toast.error(
+      "Une erreur inattendue s'est produite lors de la création de votre compte. Merci de réessayer ou de contacter le support client."
+    );
+    setIsLoading(false);
+  };
 
   const onSubmit = async ({
     email,
@@ -77,17 +71,28 @@ const useSignUp = (type: UserType, onSignUp: () => void) => {
       });
 
       if (data.user) {
-        mutate({
-          user_id: data.user.id,
-          firstname,
-          lastname,
-          phone_number: phoneNumber,
-          jobs: jobs?.map((job) => job.value),
-        });
+        mutate(
+          {
+            user_id: data.user.id,
+            firstname,
+            lastname,
+            phone_number: phoneNumber,
+            jobs: jobs?.map((job) => job.value),
+            email,
+          },
+          {
+            onSuccess: () => {
+              setIsLoading(false);
+              onSignUp();
+            },
+            onError: (e) => {
+              onSignUpError(e, "Failed to create customer");
+            },
+          }
+        );
       }
-    } catch (error) {
-      logger.error(error);
-      setIsLoading(false);
+    } catch (e) {
+      onSignUpError(e, "Failed to register user");
     }
   };
 

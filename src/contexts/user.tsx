@@ -3,10 +3,10 @@
 import { useRouter } from "next/navigation";
 import { createContext, useContext, useEffect, useState } from "react";
 import supabase from "@utils/supabase/supabase-browser";
-import { getCustomer } from "@services/customer";
+import { getCustomer } from "@services/customer/client";
 import { Session } from "@supabase/supabase-js";
 import { IUser, UserType } from "types/user";
-import { getProvider } from "@services/provider";
+import { getProvider } from "@services/provider/client";
 
 const UserContext = createContext<{ user: IUser | null }>({
   user: null,

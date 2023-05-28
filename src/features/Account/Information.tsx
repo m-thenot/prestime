@@ -3,7 +3,7 @@ import Button from "@components/Button";
 import FormError from "@components/FormError";
 import Input from "@components/Input";
 import InputPhoneNumber from "@components/InputPhoneNumber";
-import { updateCustomer } from "@services/customer";
+import { updateCustomer } from "@services/customer/client";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useUser } from "@contexts/user";
