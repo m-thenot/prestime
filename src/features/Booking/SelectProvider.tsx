@@ -117,7 +117,7 @@ const SelectProvider: React.FC = () => {
             center={false}
             options={options!}
             defaultValue={booking?.taskProvider?.id || 0}
-            onChange={(value) => setTaskProvider(value)}
+            onChange={(value) => setTaskProvider(value as number)}
             dividers={[
               {
                 id: 0,

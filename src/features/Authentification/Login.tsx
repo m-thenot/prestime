@@ -31,10 +31,13 @@ const Login: React.FC<ILoginProps> = ({ isEmbedded, onClickSignUp }) => {
   const redirectToReferrer = useRedirectToReferrer();
   const { mutate, isLoading } = useMutation(
     async ({ email, password }: LoginInputs) => {
+      console.log("start login");
       const { data, error } = await supabase.auth.signInWithPassword({
         email,
         password,
       });
+
+      console.log(data);
 
       setAreInvalidCredentials(Boolean(error));
 

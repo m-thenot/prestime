@@ -36,7 +36,7 @@ const SelectTask: React.FC<ISelectTaskProps> = ({ tasks, service }) => {
         options={tasks.map((task) => {
           return { value: task.id, label: task.name };
         })}
-        onChange={(value) => setTaskSelected(value)}
+        onChange={(value) => setTaskSelected(value as number)}
         defaultValue={booking?.task?.id}
       />
     </StepContent>

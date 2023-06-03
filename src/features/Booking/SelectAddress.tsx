@@ -1,6 +1,6 @@
 "use client";
 import { useUser } from "@contexts/user";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import StepContent from "./StepContent";
 import AuthEmbedded from "@features/Authentification/AuthEmbedded";
 import Input from "@components/Input";
@@ -17,6 +17,7 @@ import PlacesAutocomplete, {
 import { LoadScript } from "@react-google-maps/api";
 import { logger } from "@utils/logger";
 import colors from "tailwindcss/colors";
+import { useRouter } from "next/navigation";
 
 const libraries: any[] = ["places"];
 
@@ -34,6 +35,7 @@ const SelectAddress: React.FC = () => {
   const [address, setAddress] = useState<IAddress>(defaultAddress);
   const [inputAddress, setInputAddress] = useState("");
   const { booking, setBooking } = useBooking();
+  const router = useRouter();
 
   const onSubmitModal = () => {
     setIsModalOpen(false);
@@ -46,7 +48,7 @@ const SelectAddress: React.FC = () => {
       ...booking,
       address,
     });
-    // Go to payment page
+    router.push(`/booking/${booking!.service!.slug}/payment`);
   };
 
   const handleChange = (value: string) => {
@@ -67,6 +69,13 @@ const SelectAddress: React.FC = () => {
       logger.error(error);
     }
   };
+
+  useEffect(() => {
+    if (booking?.address) {
+      setInputAddress(booking.address.formattedAddress);
+      setAddress(booking.address);
+    }
+  }, [booking]);
 
   return user ? (
     <StepContent

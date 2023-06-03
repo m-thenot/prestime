@@ -1,4 +1,5 @@
 export * from "./Account";
+export * from "./Amex";
 export * from "./Arrow";
 export * from "./Bill";
 export * from "./Calendar";
@@ -11,6 +12,7 @@ export * from "./Eye";
 export * from "./EyeBar";
 export * from "./Facebook";
 export * from "./Form";
+export * from "./Mastercard";
 export * from "./Notification";
 export * from "./Pin";
 export * from "./Quote";
@@ -18,3 +20,4 @@ export * from "./SearchIcon";
 export * from "./Select";
 export * from "./Twitter";
 export * from "./UserSettings";
+export * from "./Visa";
