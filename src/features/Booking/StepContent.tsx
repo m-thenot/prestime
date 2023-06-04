@@ -15,6 +15,7 @@ interface IStepContentProps {
   percentProgress: number;
   hasSubmitButton?: boolean;
   submitButtonDisabled?: boolean;
+  isButtonLoading?: boolean;
 }
 
 const StepContent: React.FC<IStepContentProps> = ({
@@ -24,6 +25,7 @@ const StepContent: React.FC<IStepContentProps> = ({
   percentProgress,
   hasSubmitButton = true,
   submitButtonDisabled = false,
+  isButtonLoading = false,
 }) => {
   const { booking, isLoading } = useBooking();
   const pathname = usePathname();
@@ -63,6 +65,8 @@ const StepContent: React.FC<IStepContentProps> = ({
                 onClick={onSubmit}
                 className="w-full sm:w-fit"
                 disabled={submitButtonDisabled}
+                type="submit"
+                isLoading={isButtonLoading}
               >
                 Continuer
               </Button>

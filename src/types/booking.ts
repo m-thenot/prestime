@@ -12,7 +12,6 @@ export interface IBooking {
   task?: ITask;
   taskProvider?: ITaskProvider | null;
   comment?: string | null;
-  customer?: ICustomer;
   duration?: number;
   paymentMethod?: any;
   weeklyRecurrence?: number;
@@ -24,4 +23,10 @@ export enum BOOKING_STEPS {
   PROVIDERS = "providers",
   SCHEDULE = "schedule",
   ADDRESS = "address",
+  PAYMENT = "payment",
+}
+
+export enum PaymentMethod {
+  CASH = "cash",
+  CREDIT_CARD = "CREDIT_CARD",
 }

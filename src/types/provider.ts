@@ -33,7 +33,7 @@ export interface ITaskProvider {
 
 export interface IProvider {
   id: number;
-  created_at: Date;
+  created_at: number;
   firstname: string;
   lastname: string;
   phone_number: string;

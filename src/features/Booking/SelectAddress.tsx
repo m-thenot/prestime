@@ -18,11 +18,14 @@ import { LoadScript } from "@react-google-maps/api";
 import { logger } from "@utils/logger";
 import colors from "tailwindcss/colors";
 import { useRouter } from "next/navigation";
+import { getAddressComponent } from "@utils/address";
 
 const libraries: any[] = ["places"];
 
 const defaultAddress = {
   formattedAddress: "",
+  city: "Djibouti",
+  country: "Djibouti",
   coord: {
     lat: 11.571971448573981,
     lng: 43.156802120100984,
@@ -60,8 +63,11 @@ const SelectAddress: React.FC = () => {
 
     try {
       const results = await geocodeByAddress(value);
+
       const latLng = await getLatLng(results[0]);
       setAddress({
+        city: getAddressComponent(results[0].address_components, "locality"),
+        country: getAddressComponent(results[0].address_components, "country"),
         formattedAddress: value,
         coord: latLng,
       });

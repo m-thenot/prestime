@@ -15,7 +15,7 @@ interface IDivider {
 
 interface RadioGroupProps {
   options: RadioOption[];
-  defaultValue?: number;
+  defaultValue?: number | string;
   onChange: (value: number | string) => void;
   hasTwoColumns?: boolean;
   center?: boolean;

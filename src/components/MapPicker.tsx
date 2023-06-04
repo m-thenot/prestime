@@ -3,6 +3,7 @@ import Geocode from "react-geocode";
 import { IAddress } from "types/address";
 import Loader from "./Loader";
 import { logger } from "@utils/logger";
+import { getAddressComponent } from "@utils/address";
 
 Geocode.setApiKey(process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY!);
 Geocode.setLanguage("fr");
@@ -36,6 +37,15 @@ const MapPicker: React.FC<IMapPickerProps> = ({ address, setAddress }) => {
 
           if (address.lat !== lat || address.lng !== lng) {
             setAddress({
+              city: getAddressComponent(
+                response.results[0].address_components,
+                "locality"
+              ),
+              country: getAddressComponent(
+                response.results[0].address_components,
+                "country"
+              ),
+
               coord: {
                 lat,
                 lng,

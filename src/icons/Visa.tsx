@@ -25,7 +25,7 @@ export const Visa: React.FC<IconProps> = ({ width, height, ...props }) => {
           gradientUnits="userSpaceOnUse"
         >
           <stop stopColor="#222357" />
-          <stop offset="1" stop-color="#254AA5" />
+          <stop offset="1" stopColor="#254AA5" />
         </linearGradient>
       </defs>
     </svg>
