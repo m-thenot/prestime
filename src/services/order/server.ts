@@ -1,16 +1,31 @@
 import { createAddress } from "@services/address";
 import { logger } from "@utils/logger";
-import supabase from "@utils/supabase/supabase-server";
+import supabase, { createServiceClient } from "@utils/supabase/supabase-server";
 import {
   IInsertAppointment,
   IInsertOrder,
   IInsertPayment,
   INewOrder,
+  OrderState,
+  PaymentState,
 } from "types/order";
 
 const ORDER_TABLE = "order";
 const PAYMENT_TABLE = "payment";
 const APPOINTMENT_TABLE = "appointment";
+
+export const submitOrder = async (orderId: number) => {
+  const result = await createServiceClient()
+    .from(ORDER_TABLE)
+    .update({
+      state: OrderState.SUBMITED,
+    })
+    .eq("id", orderId)
+    .select("payment")
+    .single();
+
+  return result.data?.payment;
+};
 
 const insertOrder = async (order: IInsertOrder) => {
   const result = await supabase()
@@ -30,6 +45,18 @@ const insertPayment = async (payment: IInsertPayment) => {
     .single();
 
   return result.data?.id;
+};
+
+export const updatePaymentState = async (
+  id: number,
+  paymentState: PaymentState
+) => {
+  return await createServiceClient()
+    .from(PAYMENT_TABLE)
+    .update({
+      state: paymentState,
+    })
+    .eq("id", id);
 };
 
 const insertAppointment = async (appointment: IInsertAppointment) => {
