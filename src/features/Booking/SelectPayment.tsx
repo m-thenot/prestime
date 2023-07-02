@@ -4,11 +4,14 @@ import { useBooking } from "@contexts/booking";
 import { useUser } from "@contexts/user";
 import { Amex, Mastercard, Visa } from "@icons";
 import { loadStripe } from "@stripe/stripe-js";
+import { fetchPostJSON } from "@utils/api";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import { PaymentMethod } from "types/booking";
 import StepContent from "./StepContent";
+import { useMutation } from "react-query";
+import { logger } from "@utils/logger";
 
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
@@ -53,6 +56,11 @@ const SelectPayment: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { user } = useUser();
   const router = useRouter();
+  const { mutate } = useMutation({
+    mutationFn: async (data: any) => {
+      return await fetchPostJSON("/api/orders", { data });
+    },
+  });
 
   useEffect(() => {
     if (searchParams.get("success")) {
@@ -71,7 +79,21 @@ const SelectPayment: React.FC = () => {
     if (paymentMethod === PaymentMethod.CREDIT_CARD) {
       formRef.current && formRef.current.submit();
     } else {
-      // call api create order
+      mutate(
+        {
+          ...booking,
+          user,
+        },
+        {
+          onSuccess: () => router.push("/booking/confirmation"),
+          onError: (e) => {
+            toast.error(
+              "Une erreur inattendue s'est produite. Merci de réessayer ou de contacter le support client."
+            );
+            logger.error("Failed to create new order", { error: e });
+          },
+        }
+      );
     }
   };
 

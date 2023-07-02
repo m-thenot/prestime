@@ -1,6 +1,8 @@
 import { Facebook, Twitter } from "@icons";
 import Link from "next/link";
 import React from "react";
+import Image from "next/image";
+import Logo from "@images/full_logo.png";
 
 const legalLinks = [
   /* {
@@ -35,8 +37,16 @@ const Footer: React.FC = () => {
   return (
     <footer className="bg-background w-screen">
       <div className="pt-12 pb-6 container bg-background rounded">
-        <div className="flex justify-between">
-          <p className="font-bold text-xl hidden sm:flex">Deg Deg</p>
+        <div className="flex justify-between items-center">
+          <Image
+            src={Logo}
+            alt=""
+            priority
+            placeholder="blur"
+            width={180}
+            height={46}
+            className="hidden sm:flex"
+          />
 
           <div className="flex justify-between w-full sm:w-auto">
             <div className="flex flex-col sm:ml-16">

@@ -62,6 +62,7 @@ export interface INewOrder {
   task: number;
   taskProvider?: number;
   provider?: number | null;
+  schedules: number[];
   state: OrderState;
   payment: IInsertPayment;
   address: IAddress;

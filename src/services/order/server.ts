@@ -58,10 +58,7 @@ export const createNewOrder = async (
       address: addressId,
       customer: customerId,
       provider: newOrder.provider,
-      suggested_dates: [
-        new Date(1685873303960).toISOString(),
-        new Date(1685873303960).toISOString(),
-      ],
+      suggested_dates: newOrder.schedules.map((s) => new Date(s).toISOString()),
     });
 
     return await insertOrder({
@@ -72,6 +69,6 @@ export const createNewOrder = async (
       task_provider: newOrder.taskProvider,
     });
   } catch (e) {
-    logger.error("Failed to create a new Order", e);
+    logger.error("Failed to create a new Order", { error: e });
   }
 };

@@ -9,6 +9,10 @@ import ServicesNavigation from "@features/Service/ServicesNavigation";
 import { userAccountRoutes } from "@utils/user";
 import LogOutButton from "@features/Authentification/LogOutButton";
 import { UserType } from "types/user";
+import Logo from "@images/full_logo.png";
+import LogoMobile from "@images/logo.png";
+
+import Image from "next/image";
 
 const Header: React.FC = () => {
   const { user } = useUser();
@@ -17,9 +21,28 @@ const Header: React.FC = () => {
     <header className="container items-center flex justify-between mb-8 sm:mb-12">
       <Link
         href="/"
-        className="text-xl sm:text-2xl font-extrabold hover:no-underline"
+        className="text-xl sm:text-2xl font-extrabold hover:no-underline translate-y-1"
       >
-        Deg Deg
+        <div className="hidden sm:block">
+          <Image
+            src={Logo}
+            alt=""
+            priority
+            placeholder="blur"
+            width={150}
+            height={39}
+          />
+        </div>
+        <div className="sm:hidden">
+          <Image
+            src={LogoMobile}
+            alt=""
+            priority
+            placeholder="blur"
+            width={50}
+            height={50}
+          />
+        </div>
       </Link>
 
       <ServicesNavigation />

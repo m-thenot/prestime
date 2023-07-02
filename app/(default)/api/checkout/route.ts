@@ -29,6 +29,7 @@ export async function POST(request: Request) {
       customerId,
       service,
       financialId,
+      schedules,
     } = booking;
 
     const orderId = await createNewOrder(
@@ -42,6 +43,7 @@ export async function POST(request: Request) {
         state: OrderState.PENDING,
         address: address!,
         comment: comment,
+        schedules: schedules!.map((sch) => sch.value),
         provider: null,
       },
       customerId
