@@ -42,7 +42,6 @@ const Footer: React.FC = () => {
             src={Logo}
             alt=""
             priority
-            placeholder="blur"
             width={180}
             height={46}
             className="hidden sm:flex"

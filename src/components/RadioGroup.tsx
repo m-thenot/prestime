@@ -35,8 +35,14 @@ const RadioGroup: FC<RadioGroupProps> = ({
   );
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSelectedValue(event.target.value);
-    onChange(event.target.value);
+    let value: string | number = event.target.value;
+
+    if (typeof options[0]?.value === "number") {
+      value = Number(event.target.value);
+    }
+
+    setSelectedValue(value);
+    onChange(value);
   };
 
   useEffect(() => {

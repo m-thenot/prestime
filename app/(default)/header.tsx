@@ -24,24 +24,10 @@ const Header: React.FC = () => {
         className="text-xl sm:text-2xl font-extrabold hover:no-underline translate-y-1"
       >
         <div className="hidden sm:block">
-          <Image
-            src={Logo}
-            alt=""
-            priority
-            placeholder="blur"
-            width={150}
-            height={39}
-          />
+          <Image src={Logo} alt="" priority width={150} height={39} />
         </div>
         <div className="sm:hidden">
-          <Image
-            src={LogoMobile}
-            alt=""
-            priority
-            placeholder="blur"
-            width={50}
-            height={50}
-          />
+          <Image src={LogoMobile} alt="" priority width={50} height={50} />
         </div>
       </Link>
 
