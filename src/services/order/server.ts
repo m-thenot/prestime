@@ -99,3 +99,36 @@ export const createNewOrder = async (
     logger.error("Failed to create a new Order", { error: e });
   }
 };
+
+export const getOrders = async () => {
+  const orders = await supabase()
+    .from(ORDER_TABLE)
+    .select(
+      `
+  id,
+  created_at,
+  state,
+  task:task(
+    name,
+    service:service(
+      title,
+      image
+    )
+  ),
+  task_provider:task_provider(
+    provider:public_provider(
+      firstname
+    )
+  ),
+  appointment:appointment(
+    date,
+    suggested_dates,
+    address:address(
+      formatted_address
+    )
+  )
+  `
+    );
+
+  return orders.data;
+};

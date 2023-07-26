@@ -1,5 +1,6 @@
 import { IAddress } from "./address";
 import { ICustomer } from "./customer";
+import { OrderState } from "./order";
 import { ITaskProvider } from "./provider";
 import { ISchedule } from "./schedule";
 import { IService } from "./service";
@@ -24,9 +25,35 @@ export enum BOOKING_STEPS {
   SCHEDULE = "schedule",
   ADDRESS = "address",
   PAYMENT = "payment",
+  CONFIRMATION = "confirmation",
 }
 
 export enum PaymentMethod {
   CASH = "cash",
   CREDIT_CARD = "CREDIT_CARD",
+}
+
+export interface IBookingCard {
+  id: number;
+  created_at: Date;
+  state: OrderState;
+  task_provider?: {
+    provider: {
+      firstname: string;
+    };
+  } | null;
+  task: {
+    name: string;
+    service: {
+      title: string;
+      image: string;
+    };
+  };
+  appointment: {
+    date: string | null;
+    suggested_dates: string[];
+    address: {
+      formatted_address: string;
+    };
+  };
 }

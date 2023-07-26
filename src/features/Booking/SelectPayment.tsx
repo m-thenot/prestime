@@ -58,7 +58,7 @@ const SelectPayment: React.FC = () => {
   const router = useRouter();
   const { mutate } = useMutation({
     mutationFn: async (data: any) => {
-      return await fetchPostJSON("/api/orders", { data });
+      return await fetchPostJSON("/api/orders", { booking: data });
     },
   });
 
@@ -91,6 +91,7 @@ const SelectPayment: React.FC = () => {
               "Une erreur inattendue s'est produite. Merci de réessayer ou de contacter le support client."
             );
             logger.error("Failed to create new order", { error: e });
+            setIsLoading(false);
           },
         }
       );

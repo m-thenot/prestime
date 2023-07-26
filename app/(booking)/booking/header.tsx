@@ -33,14 +33,19 @@ const Header: React.FC = () => {
     <>
       <header className="bg-white sm:drop-shadow-md">
         <div className="container items-center flex justify-between mb-2 sm:mb-8 py-6 px-5 sm:px-10 header">
-          <Button
-            variant="transparent"
-            onClick={onClickBack}
-            className="flex items-center"
-          >
-            <Arrow headDirection="left" />
-            <span className="ml-3">Retour</span>
-          </Button>
+          {step !== BOOKING_STEPS.CONFIRMATION ? (
+            <Button
+              variant="transparent"
+              onClick={onClickBack}
+              className="flex items-center"
+            >
+              <Arrow headDirection="left" />
+
+              <span className="ml-3">Retour</span>
+            </Button>
+          ) : (
+            <div />
+          )}
 
           <Link
             href="/"

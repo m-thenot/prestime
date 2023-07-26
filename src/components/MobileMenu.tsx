@@ -67,7 +67,7 @@ const MobileMenu: React.FC = () => {
         onClick={toggleMenu}
       />
       <nav
-        className={`fixed top-0 left-0 w-9/12 h-full bg-white z-50 overflow-auto transform duration-300 transition-transform py-6 px-6 ${
+        className={` fixed top-0 left-0 w-9/12 h-full bg-white z-50 overflow-auto transform duration-300 transition-transform py-6 px-6 ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
