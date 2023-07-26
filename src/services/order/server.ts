@@ -132,3 +132,49 @@ export const getOrders = async () => {
 
   return orders.data;
 };
+
+export const getOrderById = async (orderId: string) => {
+  const orders = await supabase()
+    .from(ORDER_TABLE)
+    .select(
+      `
+  id,
+  created_at,
+  state,
+  task:task(
+    name,
+    service:service(
+      title,
+      image
+    )
+  ),
+  task_provider:task_provider(
+    price,
+    provider:public_provider(
+      firstname,
+      description,
+      phone_number,
+      reviews:review(
+        id,
+        rating
+    )
+    )
+  ),
+  appointment:appointment(
+    date,
+    suggested_dates,
+    address:address(
+      formatted_address,
+      latitude,
+      longitude,
+      country,
+      city
+    )
+  )
+  `
+    )
+    .eq("id", orderId)
+    .single();
+
+  return orders.data;
+};

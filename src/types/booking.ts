@@ -57,3 +57,39 @@ export interface IBookingCard {
     };
   };
 }
+
+export interface IUserBooking {
+  id: number;
+  created_at: Date;
+  state: OrderState;
+  task_provider?: {
+    price: number;
+    provider: {
+      firstname: string;
+      description: string;
+      phone_number: string;
+      reviews?: {
+        id: number;
+        rating: number;
+      }[];
+    };
+  } | null;
+  task: {
+    name: string;
+    service: {
+      title: string;
+      image: string;
+    };
+  };
+  appointment: {
+    date: string | null;
+    suggested_dates: string[];
+    address: {
+      formatted_address: string;
+      latitude: number;
+      longitude: number;
+      country: string;
+      city: string;
+    };
+  };
+}

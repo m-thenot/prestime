@@ -61,7 +61,7 @@ const Information = () => {
       className="container items-center flex flex-col"
       onSubmit={handleSubmit(onSubmit)}
     >
-      <h1 className="mb-2">Mes informations</h1>
+      <h1 className="mb-4">Mes informations</h1>
 
       {error && (
         <FormError errorMessage="Une erreur inattendue s'est produite, veuillez réessayer." />
@@ -94,7 +94,7 @@ const Information = () => {
 
       <InputPhoneNumber errors={errors} control={control} />
 
-      <Button className="w-full mt-6" type="submit" isLoading={isLoading}>
+      <Button className="w-full my-6" type="submit" isLoading={isLoading}>
         Enregistrer
       </Button>
     </form>

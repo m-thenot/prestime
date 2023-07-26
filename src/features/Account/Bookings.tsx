@@ -1,5 +1,3 @@
-"use client";
-
 import { IBookingCard } from "types/booking";
 import Image from "next/image";
 import { Time, User } from "@icons";
@@ -15,12 +13,12 @@ interface IBookingProps {
 const Bookings: React.FC<IBookingProps> = ({ bookings }) => {
   return (
     <div className="container">
-      <h1 className="mb-2 text-center">Mes réservations</h1>
+      <h1 className="mb-8 sm:mb-10 text-center">Mes réservations</h1>
 
-      <div className="mt-6 sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-x-6">
+      <div className="grid grid-cols-1 gap-y-6 sm:grid-cols-2 lg:grid-cols-3 sm:gap-x-6">
         {bookings?.map((booking) => (
           <div
-            className="drop-shadow-lg bg-white my-4 rounded-lg w-full"
+            className="drop-shadow-lg bg-white rounded-lg w-full"
             key={booking.id}
           >
             <div className="rounded-t-lg h-16 relative w-full">
