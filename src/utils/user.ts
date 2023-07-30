@@ -1,6 +1,6 @@
 export const userAccountRoutes = [
   {
-    label: "Mes réservations à venir",
+    label: "Mes réservations",
     href: "/account/bookings",
   },
   {

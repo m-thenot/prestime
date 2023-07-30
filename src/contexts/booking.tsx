@@ -30,6 +30,8 @@ const BookingProvider = ({ children }: { children: React.ReactNode }) => {
     if (booking) {
       // save data to local storage whenever it changes
       localStorage.setItem("booking", JSON.stringify(booking));
+    } else {
+      localStorage.removeItem("booking");
     }
   }, [booking]);
 

@@ -11,7 +11,6 @@ import LogOutButton from "@features/Authentification/LogOutButton";
 import { UserType } from "types/user";
 import Logo from "@images/full_logo.png";
 import LogoMobile from "@images/logo.png";
-
 import Image from "next/image";
 
 const Header: React.FC = () => {

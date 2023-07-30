@@ -1,9 +1,17 @@
 "use client";
 import { useBooking } from "@contexts/booking";
+import { usePathname } from "next/navigation";
 import React, { Fragment } from "react";
+import { BOOKING_STEPS } from "types/booking";
 
 const BookingSummary: React.FC = () => {
   const { booking } = useBooking();
+  const pathname = usePathname();
+  const step = pathname.split("/").pop() as BOOKING_STEPS;
+
+  if (step === BOOKING_STEPS.CONFIRMATION) {
+    return null;
+  }
 
   return (
     <section className="section-booking ml-16 min-w-[250px] hidden sm:block">

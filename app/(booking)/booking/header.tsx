@@ -8,6 +8,9 @@ import { Account, Arrow } from "@icons";
 import { usePathname, useRouter } from "next/navigation";
 import { BOOKING_STEPS } from "types/booking";
 import { steps } from "constants/booking";
+import Logo from "@images/full_logo.png";
+import LogoMobile from "@images/logo.png";
+import Image from "next/image";
 
 const Header: React.FC = () => {
   const { user } = useUser();
@@ -49,9 +52,14 @@ const Header: React.FC = () => {
 
           <Link
             href="/"
-            className="text-lg sm:text-2xl font-extrabold hover:no-underline"
+            className="text-xl sm:text-2xl font-extrabold hover:no-underline translate-y-1"
           >
-            Deg Deg
+            <div className="hidden sm:block">
+              <Image src={Logo} alt="" priority width={150} height={39} />
+            </div>
+            <div className="sm:hidden">
+              <Image src={LogoMobile} alt="" priority width={50} height={50} />
+            </div>
           </Link>
 
           {user ? (
@@ -65,7 +73,7 @@ const Header: React.FC = () => {
  flex-col bg-white drop-shadow-lg"
               >
                 <Link href="/account/bookings" className="mb-3">
-                  Mes réservations à venir
+                  Mes réservations
                 </Link>
                 <Link href="/account/payments" className="mb-3">
                   Mes moyens de paiement

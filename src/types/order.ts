@@ -51,11 +51,18 @@ export interface IOrderDB {
   payment: number;
   appointment: number;
   comment?: string;
+  user_id: string;
 }
 
 export type IInsertOrder = Pick<
   IOrderDB,
-  "task" | "task_provider" | "state" | "payment" | "appointment" | "comment"
+  | "task"
+  | "task_provider"
+  | "state"
+  | "payment"
+  | "appointment"
+  | "comment"
+  | "user_id"
 >;
 
 export interface INewOrder {

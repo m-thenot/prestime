@@ -74,6 +74,8 @@ export const createNewOrder = async (
   customerId: number
 ) => {
   try {
+    const user = await supabase().auth.getUser();
+
     const [paymentId, addressId] = await Promise.all([
       insertPayment({
         ...newOrder.payment,
@@ -94,6 +96,7 @@ export const createNewOrder = async (
       state: newOrder.state,
       task: newOrder.task,
       task_provider: newOrder.taskProvider,
+      user_id: user.data.user!.id,
     });
   } catch (e) {
     logger.error("Failed to create a new Order", { error: e });
@@ -128,7 +131,8 @@ export const getOrders = async () => {
     )
   )
   `
-    );
+    )
+    .order("created_at", { ascending: false });
 
   return orders.data;
 };

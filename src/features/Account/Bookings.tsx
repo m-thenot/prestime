@@ -24,6 +24,7 @@ const Bookings: React.FC<IBookingProps> = ({ bookings }) => {
             <div className="rounded-t-lg h-16 relative w-full">
               <Image
                 src={booking.task.service.image}
+                objectFit="cover"
                 fill
                 alt=""
                 className="rounded-t-lg"
