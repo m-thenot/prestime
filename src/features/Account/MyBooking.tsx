@@ -23,6 +23,8 @@ const MyBooking: React.FC<IMyBookingProps> = ({ booking }) => {
       booking.task_provider.provider.reviews.length
     : null;
 
+  console.log(booking);
+
   return (
     <div className="container">
       <div className="flex -translate-x-4 mb-6">
@@ -64,10 +66,10 @@ const MyBooking: React.FC<IMyBookingProps> = ({ booking }) => {
 
             <LinkButton
               variant="secondary"
-              href={`"tel:${booking.task_provider.provider.phone_number.replace(
+              href={`tel:${booking.task_provider.provider.phone_number.replace(
                 /\s/g,
                 ""
-              )}"`}
+              )}`}
               className="w-full"
             >
               Contacter {booking.task_provider.provider.firstname}
@@ -117,7 +119,8 @@ const MyBooking: React.FC<IMyBookingProps> = ({ booking }) => {
           <div className="mb-3 mt-5 flex justify-between">
             <p className="font-bold">Total:</p>
             <p className="font-bold text-lg">
-              {booking.task_provider?.price} DJF
+              {booking.task.recommended_price || booking.task_provider?.price}{" "}
+              DJF
             </p>
           </div>
         </div>

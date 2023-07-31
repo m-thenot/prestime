@@ -59,7 +59,7 @@ export async function POST(request: Request) {
               description: task?.name,
             },
             currency: "DJF",
-            unit_amount: 1000,
+            unit_amount: taskProvider?.price || task?.recommended_price!,
           },
           quantity: 1,
         },

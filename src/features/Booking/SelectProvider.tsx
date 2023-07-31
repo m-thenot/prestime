@@ -47,7 +47,12 @@ const SelectProvider: React.FC = () => {
           value: 0,
           node: (
             <div className="ml-3 w-full">
-              <p className="font-bold mb-1">Faîtes nous confiance</p>
+              <div className="flex items-center justify-between">
+                <p className="font-bold mb-1">Faîtes nous confiance</p>
+                <p className="mb-0 font-bold text-lg">
+                  {booking?.task?.recommended_price} DJF
+                </p>
+              </div>
               <p>
                 Deg Deg sélectionnera le meilleur prestataire selon vos
                 disponibilités
@@ -81,13 +86,14 @@ const SelectProvider: React.FC = () => {
                     <Stars averageRating={rating} />
                   </div>
                 </div>
-                <Link
+                {/*   <Link
                   href="/login"
                   className="text-sm font-semibold hidden sm:block"
                   target="_blank"
                 >
                   Voir son profil complet
-                </Link>
+                </Link> */}
+                <p className="mb-0 font-bold text-lg">{tp.price} DJF</p>
               </div>
               <p className="text-gray-500 text-sm mt-3 line-clamp-3">
                 {tp.provider.description}

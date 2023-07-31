@@ -79,6 +79,13 @@ const BookingSummary: React.FC = () => {
           )}
         </>
       )}
+
+      {booking?.taskProvider !== undefined && (
+        <h3 className="font-semibold mt-2">
+          Total:{" "}
+          {booking.taskProvider?.price || booking.task?.recommended_price} DJF
+        </h3>
+      )}
     </section>
   );
 };

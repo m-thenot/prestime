@@ -76,6 +76,7 @@ export interface IUserBooking {
   } | null;
   task: {
     name: string;
+    recommended_price: number;
     service: {
       title: string;
       image: string;

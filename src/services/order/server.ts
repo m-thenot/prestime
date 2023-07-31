@@ -113,6 +113,7 @@ export const getOrders = async () => {
   state,
   task:task(
     name,
+    recommended_price,
     service:service(
       title,
       image
@@ -147,6 +148,7 @@ export const getOrderById = async (orderId: string) => {
   state,
   task:task(
     name,
+    recommended_price,
     service:service(
       title,
       image
