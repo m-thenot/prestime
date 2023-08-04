@@ -29,7 +29,7 @@ export enum BOOKING_STEPS {
 }
 
 export enum PaymentMethod {
-  CASH = "cash",
+  CASH = "CASH",
   CREDIT_CARD = "CREDIT_CARD",
 }
 

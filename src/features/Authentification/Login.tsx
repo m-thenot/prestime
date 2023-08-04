@@ -31,13 +31,10 @@ const Login: React.FC<ILoginProps> = ({ isEmbedded, onClickSignUp }) => {
   const redirectToReferrer = useRedirectToReferrer();
   const { mutate, isLoading } = useMutation(
     async ({ email, password }: LoginInputs) => {
-      console.log("start login");
       const { data, error } = await supabase.auth.signInWithPassword({
         email,
         password,
       });
-
-      console.log(data);
 
       setAreInvalidCredentials(Boolean(error));
 
@@ -76,7 +73,15 @@ const Login: React.FC<ILoginProps> = ({ isEmbedded, onClickSignUp }) => {
 
       <InputPassword errors={errors} {...register("password")} />
 
-      <Button className="w-full mt-6" type="submit" isLoading={isLoading}>
+      <Link
+        href="/reset-password"
+        target={isEmbedded ? "_blank" : "_self"}
+        className="font-semibold mt-3 justify-start text-sm"
+      >
+        Mot de passe oublié ?
+      </Link>
+
+      <Button className="w-full mt-4" type="submit" isLoading={isLoading}>
         Continuer
       </Button>
 
