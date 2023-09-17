@@ -62,6 +62,12 @@ const Search = () => {
     });
   };
 
+  const handleFocus = () => {
+    if (searchRef.current) {
+      searchRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
   return (
     <div className="relative" ref={searchRef}>
       <input
@@ -69,6 +75,7 @@ const Search = () => {
         placeholder="Quel service recherchez-vous ?"
         onChange={handleInputChange}
         value={query}
+        onFocus={handleFocus}
       />
       <Button className="absolute right-2 bottom-1.5">
         <SearchIcon />
