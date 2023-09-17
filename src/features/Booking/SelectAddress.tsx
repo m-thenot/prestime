@@ -83,109 +83,117 @@ const SelectAddress: React.FC = () => {
     }
   }, [booking]);
 
-  return user ? (
-    <StepContent
-      percentProgress={75}
-      title="Indiquer l’adresse ou vous souhaitez recevoir votre prestation"
-      onSubmit={onSubmit}
-      submitButtonDisabled={!Boolean(address?.formattedAddress)}
+  return (
+    <LoadScript
+      googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY!}
+      libraries={libraries}
+      language="fr"
+      region="DJ"
     >
-      <div className="flex flex-col items-center">
-        <LoadScript
-          googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY!}
-          libraries={libraries}
-          language="fr"
-          region="DJ"
+      {user ? (
+        <StepContent
+          percentProgress={75}
+          title="Indiquer l’adresse ou vous souhaitez recevoir votre prestation"
+          onSubmit={onSubmit}
+          submitButtonDisabled={!Boolean(address?.formattedAddress)}
         >
-          <PlacesAutocomplete
-            value={inputAddress}
-            onChange={handleChange}
-            onSelect={handleSelect}
-          >
-            {({ getInputProps, suggestions, getSuggestionItemProps }) => (
-              <div className="flex flex-col	items-center w-full">
-                <Input
-                  label=""
-                  {...getInputProps({
-                    placeholder: "Saisir votre adresse...",
-                  })}
-                />
-                <div className="drop-shadow-md max-w-md w-full">
-                  {suggestions.map((suggestion) => {
-                    const style = suggestion.active
-                      ? { backgroundColor: colors.gray[100], cursor: "pointer" }
-                      : { backgroundColor: colors.white, cursor: "pointer" };
-
-                    return (
-                      <div
-                        {...getSuggestionItemProps(suggestion, {
-                          className: "px-3 min-w-full py-1",
-                          style,
-                        })}
-                        key={suggestion.id}
-                      >
-                        <span className="text-sm">
-                          {suggestion.description}
-                        </span>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            )}
-          </PlacesAutocomplete>
-        </LoadScript>
-        <div className="flex items-center">
-          <div className="w-20 h-[1px] mr-4 bg-black" />
-          <p className="my-4 text-center" key={0}>
-            Ou
-          </p>
-          <div className="w-20 h-[1px] ml-4 bg-black" />
-        </div>
-        <Button
-          variant="secondary"
-          className="w-full"
-          onClick={() => setIsModalOpen(true)}
-        >
-          Sélectionner un point sur la carte
-        </Button>
-
-        {isModalOpen && (
-          <Modal onClose={() => setIsModalOpen(false)}>
-            <div className="flex items-center justify-between my-2">
-              <p className="max-w-[530px]">
-                Placer le curseur <Pin width={22} height={22} /> à votre adresse
-                :<span className="font-bold">{address.formattedAddress}</span>
-              </p>
-              <Button
-                className="h-8 min-w-[160px] hidden sm:block cursor-pointer disabled:cursor-not-allowed"
-                disabled={!address.formattedAddress}
-                onClick={onSubmitModal}
-              >
-                Valider
-              </Button>
-            </div>
-            <MapPicker address={address} setAddress={setAddress} />
-            <Button
-              className="w-full mt-3 sm:hidden"
-              disabled={!address.formattedAddress}
-              onClick={onSubmitModal}
+          <div className="flex flex-col items-center">
+            <PlacesAutocomplete
+              value={inputAddress}
+              onChange={handleChange}
+              onSelect={handleSelect}
             >
-              Valider
+              {({ getInputProps, suggestions, getSuggestionItemProps }) => (
+                <div className="flex flex-col	items-center w-full">
+                  <Input
+                    label=""
+                    {...getInputProps({
+                      placeholder: "Saisir votre adresse...",
+                    })}
+                  />
+                  <div className="drop-shadow-md max-w-md w-full">
+                    {suggestions.map((suggestion) => {
+                      const style = suggestion.active
+                        ? {
+                            backgroundColor: colors.gray[100],
+                            cursor: "pointer",
+                          }
+                        : { backgroundColor: colors.white, cursor: "pointer" };
+
+                      return (
+                        <div
+                          {...getSuggestionItemProps(suggestion, {
+                            className: "px-3 min-w-full py-1",
+                            style,
+                          })}
+                          key={suggestion.id}
+                        >
+                          <span className="text-sm">
+                            {suggestion.description}
+                          </span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+            </PlacesAutocomplete>
+            <div className="flex items-center">
+              <div className="w-20 h-[1px] mr-4 bg-black" />
+              <p className="my-4 text-center" key={0}>
+                Ou
+              </p>
+              <div className="w-20 h-[1px] ml-4 bg-black" />
+            </div>
+            <Button
+              variant="secondary"
+              className="w-full"
+              onClick={() => setIsModalOpen(true)}
+            >
+              Sélectionner un point sur la carte
             </Button>
-          </Modal>
-        )}
-      </div>
-    </StepContent>
-  ) : (
-    <StepContent
-      percentProgress={75}
-      onSubmit={() => null}
-      title=""
-      hasSubmitButton={false}
-    >
-      <AuthEmbedded />
-    </StepContent>
+
+            {isModalOpen && (
+              <Modal onClose={() => setIsModalOpen(false)}>
+                <div className="flex items-center justify-between my-2">
+                  <p className="max-w-[530px]">
+                    Placer le curseur <Pin width={22} height={22} /> à votre
+                    adresse :
+                    <span className="font-bold">
+                      {address.formattedAddress}
+                    </span>
+                  </p>
+                  <Button
+                    className="h-8 min-w-[160px] hidden sm:block cursor-pointer disabled:cursor-not-allowed"
+                    disabled={!address.formattedAddress}
+                    onClick={onSubmitModal}
+                  >
+                    Valider
+                  </Button>
+                </div>
+                <MapPicker address={address} setAddress={setAddress} />
+                <Button
+                  className="w-full mt-3 sm:hidden"
+                  disabled={!address.formattedAddress}
+                  onClick={onSubmitModal}
+                >
+                  Valider
+                </Button>
+              </Modal>
+            )}
+          </div>
+        </StepContent>
+      ) : (
+        <StepContent
+          percentProgress={75}
+          onSubmit={() => null}
+          title=""
+          hasSubmitButton={false}
+        >
+          <AuthEmbedded />
+        </StepContent>
+      )}
+    </LoadScript>
   );
 };
 

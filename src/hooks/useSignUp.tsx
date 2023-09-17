@@ -81,8 +81,10 @@ const useSignUp = (type: UserType, onSignUp: () => void) => {
             email,
           },
           {
-            onSuccess: () => {
+            onSuccess: async () => {
               setIsLoading(false);
+              await supabase.auth.refreshSession();
+
               onSignUp();
             },
             onError: (e) => {
