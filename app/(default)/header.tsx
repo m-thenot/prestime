@@ -6,7 +6,7 @@ import Link from "next/link";
 import { Account } from "@icons";
 import MobileMenu from "@components/MobileMenu";
 import ServicesNavigation from "@features/Service/ServicesNavigation";
-import { userAccountRoutes } from "@utils/user";
+import { proAccountRoutes, userAccountRoutes } from "@utils/user";
 import LogOutButton from "@features/Authentification/LogOutButton";
 import { UserType } from "types/user";
 import Logo from "@images/full_logo.png";
@@ -15,6 +15,8 @@ import Image from "next/image";
 
 const Header: React.FC = () => {
   const { user } = useUser();
+  const routes =
+    user?.type === UserType.CUSTOMER ? userAccountRoutes : proAccountRoutes;
 
   return (
     <header className="container items-center flex justify-between mb-8 sm:mb-12">
@@ -55,12 +57,11 @@ const Header: React.FC = () => {
             className="hidden absolute top-8 right-0 p-3 z-20 hover:flex rounded peer-hover:flex w-64	
  flex-col bg-white drop-shadow-lg"
           >
-            {user.type === UserType.CUSTOMER &&
-              userAccountRoutes.map((route) => (
-                <Link key={route.href} href={route.href} className="mb-3">
-                  {route.label}
-                </Link>
-              ))}
+            {routes.map((route) => (
+              <Link key={route.href} href={route.href} className="mb-3">
+                {route.label}
+              </Link>
+            ))}
             <LogOutButton />
           </div>
         </div>

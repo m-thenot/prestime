@@ -1,4 +1,5 @@
 import { createAddress } from "@services/address";
+import { getProvider } from "@services/provider/server";
 import { logger } from "@utils/logger";
 import supabase, { createServiceClient } from "@utils/supabase/supabase-server";
 import {
@@ -76,11 +77,12 @@ export const createNewOrder = async (
   try {
     const user = await supabase().auth.getUser();
 
-    const [paymentId, addressId] = await Promise.all([
+    const [paymentId, addressId, provider] = await Promise.all([
       insertPayment({
         ...newOrder.payment,
       }),
       createAddress(newOrder.address, customerId),
+      newOrder.provider && getProvider(newOrder.provider),
     ]);
 
     const appointmentId = await insertAppointment({
@@ -97,6 +99,8 @@ export const createNewOrder = async (
       task: newOrder.task,
       task_provider: newOrder.taskProvider,
       user_id: user.data.user!.id,
+      provider_user_id: provider?.user_id,
+      comment: newOrder.comment,
     });
   } catch (e) {
     logger.error("Failed to create a new Order", { error: e });

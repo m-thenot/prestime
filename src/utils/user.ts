@@ -12,3 +12,14 @@ export const userAccountRoutes = [
     href: "/account/information",
   },
 ];
+
+export const proAccountRoutes = [
+  {
+    label: "Mes commandes",
+    href: "/pro/bookings",
+  },
+  {
+    label: "Mes informations",
+    href: "/account/information",
+  },
+];

@@ -35,7 +35,7 @@ export async function POST(request: Request) {
       address: address!,
       comment: comment,
       schedules: schedules!.map((sch) => sch.value),
-      provider: null,
+      provider: taskProvider?.provider.id || null,
     },
     user.id
   );

@@ -2,7 +2,7 @@ import { createMiddlewareSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-const authenticatedRoutes = ["/account"];
+const authenticatedRoutes = ["/account", "/pro/bookings"];
 const unauthenticatedRoutes = ["/login", "/sign-up", "/pro/sign-up"];
 
 // this middleware refreshes the user's session and must be run
@@ -40,5 +40,6 @@ export const config = {
     "/account/information",
     "/account/bookings",
     "/pro/sign-up",
+    "/pro/bookings",
   ],
 };
