@@ -18,12 +18,11 @@ interface IMyBookingProps {
 }
 
 const MyBooking: React.FC<IMyBookingProps> = ({ booking }) => {
-  const providerRating = booking.task_provider?.provider.reviews
-    ? sum(booking.task_provider.provider.reviews, (r) => r.rating) /
-      booking.task_provider.provider.reviews.length
-    : null;
-
-  console.log(booking);
+  const providerReviews = booking.task_provider?.provider.reviews;
+  const providerRating =
+    providerReviews && providerReviews.length > 0
+      ? sum(providerReviews, (r) => r.rating) / providerReviews.length
+      : null;
 
   return (
     <div className="container">
@@ -110,7 +109,7 @@ const MyBooking: React.FC<IMyBookingProps> = ({ booking }) => {
               <>
                 <p className="font-bold">Disponibilités</p>
                 {booking.appointment.suggested_dates.map((date, index) => (
-                  <p key={index}>{dayjs(date).format("ddd D MMMM, hh")}h</p>
+                  <p key={index}>{dayjs(date).format("ddd D MMMM, HH")}h</p>
                 ))}
               </>
             )}

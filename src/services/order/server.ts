@@ -1,5 +1,4 @@
 import { createAddress } from "@services/address";
-import { getProvider } from "@services/provider/server";
 import { logger } from "@utils/logger";
 import supabase, { createServiceClient } from "@utils/supabase/supabase-server";
 import {
@@ -35,6 +34,10 @@ const insertOrder = async (order: IInsertOrder) => {
     .select("id")
     .single();
 
+  if (result.error) {
+    throw new Error(result.error.message);
+  }
+
   return result.data?.id;
 };
 
@@ -44,6 +47,10 @@ const insertPayment = async (payment: IInsertPayment) => {
     .insert(payment)
     .select("id")
     .single();
+
+  if (result.error) {
+    throw new Error(result.error.message);
+  }
 
   return result.data?.id;
 };
@@ -67,6 +74,10 @@ const insertAppointment = async (appointment: IInsertAppointment) => {
     .select("id")
     .single();
 
+  if (result.error) {
+    throw new Error(result.error.message);
+  }
+
   return result.data?.id;
 };
 
@@ -75,14 +86,11 @@ export const createNewOrder = async (
   customerId: number
 ) => {
   try {
-    const user = await supabase().auth.getUser();
-
-    const [paymentId, addressId, provider] = await Promise.all([
+    const [paymentId, addressId] = await Promise.all([
       insertPayment({
         ...newOrder.payment,
       }),
       createAddress(newOrder.address, customerId),
-      newOrder.provider && getProvider(newOrder.provider),
     ]);
 
     const appointmentId = await insertAppointment({
@@ -98,12 +106,13 @@ export const createNewOrder = async (
       state: newOrder.state,
       task: newOrder.task,
       task_provider: newOrder.taskProvider,
-      user_id: user.data.user!.id,
-      provider_user_id: provider?.user_id,
+      customer: customerId,
+      provider: newOrder.provider,
       comment: newOrder.comment,
     });
   } catch (e) {
     logger.error("Failed to create a new Order", { error: e });
+    throw new Error("Failed to create a new Order");
   }
 };
 
@@ -123,12 +132,18 @@ export const getOrders = async () => {
       image
     )
   ),
+  customer:customer(
+    firstname,
+    lastname,
+    phone_number
+  ),
   task_provider:task_provider(
     provider:public_provider(
       firstname
     )
   ),
   appointment:appointment(
+    id,
     date,
     suggested_dates,
     address:address(

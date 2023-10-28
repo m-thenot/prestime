@@ -50,11 +50,17 @@ export interface IBookingCard {
     };
   };
   appointment: {
+    id: number;
     date: string | null;
     suggested_dates: string[];
     address: {
       formatted_address: string;
     };
+  };
+  customer: {
+    firstname: string;
+    lastname: string;
+    phone_number: string;
   };
 }
 

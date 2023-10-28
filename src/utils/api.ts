@@ -10,6 +10,13 @@ export async function fetchGetJSON(url: string) {
   }
 }
 
+const throwError = (error: any) => {
+  if (error instanceof Error) {
+    throw new Error(error.message);
+  }
+  throw error;
+};
+
 export async function fetchPostJSON(url: string, data?: {}) {
   try {
     const response = await fetch(url, {
@@ -23,11 +30,14 @@ export async function fetchPostJSON(url: string, data?: {}) {
       redirect: "follow",
       body: JSON.stringify(data || {}),
     });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throwError(errorData);
+    }
+
     return await response.json();
   } catch (err) {
-    if (err instanceof Error) {
-      throw new Error(err.message);
-    }
-    throw err;
+    throwError(err);
   }
 }

@@ -17,5 +17,9 @@ export const createAddress = async (address: IAddress, customerId: number) => {
     .select("id")
     .single();
 
+  if (result.error) {
+    throw new Error(result.error.message);
+  }
+
   return result.data?.id;
 };

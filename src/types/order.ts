@@ -51,8 +51,8 @@ export interface IOrderDB {
   payment: number;
   appointment: number;
   comment?: string | null;
-  user_id: string;
-  provider_user_id: string | null;
+  customer: number;
+  provider?: number | null;
 }
 
 export type IInsertOrder = Pick<
@@ -63,8 +63,8 @@ export type IInsertOrder = Pick<
   | "payment"
   | "appointment"
   | "comment"
-  | "user_id"
-  | "provider_user_id"
+  | "customer"
+  | "provider"
 >;
 
 export interface INewOrder {

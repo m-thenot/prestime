@@ -15,7 +15,7 @@ const Bookings: React.FC<IBookingProps> = ({ bookings }) => {
     <div className="container">
       <h1 className="mb-8 sm:mb-10 text-center">Mes réservations</h1>
 
-      <div className="grid grid-cols-1 gap-y-6 sm:grid-cols-2 lg:grid-cols-3 sm:gap-x-6">
+      <div className="grid grid-cols-1 gap-y-6 sm:grid-cols-2 lg:grid-cols-3 sm:gap-x-6 mb-6">
         {bookings?.map((booking) => (
           <div
             className="drop-shadow-lg bg-white rounded-lg w-full"
