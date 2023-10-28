@@ -11,6 +11,7 @@ import "dayjs/locale/fr";
 import { sum } from "radash";
 import Stars from "@components/Stars";
 import { Arrow } from "@icons";
+import { getFullDateFormatted } from "@utils/date";
 dayjs.locale("fr");
 
 interface IMyBookingProps {
@@ -109,7 +110,7 @@ const MyBooking: React.FC<IMyBookingProps> = ({ booking }) => {
               <>
                 <p className="font-bold">Disponibilités</p>
                 {booking.appointment.suggested_dates.map((date, index) => (
-                  <p key={index}>{dayjs(date).format("ddd D MMMM, HH")}h</p>
+                  <p key={index}>{getFullDateFormatted(date)}</p>
                 ))}
               </>
             )}

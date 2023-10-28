@@ -3,14 +3,12 @@ import Modal from "@components/Modal";
 import RadioGroup from "@components/RadioGroup";
 import { useMemo, useState } from "react";
 import { IBookingCard } from "types/booking";
-import dayjs from "dayjs";
-import "dayjs/locale/fr";
 import { useMutation } from "react-query";
 import { acceptOrder, updateAppointmentDate } from "@services/order/client";
 import { logger } from "@utils/logger";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
-dayjs.locale("fr");
+import { getFullDateFormatted } from "@utils/date";
 
 interface INewOrderActionsProps {
   booking: IBookingCard;
@@ -55,7 +53,7 @@ const NewOrderActions: React.FC<INewOrderActionsProps> = ({ booking }) => {
       booking.appointment.suggested_dates.map((date) => {
         return {
           value: date,
-          label: `${dayjs(date).format("dddd D MMMM, HH")}h`,
+          label: getFullDateFormatted(date),
         };
       }),
     [booking.appointment.suggested_dates]

@@ -1,9 +1,5 @@
 import { IBookingCard } from "types/booking";
-import dayjs from "dayjs";
-import "dayjs/locale/fr";
 import ProBookingCard from "./ProBookingCard";
-dayjs.locale("fr");
-
 interface IBookingProps {
   bookings: IBookingCard[] | null;
 }

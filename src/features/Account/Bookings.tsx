@@ -1,10 +1,8 @@
 import { IBookingCard } from "types/booking";
 import Image from "next/image";
 import { Time, User } from "@icons";
-import dayjs from "dayjs";
-import "dayjs/locale/fr";
 import Link from "next/link";
-dayjs.locale("fr");
+import { getFullDateFormatted } from "@utils/date";
 
 interface IBookingProps {
   bookings: IBookingCard[] | null;
@@ -37,10 +35,10 @@ const Bookings: React.FC<IBookingProps> = ({ bookings }) => {
               <div className="flex items-center">
                 <Time />
                 <p className="ml-2 mb-0">
-                  {dayjs(
+                  {getFullDateFormatted(
                     booking.appointment.date ||
                       booking.appointment.suggested_dates[0]
-                  ).format("ddd D MMMM")}
+                  )}
                   {!booking.appointment.date && "..."}
                 </p>
               </div>
