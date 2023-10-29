@@ -4,7 +4,11 @@ import RadioGroup from "@components/RadioGroup";
 import { useMemo, useState } from "react";
 import { IBookingCard } from "types/booking";
 import { useMutation } from "react-query";
-import { acceptOrder, updateAppointmentDate } from "@services/order/client";
+import {
+  acceptOrder,
+  declineOrder,
+  updateAppointmentDate,
+} from "@services/order/client";
 import { logger } from "@utils/logger";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
@@ -16,12 +20,29 @@ interface INewOrderActionsProps {
 
 const NewOrderActions: React.FC<INewOrderActionsProps> = ({ booking }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDeclineModalOpen, setIsDeclineModalOpen] = useState(false);
   const [dateSelected, setDateSelected] = useState<string>(
     booking.appointment.suggested_dates[0]
   );
   const router = useRouter();
+  const { mutate: declineOrderMutate, isLoading: isDeclineLoading } =
+    useMutation(async ({ orderId }: { orderId: number }) => {
+      try {
+        await declineOrder(orderId);
+        toast.success("Commande refusée !");
+        setIsModalOpen(false);
+        router.refresh();
+      } catch (e) {
+        logger.error("Failed to declinne the order", {
+          error: e,
+        });
+        toast.error(
+          "Une erreur inattendue s'est produite. Merci de réessayer ou de contacter le support client."
+        );
+      }
+    });
 
-  const { mutate, isLoading } = useMutation(
+  const { mutate: acceptOrderMutate, isLoading } = useMutation(
     async ({
       date,
       appointmentId,
@@ -64,7 +85,9 @@ const NewOrderActions: React.FC<INewOrderActionsProps> = ({ booking }) => {
       <Button className="mb-2" onClick={() => setIsModalOpen(true)}>
         Accepter la commande
       </Button>
-      <Button variant="secondary">Refuser la commande</Button>
+      <Button variant="secondary" onClick={() => setIsDeclineModalOpen(true)}>
+        Refuser la commande
+      </Button>
 
       {isModalOpen && (
         <Modal onClose={() => setIsModalOpen(false)}>
@@ -82,7 +105,7 @@ const NewOrderActions: React.FC<INewOrderActionsProps> = ({ booking }) => {
             className="mt-5 w-full"
             isLoading={isLoading}
             onClick={() => {
-              mutate({
+              acceptOrderMutate({
                 date: dateSelected,
                 orderId: booking.id,
                 appointmentId: booking.appointment.id,
@@ -91,6 +114,35 @@ const NewOrderActions: React.FC<INewOrderActionsProps> = ({ booking }) => {
           >
             Confirmer
           </Button>
+        </Modal>
+      )}
+
+      {isDeclineModalOpen && (
+        <Modal onClose={() => setIsDeclineModalOpen(false)}>
+          <p>Êtes-vous sûr de refuser cette commande ? </p>
+
+          <div className="flex gap-2 justify-between mt-5">
+            <Button
+              className="w-full"
+              variant="secondary"
+              onClick={() => {
+                setIsDeclineModalOpen(false);
+              }}
+            >
+              Annuler
+            </Button>
+            <Button
+              className="w-full"
+              isLoading={isDeclineLoading}
+              onClick={() => {
+                declineOrderMutate({
+                  orderId: booking.id,
+                });
+              }}
+            >
+              Oui, je refuse
+            </Button>
+          </div>
         </Modal>
       )}
     </>

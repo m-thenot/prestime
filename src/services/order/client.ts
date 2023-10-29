@@ -35,3 +35,15 @@ export const acceptOrder = async (orderId: number) => {
 
   return result.data;
 };
+
+export const declineOrder = async (orderId: number) => {
+  const { data, error } = await supabase.functions.invoke("decline-order", {
+    body: { orderId },
+  });
+
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  return data;
+};
