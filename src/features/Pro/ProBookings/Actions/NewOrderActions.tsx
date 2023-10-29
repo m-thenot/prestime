@@ -83,6 +83,8 @@ const NewOrderActions: React.FC<INewOrderActionsProps> = ({ booking }) => {
 
   return (
     <>
+      <div className="sm:hidden h-[1px] w-full bg-gray-100 my-4" />
+
       <Button className="mb-2" onClick={() => setIsModalOpen(true)}>
         Accepter la commande
       </Button>

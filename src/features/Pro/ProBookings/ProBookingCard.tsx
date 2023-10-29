@@ -4,6 +4,8 @@ import { Time, User } from "@icons";
 import Link from "next/link";
 import ProActions from "./ProActions";
 import { getFullDateFormatted } from "@utils/date";
+import Tag from "@components/Tag";
+import { OrderState } from "types/order";
 
 interface IProBookingCardProps {
   booking: IBookingCard;
@@ -12,19 +14,37 @@ interface IProBookingCardProps {
 const ProBookingCard: React.FC<IProBookingCardProps> = ({ booking }) => {
   const suggestedDates = booking.appointment.suggested_dates;
 
+  const renderTags = () => {
+    switch (booking.state) {
+      case OrderState.ACCEPTED:
+        return <Tag text="En cours" className="absolute right-4 top-3" />;
+      case OrderState.DONE:
+        return <Tag text="Terminé" className="absolute right-4 top-3" />;
+      case OrderState.CANCELED_BY_CUSTOMER:
+      case OrderState.CANCELED_BY_PROVIDER:
+        return <Tag text="Annulé" className="absolute right-4 top-3" />;
+
+      default:
+        return null;
+    }
+  };
+
   return (
-    <div className="drop-shadow-lg bg-white rounded-lg w-full" key={booking.id}>
-      <div className="flex">
-        <div className="rounded-l-lg relative w-2/6">
+    <div
+      className="drop-shadow-lg bg-white rounded-lg w-full relative mb-6"
+      key={booking.id}
+    >
+      <div className="sm:flex">
+        <div className="rounded-t-lg sm:rounded-l-lg relative sm:w-2/6 sm:h-auto h-36">
           <Image
             src={booking.task.service.image}
             objectFit="cover"
             fill
             alt=""
-            className="rounded-l-lg"
+            className="rounded-t-lg sm:rounded-l-lg"
           />
         </div>
-        <div className="px-4 py-3 flex justify-between w-full items-end">
+        <div className="px-4 py-3 sm:flex sm:justify-between w-full sm:items-end">
           <div>
             <p className="font-medium mb-0">{booking.task.service.title}</p>
             <p className="text-gray-500">{booking.task.name}</p>
@@ -71,11 +91,13 @@ const ProBookingCard: React.FC<IProBookingCardProps> = ({ booking }) => {
               Voir le détail de la commande
             </Link>
           </div>
+
           <div className="flex flex-col justify-end relative h-full">
             <ProActions booking={booking} />
           </div>
         </div>
       </div>
+      {renderTags()}
     </div>
   );
 };

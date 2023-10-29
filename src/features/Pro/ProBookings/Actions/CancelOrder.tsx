@@ -1,7 +1,6 @@
 "use client";
 import Button from "@components/Button";
 import Modal from "@components/Modal";
-import Tag from "@components/Tag";
 import { updateOrderState } from "@services/order/client";
 import { logger } from "@utils/logger";
 import { useRouter } from "next/navigation";
@@ -38,7 +37,8 @@ const CancelOrder: React.FC<ICancelOrderProps> = ({ booking }) => {
 
   return (
     <>
-      <Tag text="En cours" className="absolute right-0 top-0" />
+      <div className="sm:hidden h-[1px] w-full bg-gray-100 my-4" />
+
       <Button variant="secondary" onClick={() => setIsModalOpen(true)}>
         Annuler la commande
       </Button>

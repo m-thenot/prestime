@@ -18,16 +18,6 @@ const ProActions: React.FC<IProActionsProps> = ({ booking }) => {
 
       case OrderState.ACCEPTED:
         return <CancelOrder booking={booking} />;
-      case OrderState.DONE:
-        return (
-          <>
-            <Tag text="Terminé" className="absolute right-0 top-0" />
-            {/* <Button variant="secondary">Télécharger la facture</Button> */}
-          </>
-        );
-      case OrderState.CANCELED_BY_CUSTOMER:
-      case OrderState.CANCELED_BY_PROVIDER:
-        return <Tag text="Annulé" className="absolute right-0 top-0" />;
 
       default:
         return null;

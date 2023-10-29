@@ -17,10 +17,7 @@ Deno.serve(async (req) => {
     const connection = await pool.connect();
 
     try {
-      const result =
-        await connection.queryObject`UPDATE "order" SET provider = null WHERE id = ${orderId}`;
-
-      console.log(result);
+      await connection.queryObject`UPDATE "order" SET provider = null WHERE id = ${orderId}`;
 
       return new Response("ok", { headers: corsHeaders });
     } finally {
