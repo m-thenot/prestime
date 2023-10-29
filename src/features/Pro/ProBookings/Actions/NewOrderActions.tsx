@@ -1,3 +1,4 @@
+"use client";
 import Button from "@components/Button";
 import Modal from "@components/Modal";
 import RadioGroup from "@components/RadioGroup";
@@ -33,7 +34,7 @@ const NewOrderActions: React.FC<INewOrderActionsProps> = ({ booking }) => {
         setIsModalOpen(false);
         router.refresh();
       } catch (e) {
-        logger.error("Failed to declinne the order", {
+        logger.error("Failed to decline the order", {
           error: e,
         });
         toast.error(

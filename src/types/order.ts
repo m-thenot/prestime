@@ -38,8 +38,15 @@ export enum OrderState {
   SUBMITED = "submited",
   ACCEPTED = "accepted",
   DONE = "done",
-  CANCELED = "canceled",
+  CANCELED_BY_CUSTOMER = "canceled_by_customer",
+  CANCELED_BY_PROVIDER = "canceled_by_provider",
 }
+
+export const OrderCompletedStates = [
+  OrderState.DONE,
+  OrderState.CANCELED_BY_CUSTOMER,
+  OrderState.CANCELED_BY_PROVIDER,
+];
 
 export interface IOrderDB {
   id: number;

@@ -1,18 +1,15 @@
 "use client";
 
-import Button, { LinkButton } from "@components/Button";
+import { LinkButton } from "@components/Button";
 import theme from "constants/theme";
 import { WhatsApp } from "icons/WhatsApp";
 import { IUserBooking } from "types/booking";
 import Image from "next/image";
 import AvatarImage from "@images/avatar.svg";
-import dayjs from "dayjs";
-import "dayjs/locale/fr";
 import { sum } from "radash";
 import Stars from "@components/Stars";
 import { Arrow } from "@icons";
 import { getFullDateFormatted } from "@utils/date";
-dayjs.locale("fr");
 
 interface IMyBookingProps {
   booking: IUserBooking;
@@ -104,7 +101,7 @@ const MyBooking: React.FC<IMyBookingProps> = ({ booking }) => {
             {booking.appointment.date ? (
               <>
                 <p className="font-bold">Date du rendez-vous</p>
-                <p>{dayjs(booking.appointment.date).format("ddd D MMMM")}</p>
+                <p>{getFullDateFormatted(booking.appointment.date)}</p>
               </>
             ) : (
               <>

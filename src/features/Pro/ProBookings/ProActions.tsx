@@ -3,6 +3,7 @@ import Button from "@components/Button";
 import Tag from "@components/Tag";
 import { IBookingCard } from "types/booking";
 import { OrderState } from "types/order";
+import CancelOrder from "./Actions/CancelOrder";
 import NewOrderActions from "./Actions/NewOrderActions";
 
 interface IProActionsProps {
@@ -16,20 +17,16 @@ const ProActions: React.FC<IProActionsProps> = ({ booking }) => {
         return <NewOrderActions booking={booking} />;
 
       case OrderState.ACCEPTED:
-        return (
-          <>
-            <Tag text="En cours" className="absolute right-0 top-0" />
-            <Button variant="secondary">Annuler la commande</Button>
-          </>
-        );
+        return <CancelOrder booking={booking} />;
       case OrderState.DONE:
         return (
           <>
             <Tag text="Terminé" className="absolute right-0 top-0" />
-            <Button variant="secondary">Télécharger la facture</Button>
+            {/* <Button variant="secondary">Télécharger la facture</Button> */}
           </>
         );
-      case OrderState.CANCELED:
+      case OrderState.CANCELED_BY_CUSTOMER:
+      case OrderState.CANCELED_BY_PROVIDER:
         return <Tag text="Annulé" className="absolute right-0 top-0" />;
 
       default:
