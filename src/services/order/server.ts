@@ -185,6 +185,14 @@ export const getOrderById = async (orderId: string) => {
     )
     )
   ),
+  customer:customer(
+    firstname,
+    lastname,
+    phone_number
+  ),
+  payment:payment(
+    method
+  ),
   appointment:appointment(
     date,
     suggested_dates,

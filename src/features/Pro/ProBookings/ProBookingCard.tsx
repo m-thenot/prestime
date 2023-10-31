@@ -85,7 +85,7 @@ const ProBookingCard: React.FC<IProBookingCardProps> = ({ booking }) => {
             </div>
 
             <Link
-              href={`/account/bookings/${booking.id}`}
+              href={`/pro/bookings/${booking.id}`}
               className="font-semibold block w-full mt-4"
             >
               Voir le détail de la commande

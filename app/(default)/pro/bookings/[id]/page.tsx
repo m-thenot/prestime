@@ -1,12 +1,12 @@
 import "server-only";
-import MyBooking from "@features/Account/MyBooking";
 import { getOrderById } from "@services/order/server";
 import { IUserBooking } from "types/booking";
+import ProBookingDetails from "@features/Pro/ProBookings/ProBookingDetails";
 
 export default async function Page({ params }: { params: { id: string } }) {
   const order = await getOrderById(params.id);
 
-  return <MyBooking booking={order as IUserBooking} />;
+  return <ProBookingDetails booking={order as IUserBooking} />;
 }
 
 export const metadata = {

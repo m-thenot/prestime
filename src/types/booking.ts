@@ -88,6 +88,9 @@ export interface IUserBooking {
       image: string;
     };
   };
+  payment: {
+    method: PaymentMethod;
+  };
   appointment: {
     date: string | null;
     suggested_dates: string[];
@@ -98,5 +101,10 @@ export interface IUserBooking {
       country: string;
       city: string;
     };
+  };
+  customer: {
+    firstname: string;
+    lastname: string;
+    phone_number: string;
   };
 }
