@@ -17,6 +17,17 @@ const SelectTask: React.FC<ISelectTaskProps> = ({ tasks, service }) => {
   const { booking, setBooking } = useBooking();
   const router = useRouter();
 
+  useEffect(() => {
+    // Reset booking if it is not the same service
+    if (booking && booking?.service?.slug !== service.slug) {
+      setBooking(null);
+    }
+  }, [booking]);
+
+  useEffect(() => {
+    router.prefetch(`/booking/${service.slug}/description`);
+  }, []);
+
   const onSelect = () => {
     setBooking({
       ...booking,

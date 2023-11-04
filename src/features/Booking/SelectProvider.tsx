@@ -4,11 +4,10 @@ import Stars from "@components/Stars";
 import { useBooking } from "@contexts/booking";
 import { getAllTaskProvidersByTask } from "@services/task-provider";
 import { sum } from "radash";
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import StepContent from "./StepContent";
 import Image from "next/image";
 import AvatarImage from "@images/avatar.svg";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useQuery } from "react-query";
 import Loader from "@components/Loader";
@@ -28,6 +27,11 @@ const SelectProvider: React.FC = () => {
       enabled: Boolean(booking?.task?.id),
     }
   );
+
+  useEffect(() => {
+    booking?.service?.slug &&
+      router.prefetch(`/booking/${booking.service.slug}/schedule`);
+  }, [booking]);
 
   const onSelect = () => {
     setBooking({

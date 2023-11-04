@@ -2,13 +2,18 @@
 
 import { useBooking } from "@contexts/booking";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import StepContent from "./StepContent";
 
 const TaskDescription: React.FC = () => {
   const { booking, setBooking } = useBooking();
   const router = useRouter();
   const [text, setText] = useState<string | null>(null);
+
+  useEffect(() => {
+    booking?.service?.slug &&
+      router.prefetch(`/booking/${booking.service.slug}/providers`);
+  }, [booking]);
 
   const onSubmit = () => {
     setBooking({

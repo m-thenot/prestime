@@ -73,6 +73,9 @@ const SelectSchedule: React.FC<ISelectScheduleProps> = ({ schedules }) => {
     if (booking?.schedules && isDateView) {
       setIsDateView(false);
     }
+
+    booking?.service?.slug &&
+      router.prefetch(`/booking/${booking.service.slug}/address`);
   }, [booking]);
 
   const schedulesSelected = currentSelection

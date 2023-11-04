@@ -81,6 +81,9 @@ const SelectAddress: React.FC = () => {
       setInputAddress(booking.address.formattedAddress);
       setAddress(booking.address);
     }
+
+    booking?.service?.slug &&
+      router.prefetch(`/booking/${booking.service.slug}/payment`);
   }, [booking]);
 
   return (
