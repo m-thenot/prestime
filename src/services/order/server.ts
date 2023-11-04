@@ -193,6 +193,7 @@ export const getOrderById = async (orderId: string) => {
   payment:payment(
     method
   ),
+  comment,
   appointment:appointment(
     date,
     suggested_dates,

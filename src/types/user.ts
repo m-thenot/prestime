@@ -1,7 +1,7 @@
 import { ICustomer } from "./customer";
 import { IProvider } from "./provider";
 
-interface ICustomerUser extends ICustomer {
+export interface ICustomerUser extends ICustomer {
   email: string;
   type: UserType;
 }

@@ -131,11 +131,12 @@ const SelectProvider: React.FC = () => {
             dividers={[
               {
                 id: 0,
-                node: (
-                  <p className="my-4 text-center" key={0}>
-                    Ou
-                  </p>
-                ),
+                node:
+                  taskProviders && taskProviders.length > 0 ? (
+                    <p className="my-4 text-center" key={0}>
+                      Ou
+                    </p>
+                  ) : null,
               },
             ]}
           />

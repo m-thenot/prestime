@@ -36,7 +36,9 @@ export async function POST(request: Request) {
         state: OrderState.SUBMITED,
         address: address!,
         comment: comment,
-        schedules: schedules!.map((sch) => sch.value),
+        schedules: schedules!.flatMap((day) =>
+          day.timeSlots.map((slot) => slot.value)
+        ),
         provider: taskProvider?.provider.id || null,
       },
       user.id

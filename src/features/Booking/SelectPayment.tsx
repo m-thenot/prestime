@@ -117,8 +117,7 @@ const SelectPayment: React.FC = () => {
           name="booking"
           value={JSON.stringify({
             ...booking,
-            customerId: user?.id,
-            financialId: user?.financial_id,
+            user,
           })}
         />
       </form>

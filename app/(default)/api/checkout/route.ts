@@ -5,10 +5,12 @@ import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 import { IBooking, PaymentMethod } from "types/booking";
 import { OrderState, PaymentState } from "types/order";
+import { Novu } from "@novu/node";
+import { ICustomerUser } from "types/user";
 
+const novu = new Novu(process.env.NOVU_API_KEY!);
 interface IBookingWithCustomer extends IBooking {
-  customerId: number;
-  financialId: string;
+  user: ICustomerUser;
 }
 
 export async function POST(request: Request) {
@@ -21,16 +23,8 @@ export async function POST(request: Request) {
       body.get("booking") as string
     );
 
-    const {
-      task,
-      taskProvider,
-      address,
-      comment,
-      customerId,
-      service,
-      financialId,
-      schedules,
-    } = booking;
+    const { task, taskProvider, address, comment, user, service, schedules } =
+      booking;
 
     const orderId = await createNewOrder(
       {
@@ -43,11 +37,24 @@ export async function POST(request: Request) {
         state: OrderState.PENDING,
         address: address!,
         comment: comment,
-        schedules: schedules!.map((sch) => sch.value),
+        schedules: schedules!.flatMap((day) =>
+          day.timeSlots.map((slot) => slot.value)
+        ),
         provider: taskProvider?.provider.id || null,
       },
-      customerId
+      user.id
     );
+
+    await novu.trigger("orders-created", {
+      to: {
+        subscriberId: user.user_id,
+      },
+      payload: {
+        firstname: user.firstname,
+        orderId,
+        product: `${service?.title} - ${task?.name}`,
+      },
+    });
 
     // Create Checkout Sessions from body params.
     const session = await stripe.checkout.sessions.create({
@@ -67,7 +74,7 @@ export async function POST(request: Request) {
       mode: "payment",
       success_url: `${referer}/?success=true`,
       cancel_url: `${referer}/?canceled=true`,
-      customer: financialId,
+      customer: user.financial_id,
       client_reference_id: orderId,
     });
     return NextResponse.redirect(session.url!, 303);

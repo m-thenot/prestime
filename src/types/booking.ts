@@ -88,6 +88,7 @@ export interface IUserBooking {
       image: string;
     };
   };
+  comment: string;
   payment: {
     method: PaymentMethod;
   };

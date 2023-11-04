@@ -4,10 +4,6 @@ import { LinkButton } from "@components/Button";
 import theme from "constants/theme";
 import { WhatsApp } from "icons/WhatsApp";
 import { IUserBooking, PaymentMethod } from "types/booking";
-import Image from "next/image";
-import AvatarImage from "@images/avatar.svg";
-import { sum } from "radash";
-import Stars from "@components/Stars";
 import { Arrow } from "@icons";
 import { getFullDateFormatted } from "@utils/date";
 
@@ -58,6 +54,13 @@ const OrderDetails: React.FC<IOrderDetailsProps> = ({
             <p className="font-bold">{booking.task.service.title}</p>
             <p>{booking.task.name}</p>
           </div>
+
+          {booking.comment && (
+            <div className="mb-3">
+              <p className="font-bold">Description</p>
+              <p>{booking.comment}</p>
+            </div>
+          )}
 
           <div className="mb-3">
             <p className="font-bold">Adresse</p>
