@@ -32,7 +32,7 @@ const Header: React.FC = () => {
         </div>
       </Link>
 
-      <ServicesNavigation />
+      {user?.type !== UserType.PROVIDER && <ServicesNavigation />}
 
       {!user && (
         <LinkButton

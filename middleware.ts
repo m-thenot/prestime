@@ -23,16 +23,22 @@ export async function middleware(req: NextRequest) {
   const pathname = req.nextUrl.pathname;
 
   if (
+    session &&
+    type === UserType.PROVIDER &&
+    (authenticatedCustomerRoutes.some((route) => pathname.startsWith(route)) ||
+      unauthenticatedRoutes.some((route) => pathname.startsWith(route)) ||
+      pathname === "/")
+  ) {
+    return NextResponse.redirect(new URL("/pro/bookings", req.url));
+  }
+
+  if (
     (!session &&
       authenticatedRoutes.some((route) => pathname.startsWith(route))) ||
     (session &&
-      unauthenticatedRoutes.some((route) => pathname.startsWith(route))) ||
-    (session &&
       type === UserType.CUSTOMER &&
-      authenticatedProRoutes.some((route) => pathname.startsWith(route))) ||
-    (session &&
-      type === UserType.PROVIDER &&
-      authenticatedCustomerRoutes.some((route) => pathname.startsWith(route)))
+      (authenticatedProRoutes.some((route) => pathname.startsWith(route)) ||
+        unauthenticatedRoutes.some((route) => pathname.startsWith(route))))
   ) {
     return NextResponse.redirect(new URL("/", req.url));
   }

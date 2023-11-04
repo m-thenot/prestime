@@ -11,14 +11,14 @@ interface IServiceCard {
 const ServiceCard: React.FC<IServiceCard> = ({ service }) => {
   return (
     <div
-      className="drop-shadow-lg bg-white my-4 rounded-lg w-fit mx-2"
+      className="drop-shadow-lg bg-white  my-4 rounded-lg w-fit mx-2"
       style={{ position: "relative" }}
     >
       <Image
         src={service.image}
         alt=""
-        width={270}
-        height={320}
+        width={264}
+        height={195}
         className="rounded-t-lg"
       />
       <div className="px-4 py-3">
