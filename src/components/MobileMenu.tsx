@@ -11,7 +11,7 @@ import { WhatsApp } from "icons/WhatsApp";
 import colors from "tailwindcss/colors";
 import Link from "next/link";
 import { useUser } from "@contexts/user";
-import { userAccountRoutes } from "@utils/user";
+import { proAccountRoutes, userAccountRoutes } from "@utils/user";
 import LogOutButton from "@features/Authentification/LogOutButton";
 import { usePathname } from "next/navigation";
 import { UserType } from "types/user";
@@ -23,6 +23,8 @@ const MobileMenu: React.FC = () => {
   const [activeCategory, setActiveCategory] =
     useState<null | ICategoryWithServices>(null);
   const pathname = usePathname();
+  const routes =
+    user?.type === UserType.CUSTOMER ? userAccountRoutes : proAccountRoutes;
 
   const toggleMenu = () => {
     if (!isOpen) {
@@ -75,17 +77,16 @@ const MobileMenu: React.FC = () => {
           {user ? (
             <>
               <p className="text-lg font-bold">Bienvenue {user.firstname} !</p>
-              {user.type === UserType.CUSTOMER &&
-                userAccountRoutes.map((route) => (
-                  <Link
-                    key={route.href}
-                    href={route.href}
-                    className="py-2 flex justify-between items-center w-full"
-                  >
-                    <span>{route.label}</span>
-                    <Chevron />
-                  </Link>
-                ))}
+              {routes.map((route) => (
+                <Link
+                  key={route.href}
+                  href={route.href}
+                  className="py-2 flex justify-between items-center w-full"
+                >
+                  <span>{route.label}</span>
+                  <Chevron />
+                </Link>
+              ))}
               <LogOutButton className="py-2" />
             </>
           ) : (
@@ -100,20 +101,23 @@ const MobileMenu: React.FC = () => {
 
           <div className="border-t border-slate-200 my-6" />
 
-          <p className="text-lg font-bold">Nos services</p>
-          {categories.map((category) => (
-            <button
-              type="button"
-              key={category.id}
-              onClick={() => setActiveCategory(category)}
-              className="py-2 flex justify-between items-center w-full"
-            >
-              <span>{category.title} </span>
-              <Chevron />
-            </button>
-          ))}
-
-          <div className="border-t border-slate-200 my-6" />
+          {user?.type !== UserType.PROVIDER && (
+            <>
+              <p className="text-lg font-bold">Nos services</p>
+              {categories.map((category) => (
+                <button
+                  type="button"
+                  key={category.id}
+                  onClick={() => setActiveCategory(category)}
+                  className="py-2 flex justify-between items-center w-full"
+                >
+                  <span>{category.title} </span>
+                  <Chevron />
+                </button>
+              ))}
+              <div className="border-t border-slate-200 my-6" />
+            </>
+          )}
 
           <p className="text-lg font-bold mb-4">Besoin d&lsquo;aide ?</p>
 

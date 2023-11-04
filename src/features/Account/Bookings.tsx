@@ -43,7 +43,7 @@ const Bookings: React.FC<IBookingProps> = ({ bookings }) => {
           ))}
         </div>
       ) : (
-        <p>Vous n&lsquo;avez complété aucune réservation pour le momentt.</p>
+        <p>Vous n&lsquo;avez complété aucune réservation pour le moment.</p>
       ),
     },
   ];

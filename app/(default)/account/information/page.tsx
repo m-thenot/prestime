@@ -13,5 +13,5 @@ export const metadata = {
       index: false,
       noimageindex: true,
     },
-  },
+  }
 };

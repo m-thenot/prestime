@@ -16,6 +16,7 @@ export async function generateMetadata() {
   }
 
   return {
+    metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL!),
     title: page.seo.title,
     description: page.seo.description,
     openGraph: {

@@ -2,7 +2,7 @@ import "server-only";
 import Header from "./header";
 import Footer from "./footer";
 import LayoutContainer from "@components/LayoutContainer";
-import { defaultMetadata } from "@utils/defaultMetadata";
+import { defaultMetadata, defaultViewport } from "@utils/defaultMetadata";
 import { Analytics } from "@vercel/analytics/react";
 import { ServicesProvider } from "@contexts/services";
 import { getAllCategoriesWithServices } from "@services/category";
@@ -29,3 +29,7 @@ export default async function RootLayout({
 }
 
 export const metadata = defaultMetadata;
+
+export const viewport = {
+  ...defaultViewport,
+};

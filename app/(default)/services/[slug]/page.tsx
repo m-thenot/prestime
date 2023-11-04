@@ -24,6 +24,7 @@ export async function generateMetadata({ params }: IParams) {
   }
 
   return {
+    metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL!),
     title: service.seo.title,
     description: service.seo.description,
     openGraph: {

@@ -3,7 +3,7 @@ import Header from "./header";
 import LayoutContainer from "@components/LayoutContainer";
 import BookingSummary from "@features/Booking/BookingSummary";
 import { BookingProvider } from "@contexts/booking";
-import { defaultMetadata } from "@utils/defaultMetadata";
+import { defaultMetadata, defaultViewport } from "@utils/defaultMetadata";
 import { Analytics } from "@vercel/analytics/react";
 
 export default async function RootLayout({
@@ -37,4 +37,8 @@ export const metadata = {
       noimageindex: true,
     },
   },
+};
+
+export const viewport = {
+  ...defaultViewport,
 };
