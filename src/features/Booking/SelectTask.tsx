@@ -48,11 +48,16 @@ const SelectTask: React.FC<ISelectTaskProps> = ({ tasks, service }) => {
         options={tasks.map((task) => {
           return {
             value: task.id,
-            label: `${
-              skipProviderSelection
-                ? `${task.name} - ${task.recommended_price} DJF`
-                : task.name
-            }`,
+            node: skipProviderSelection ? (
+              <div className="ml-3">
+                {task.name} -{" "}
+                <span className="font-semibold">
+                  {task.recommended_price} DJF
+                </span>
+              </div>
+            ) : (
+              <span className="ml-3">{task.name}</span>
+            ),
           };
         })}
         onChange={(value) => setTaskSelected(value as number)}

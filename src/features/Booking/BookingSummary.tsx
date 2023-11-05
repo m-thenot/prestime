@@ -6,12 +6,12 @@ import React, { Fragment, useState } from "react";
 import { BOOKING_STEPS } from "types/booking";
 
 const BookingSummary: React.FC = () => {
-  const { booking, skipProviderSelection } = useBooking();
+  const { booking, skipProviderSelection, isLoading } = useBooking();
   const pathname = usePathname();
   const step = pathname.split("/").pop() as BOOKING_STEPS;
   const [isSummaryOpen, setIsSummaryOpen] = useState(false);
 
-  if (step === BOOKING_STEPS.CONFIRMATION) {
+  if (step === BOOKING_STEPS.CONFIRMATION || isLoading) {
     return null;
   }
 

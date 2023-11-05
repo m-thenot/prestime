@@ -43,7 +43,7 @@ const StepContent: React.FC<IStepContentProps> = ({
   }, [isLoading]);
 
   return (
-    <section className="section-booking w-full flex flex-col mb-20 sm:mb-0">
+    <section className="section-booking w-full flex flex-col mb-28 sm:mb-0">
       {isLoading ? (
         <div className="flex items-center justify-center h-full w-full">
           <Loader color="black" />
