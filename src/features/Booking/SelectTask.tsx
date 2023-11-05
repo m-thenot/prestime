@@ -14,7 +14,7 @@ interface ISelectTaskProps {
 
 const SelectTask: React.FC<ISelectTaskProps> = ({ tasks, service }) => {
   const [taskSelected, setTaskSelected] = useState(tasks[0]?.id);
-  const { booking, setBooking } = useBooking();
+  const { booking, setBooking, skipProviderSelection } = useBooking();
   const router = useRouter();
 
   useEffect(() => {
@@ -33,6 +33,7 @@ const SelectTask: React.FC<ISelectTaskProps> = ({ tasks, service }) => {
       ...booking,
       service: service,
       task: tasks.find((task) => task.id === taskSelected),
+      ...(skipProviderSelection ? { taskProvider: null } : {}),
     });
     router.push(`/booking/${service.slug}/description`);
   };
@@ -45,7 +46,14 @@ const SelectTask: React.FC<ISelectTaskProps> = ({ tasks, service }) => {
     >
       <RadioGroup
         options={tasks.map((task) => {
-          return { value: task.id, label: task.name };
+          return {
+            value: task.id,
+            label: `${
+              skipProviderSelection
+                ? `${task.name} - ${task.recommended_price} DJF`
+                : task.name
+            }`,
+          };
         })}
         onChange={(value) => setTaskSelected(value as number)}
         defaultValue={booking?.task?.id}

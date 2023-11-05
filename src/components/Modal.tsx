@@ -13,7 +13,7 @@ const Modal: React.FC<IModalProps> = ({ children, onClose }) => {
     <ClientOnlyPortal selector="body">
       <div
         onClick={onClose}
-        className="fixed top-0 left-0 right-0 bg-opacity-60 bg-black flex items-center justify-center w-full h-full"
+        className="fixed top-0 left-0 right-0 bg-opacity-60 bg-black flex items-center justify-center w-full h-full z-50"
       >
         <div
           onClick={(e) => {

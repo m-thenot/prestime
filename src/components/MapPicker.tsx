@@ -18,14 +18,14 @@ const styleContainer = {
 interface IMapPickerProps {
   address: IAddress;
   setAddress: React.Dispatch<React.SetStateAction<IAddress>>;
+  isLoaded: Boolean;
 }
 
-const MapPicker: React.FC<IMapPickerProps> = ({ address, setAddress }) => {
-  const { isLoaded } = useJsApiLoader({
-    id: "google-map-script",
-    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY!,
-  });
-
+const MapPicker: React.FC<IMapPickerProps> = ({
+  address,
+  setAddress,
+  isLoaded,
+}) => {
   const onDragEnd = (e: google.maps.MapMouseEvent) => {
     const lat = e.latLng?.lat();
     const lng = e.latLng?.lng();

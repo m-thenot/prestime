@@ -59,7 +59,7 @@ const StepContent: React.FC<IStepContentProps> = ({
           <div className="flex flex-1" />
 
           {hasSubmitButton && (
-            <div className="sm:flex sm:relative sm:justify-end mt-8 fixed bottom-0 py-4 px-5 bg-white w-screen -translate-x-5 shadow-[0px_-2px_10px_rgba(0,0,0,0.1)] sm:shadow-none sm:px-0 sm:py-0 sm:w-auto sm:translate-x-0">
+            <div className="z-10 sm:flex sm:relative sm:justify-end mt-8 fixed bottom-0 py-4 pt-1 sm:pt-4 px-5 bg-white w-screen -translate-x-5 sm:px-0 sm:py-0 sm:w-auto sm:translate-x-0">
               <Button
                 hasMinWidth
                 onClick={onSubmit}
