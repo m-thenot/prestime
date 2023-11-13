@@ -13,17 +13,17 @@ const PrivacyPolicy: React.FC = () => {
       <div className="max-w-2xl mx-auto my-5 sm:my-10">
         <h2 className="text-lg mt-6 mb-2">Politique de confidentialité</h2>
         <p>
-          Le site web Deg Deg est détenu par Deg Deg, qui est un contrôleur de
+          Le site web Prestime est détenu par Prestime, qui est un contrôleur de
           données de vos données personnelles.
         </p>
 
         <p>
           Nous avons adopté cette politique de confidentialité, qui détermine la
-          manière dont nous traitons les informations collectées par Deg Deg,
+          manière dont nous traitons les informations collectées par Prestime,
           qui fournit également les raisons pour lesquelles nous devons
           collecter certaines données personnelles vous concernant. Par
           conséquent, vous devez lire cette politique de confidentialité avant
-          d&lsquo;utiliser le site web de Deg Deg.
+          d&lsquo;utiliser le site web de Prestime.
         </p>
 
         <p>
@@ -36,7 +36,7 @@ const PrivacyPolicy: React.FC = () => {
         </h2>
 
         <p>
-          Lorsque vous visitez le Deg Deg, nous recueillons automatiquement
+          Lorsque vous visitez le Prestime, nous recueillons automatiquement
           certaines informations sur votre appareil, notamment des informations
           sur votre navigateur web, votre adresse IP, votre fuseau horaire et
           certains des cookies installés sur votre appareil.

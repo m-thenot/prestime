@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: IParams) {
       title: service.seo.title,
       description: service.seo.description,
       type: "website",
-      siteName: "Deg Deg",
+      siteName: "Prestime",
     },
   };
 }

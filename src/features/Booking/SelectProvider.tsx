@@ -58,7 +58,7 @@ const SelectProvider: React.FC = () => {
                 </p>
               </div>
               <p>
-                Deg Deg sélectionnera le meilleur prestataire selon vos
+                Prestime sélectionnera le meilleur prestataire selon vos
                 disponibilités
               </p>
             </div>

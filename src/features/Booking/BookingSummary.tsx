@@ -54,7 +54,7 @@ const BookingSummary: React.FC = () => {
               {booking?.taskProvider !== undefined ? (
                 <p className="text-sm">
                   {booking.taskProvider === null
-                    ? "Deg Deg"
+                    ? "Prestime"
                     : `${booking.taskProvider.provider.firstname} ${booking.taskProvider.provider.lastname}`}
                 </p>
               ) : (

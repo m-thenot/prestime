@@ -5,6 +5,7 @@ import BookingSummary from "@features/Booking/BookingSummary";
 import { BookingProvider } from "@contexts/booking";
 import { defaultMetadata, defaultViewport } from "@utils/defaultMetadata";
 import { Analytics } from "@vercel/analytics/react";
+import Tracking from "@components/Tracking";
 
 export default async function RootLayout({
   children,
@@ -15,6 +16,7 @@ export default async function RootLayout({
     <LayoutContainer classNames="sm:bg-background">
       <Header />
       <Analytics />
+      <Tracking />
       <main className="px-5 mb-4 sm:px-10 container">
         <div className="flex justify-between">
           <BookingProvider>

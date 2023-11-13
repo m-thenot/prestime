@@ -11,7 +11,7 @@ const Banner: React.FC = () => {
       <div className="md:max-w-[45%] lg:max-w-md xl:max-w-lg sm:mr-8">
         <h1 className="text-3xl">Des services de qualité, à la demande</h1>
         <p className="mt-5 text-slate-500">
-          Deg Deg vous fait profiter de son réseau de professionels à Djibouti,
+          Prestime vous fait profiter de son réseau de professionels à Djibouti,
           afin que vous puissiez réserver une prestation en quelques clics.
         </p>
 
