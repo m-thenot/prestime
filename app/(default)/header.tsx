@@ -10,7 +10,6 @@ import { proAccountRoutes, userAccountRoutes } from "@utils/user";
 import LogOutButton from "@features/Authentification/LogOutButton";
 import { UserType } from "types/user";
 import Logo from "@images/full_logo.png";
-import LogoMobile from "@images/logo.png";
 import Image from "next/image";
 
 const Header: React.FC = () => {
@@ -27,8 +26,8 @@ const Header: React.FC = () => {
         <div className="hidden sm:block">
           <Image src={Logo} alt="" priority width={150} height={39} />
         </div>
-        <div className="sm:hidden">
-          <Image src={LogoMobile} alt="" priority width={50} height={50} />
+        <div className="sm:hidden -translate-y-[5px]">
+          <Image src={Logo} alt="" priority width={112} height={30} />
         </div>
       </Link>
 

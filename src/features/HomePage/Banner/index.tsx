@@ -17,7 +17,7 @@ const Banner: React.FC = () => {
 
         <Search />
         <p className="ml-4 mt-2 text-xs text-slate-500">
-          Ex: Coiffure, coach de sport, électricien...
+          Ex: Peintre, plombier, électricien...
         </p>
       </div>
       <div className="relative ml-16 mr-6 hidden md:block">
