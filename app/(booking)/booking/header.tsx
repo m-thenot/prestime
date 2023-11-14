@@ -74,9 +74,9 @@ const Header: React.FC = () => {
                 <Link href="/account/bookings" className="mb-3">
                   Mes réservations
                 </Link>
-                <Link href="/account/payments" className="mb-3">
+                {/*   <Link href="/account/payments" className="mb-3">
                   Mes moyens de paiement
-                </Link>
+                </Link> */}
                 <Link href="/account/information" className="mb-3">
                   Mes informations
                 </Link>

@@ -10,6 +10,8 @@ const BookingSummary: React.FC = () => {
   const pathname = usePathname();
   const step = pathname.split("/").pop() as BOOKING_STEPS;
   const [isSummaryOpen, setIsSummaryOpen] = useState(false);
+  const price =
+    booking?.task?.recommended_price || booking?.taskProvider?.price;
 
   if (step === BOOKING_STEPS.CONFIRMATION || isLoading) {
     return null;
@@ -104,8 +106,7 @@ const BookingSummary: React.FC = () => {
 
         {booking?.taskProvider !== undefined && (
           <h3 className="font-semibold mt-4">
-            Total:{" "}
-            {booking.taskProvider?.price || booking.task?.recommended_price} DJF
+            Total: {price ? `${price} DJF` : "Sur devis"}
           </h3>
         )}
       </section>

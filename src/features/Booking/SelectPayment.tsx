@@ -61,6 +61,8 @@ const SelectPayment: React.FC = () => {
       return await fetchPostJSON("/api/orders", { booking: data });
     },
   });
+  const price =
+    booking?.task?.recommended_price || booking?.taskProvider?.price;
 
   useEffect(() => {
     if (searchParams.get("success")) {
@@ -76,7 +78,7 @@ const SelectPayment: React.FC = () => {
 
   const onSelect = async () => {
     setIsLoading(true);
-    if (paymentMethod === PaymentMethod.CREDIT_CARD) {
+    if (paymentMethod === PaymentMethod.CREDIT_CARD && price) {
       formRef.current && formRef.current.submit();
     } else {
       mutate(

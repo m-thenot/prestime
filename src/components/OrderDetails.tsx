@@ -32,6 +32,8 @@ const OrderDetails: React.FC<IOrderDetailsProps> = ({
   detailsTitle,
   children,
 }) => {
+  const price = booking.task?.recommended_price || booking.task_provider?.price;
+
   return (
     <div className="container">
       <div className="flex -translate-x-4 mb-6">
@@ -91,8 +93,7 @@ const OrderDetails: React.FC<IOrderDetailsProps> = ({
           <div className="mb-3 mt-5 flex justify-between">
             <p className="font-bold">Total:</p>
             <p className="font-bold text-lg">
-              {booking.task.recommended_price || booking.task_provider?.price}{" "}
-              DJF
+              {price ? `${price} DJF` : "Sur devis"}
             </p>
           </div>
         </div>

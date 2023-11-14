@@ -50,10 +50,15 @@ const SelectTask: React.FC<ISelectTaskProps> = ({ tasks, service }) => {
             value: task.id,
             node: skipProviderSelection ? (
               <div className="ml-3">
-                {task.name} -{" "}
-                <span className="font-semibold">
-                  {task.recommended_price} DJF
-                </span>
+                {task.name}
+                {task.recommended_price && (
+                  <>
+                    -{" "}
+                    <span className="font-semibold">
+                      {task.recommended_price} DJF
+                    </span>
+                  </>
+                )}
               </div>
             ) : (
               <span className="ml-3">{task.name}</span>

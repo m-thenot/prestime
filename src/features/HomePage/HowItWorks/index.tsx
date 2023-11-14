@@ -24,9 +24,9 @@ const steps = [
   },
   {
     icon: Select,
-    label: "Choisissez un prestataire",
+    label: "On vous sélectionne un prestataire",
     description:
-      "Choisissez un prestataire ou faîtes nous confiance et laissez nous choisir pour vous",
+      "On vous trouve un prestataire disponible qui correspond à vos besoins",
   },
   {
     icon: Bill,
