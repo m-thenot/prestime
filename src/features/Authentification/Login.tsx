@@ -50,10 +50,14 @@ const Login: React.FC<ILoginProps> = ({ isEmbedded, onClickSignUp }) => {
 
   return (
     <form
-      className="items-center flex flex-col"
+      className={`items-center flex flex-col ${isEmbedded ? "" : "container"} `}
       onSubmit={handleSubmit(onSubmit)}
     >
-      <h1 className="mb-2">Se connecter</h1>
+      {isEmbedded ? (
+        <h2 className="mb-2">Se connecter</h2>
+      ) : (
+        <h1 className="mb-2">Se connecter</h1>
+      )}
 
       {areInvalidCredentials && (
         <FormError errorMessage="Email ou mot de passe incorrect" />
@@ -69,7 +73,15 @@ const Login: React.FC<ILoginProps> = ({ isEmbedded, onClickSignUp }) => {
 
       <InputPassword errors={errors} {...register("password")} />
 
-      <Button className="w-full mt-6" type="submit" isLoading={isLoading}>
+      <Link
+        href="/reset-password"
+        target={isEmbedded ? "_blank" : "_self"}
+        className="font-semibold mt-3 justify-start text-sm"
+      >
+        Mot de passe oublié ?
+      </Link>
+
+      <Button className="w-full mt-4" type="submit" isLoading={isLoading}>
         Continuer
       </Button>
 

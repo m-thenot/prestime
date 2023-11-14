@@ -1,60 +1,67 @@
 "use client";
 
-import Button from "@components/Button";
+import { LinkButton } from "@components/Button";
 import { useUser } from "@contexts/user";
 import Link from "next/link";
-import supabase from "@utils/supabase/supabase-browser";
 import { Account } from "@icons";
-import { HamburgerMenu } from "icons/HamburgerMenu";
+import MobileMenu from "@components/MobileMenu";
+import ServicesNavigation from "@features/Service/ServicesNavigation";
+import { proAccountRoutes, userAccountRoutes } from "@utils/user";
+import LogOutButton from "@features/Authentification/LogOutButton";
+import { UserType } from "types/user";
+import Logo from "@images/full_logo.png";
+import Image from "next/image";
 
 const Header: React.FC = () => {
   const { user } = useUser();
-
-  const handleLogout = async () => {
-    await supabase.auth.signOut();
-  };
+  const routes =
+    user?.type === UserType.CUSTOMER ? userAccountRoutes : proAccountRoutes;
 
   return (
-    <header className="items-center flex justify-between mb-8 sm:mb-12">
-      <Link href="/" className="text-2xl font-extrabold hover:no-underline">
-        Easy Service
+    <header className="container items-center flex justify-between mb-8 sm:mb-12">
+      <Link
+        href="/"
+        className="text-xl sm:text-2xl font-extrabold hover:no-underline translate-y-1"
+      >
+        <div className="hidden sm:block">
+          <Image src={Logo} alt="" priority width={150} height={39} />
+        </div>
+        <div className="sm:hidden -translate-y-[5px]">
+          <Image src={Logo} alt="" priority width={112} height={30} />
+        </div>
       </Link>
 
+      {user?.type !== UserType.PROVIDER && <ServicesNavigation />}
+
       {!user && (
-        <Button
+        <LinkButton
           variant="link"
-          className="block sm:hidden font-semibold underline"
+          isUnderlined
+          className="block sm:hidden font-semibold"
+          href="/pro/sign-up"
         >
           Devenir pro
-        </Button>
+        </LinkButton>
       )}
 
-      <Button variant="transparent" className="block sm:hidden">
-        <HamburgerMenu width={32} height={32} />
-      </Button>
+      <MobileMenu />
 
       {user ? (
         <div className="hidden sm:flex flex-col relative">
-          <Link href="/account" className="peer flex items-center">
-            <p className="mx-3 font-semibold	">{user.firstname}</p>
+          <Link href="/account/information" className="peer flex items-center">
+            <p className="mx-3 font-semibold	mb-0">{user.firstname}</p>
             <Account />
           </Link>
           <div
             className="hidden absolute top-8 right-0 p-3 z-20 hover:flex rounded peer-hover:flex w-64	
  flex-col bg-white drop-shadow-lg"
           >
-            <Link href="/account/bookings" className="mb-3">
-              Mes réservations à venir
-            </Link>
-            <Link href="/account/payments" className="mb-3">
-              Mes moyens de paiement
-            </Link>
-            <Link href="/account/information" className="mb-3">
-              Mes informations
-            </Link>
-            <Button variant="link" onClick={handleLogout}>
-              Se déconnecter
-            </Button>
+            {routes.map((route) => (
+              <Link key={route.href} href={route.href} className="mb-3">
+                {route.label}
+              </Link>
+            ))}
+            <LogOutButton />
           </div>
         </div>
       ) : (
@@ -62,7 +69,7 @@ const Header: React.FC = () => {
           <Link href="/login" className="mr-6 font-semibold">
             Se connecter
           </Link>
-          <Button>Devenir professionnel</Button>
+          <LinkButton href="/pro/sign-up">Devenir professionnel</LinkButton>
         </div>
       )}
     </header>

@@ -8,4 +8,14 @@ const createClient = () =>
     cookies,
   });
 
+export const createServiceClient = () => {
+  return createServerComponentSupabaseClient<Database>({
+    headers,
+    cookies: () => ({
+      get: () => null,
+    }),
+    supabaseKey: process.env.SUPABASE_SERVICE_KEY,
+  });
+};
+
 export default createClient;

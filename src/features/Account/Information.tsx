@@ -3,7 +3,7 @@ import Button from "@components/Button";
 import FormError from "@components/FormError";
 import Input from "@components/Input";
 import InputPhoneNumber from "@components/InputPhoneNumber";
-import { updateCustomer } from "@services/customer";
+import { updateCustomer } from "@services/customer/client";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useUser } from "@contexts/user";
@@ -58,10 +58,10 @@ const Information = () => {
 
   return (
     <form
-      className="items-center flex flex-col"
+      className="container items-center flex flex-col"
       onSubmit={handleSubmit(onSubmit)}
     >
-      <h1 className="mb-2">Mes informations</h1>
+      <h1 className="mb-4">Mes informations</h1>
 
       {error && (
         <FormError errorMessage="Une erreur inattendue s'est produite, veuillez réessayer." />
@@ -94,7 +94,7 @@ const Information = () => {
 
       <InputPhoneNumber errors={errors} control={control} />
 
-      <Button className="w-full mt-6" type="submit" isLoading={isLoading}>
+      <Button className="w-full my-6" type="submit" isLoading={isLoading}>
         Enregistrer
       </Button>
     </form>

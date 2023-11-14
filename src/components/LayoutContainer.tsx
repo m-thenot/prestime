@@ -23,7 +23,7 @@ interface ILayoutContainerProps {
 //@ts-expect-error Server Component
 const LayoutContainer: React.FC<ILayoutContainerProps> = async ({
   children,
-  classNames = "container px-5 my-4 sm:px-10",
+  classNames = "mt-4",
 }) => {
   const session = await getSession();
 

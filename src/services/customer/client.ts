@@ -1,11 +1,8 @@
 import supabase from "@utils/supabase/supabase-browser";
-import { InsertCustomer, UpdateCustomer } from "types/customer";
+
+import { UpdateCustomer } from "types/customer";
 
 const CUSTOMER_TABLE = "customer";
-
-export const createCustomer = async (customer: InsertCustomer) => {
-  return await supabase.from(CUSTOMER_TABLE).insert(customer);
-};
 
 export const updateCustomer = async (
   customer: UpdateCustomer,

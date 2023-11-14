@@ -8,6 +8,8 @@ import { Account, Arrow } from "@icons";
 import { usePathname, useRouter } from "next/navigation";
 import { BOOKING_STEPS } from "types/booking";
 import { steps } from "constants/booking";
+import Logo from "@images/full_logo.png";
+import Image from "next/image";
 
 const Header: React.FC = () => {
   const { user } = useUser();
@@ -33,26 +35,36 @@ const Header: React.FC = () => {
     <>
       <header className="bg-white sm:drop-shadow-md">
         <div className="container items-center flex justify-between mb-2 sm:mb-8 py-6 px-5 sm:px-10 header">
-          <Button
-            variant="transparent"
-            onClick={onClickBack}
-            className="flex items-center"
-          >
-            <Arrow headDirection="left" />
-            <span className="ml-3">Retour</span>
-          </Button>
+          {step !== BOOKING_STEPS.CONFIRMATION ? (
+            <Button
+              variant="transparent"
+              onClick={onClickBack}
+              className="flex items-center"
+            >
+              <Arrow headDirection="left" />
+
+              <span className="ml-3">Retour</span>
+            </Button>
+          ) : (
+            <div />
+          )}
 
           <Link
             href="/"
-            className="text-lg sm:text-2xl font-extrabold hover:no-underline"
+            className="text-xl sm:text-2xl font-extrabold hover:no-underline translate-y-1"
           >
-            Easy Service
+            <div className="hidden sm:block">
+              <Image src={Logo} alt="" priority width={150} height={39} />
+            </div>
+            <div className="sm:hidden -translate-y-[5px]">
+              <Image src={Logo} alt="" priority width={89} height={24} />
+            </div>
           </Link>
 
           {user ? (
             <div className="hidden sm:flex flex-col relative">
               <Link href="/account" className="peer flex items-center">
-                <p className="mx-3 font-semibold	">{user.firstname}</p>
+                <p className="mx-3 font-semibold mb-0">{user.firstname}</p>
                 <Account />
               </Link>
               <div
@@ -60,11 +72,11 @@ const Header: React.FC = () => {
  flex-col bg-white drop-shadow-lg"
               >
                 <Link href="/account/bookings" className="mb-3">
-                  Mes réservations à venir
+                  Mes réservations
                 </Link>
-                <Link href="/account/payments" className="mb-3">
+                {/*   <Link href="/account/payments" className="mb-3">
                   Mes moyens de paiement
-                </Link>
+                </Link> */}
                 <Link href="/account/information" className="mb-3">
                   Mes informations
                 </Link>

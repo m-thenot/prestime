@@ -24,13 +24,14 @@ export async function generateMetadata({ params }: IParams) {
   }
 
   return {
+    metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL!),
     title: service.seo.title,
     description: service.seo.description,
     openGraph: {
       title: service.seo.title,
       description: service.seo.description,
       type: "website",
-      siteName: "EasyService",
+      siteName: "Prestime",
     },
   };
 }
@@ -46,7 +47,7 @@ export default async function Page({ params }: IParams) {
 
   return (
     <>
-      <ServiceBanner content={service.banner} />
+      <ServiceBanner content={service.banner} slug={params.slug} />
       {category && <GalleryServices categoryId={category.id} />}
       <HowItWorks />
       <Faq options={service.faqCollection.items} />

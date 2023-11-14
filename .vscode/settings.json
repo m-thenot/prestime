@@ -6,6 +6,7 @@
     "source.fixAll.tslint": true,
     "source.fixAll.stylelint": true
   },
+  "deno.enable": false,
   "editor.formatOnPaste": false,
   "files.associations": {
     "*.env.staging": "env",

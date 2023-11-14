@@ -24,9 +24,9 @@ const steps = [
   },
   {
     icon: Select,
-    label: "Choisissez un prestataire",
+    label: "On vous sélectionne un prestataire",
     description:
-      "Choisissez un prestataire ou faîtes nous confiance et laissez nous choisir pour vous",
+      "On vous trouve un prestataire disponible qui correspond à vos besoins",
   },
   {
     icon: Bill,
@@ -38,28 +38,32 @@ const steps = [
 
 const HowItWorks: React.FC = () => {
   return (
-    <section className="section-bg px-8 py-12">
-      <h2 className="mb-8">Comment ça fonctionne ?</h2>
-      <div className="flex justify-between items-center sm:items-start flex-col sm:flex-row">
-        {steps.map((step, index) => {
-          const Icon = step.icon;
-          return (
-            <React.Fragment key={index}>
-              <div className="mb-8 sm:mb-0 max-w-[320px] sm:w-1/5 flex flex-col items-center">
-                <div className="bg-white rounded-full drop-shadow-lg p-4">
-                  <Icon />
+    <section className="section-bg">
+      <div className="container px-8">
+        <h2 className="mb-8">Comment ça fonctionne ?</h2>
+        <div className="flex justify-between items-center sm:items-start flex-col sm:flex-row">
+          {steps.map((step, index) => {
+            const Icon = step.icon;
+            return (
+              <React.Fragment key={index}>
+                <div className="mb-8 sm:mb-0 max-w-[320px] sm:w-1/5 flex flex-col items-center">
+                  <div className="bg-white rounded-full drop-shadow-lg p-4">
+                    <Icon />
+                  </div>
+                  <p className="font-semibold my-4 text-center">{step.label}</p>
+                  <p className="text-slate-500 text-center">
+                    {step.description}
+                  </p>
                 </div>
-                <p className="font-semibold my-4 text-center">{step.label}</p>
-                <p className="text-slate-500 text-center">{step.description}</p>
-              </div>
-              {index !== steps.length - 1 && (
-                <div className="hidden place-self-center mx-2 sm:flex">
-                  {index % 2 === 0 ? <CurvedArrowUp /> : <CurvedArrowDown />}
-                </div>
-              )}
-            </React.Fragment>
-          );
-        })}
+                {index !== steps.length - 1 && (
+                  <div className="hidden place-self-center mx-2 sm:flex">
+                    {index % 2 === 0 ? <CurvedArrowUp /> : <CurvedArrowDown />}
+                  </div>
+                )}
+              </React.Fragment>
+            );
+          })}
+        </div>
       </div>
     </section>
   );

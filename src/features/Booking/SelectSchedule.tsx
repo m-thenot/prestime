@@ -73,6 +73,9 @@ const SelectSchedule: React.FC<ISelectScheduleProps> = ({ schedules }) => {
     if (booking?.schedules && isDateView) {
       setIsDateView(false);
     }
+
+    booking?.service?.slug &&
+      router.prefetch(`/booking/${booking.service.slug}/address`);
   }, [booking]);
 
   const schedulesSelected = currentSelection
@@ -90,6 +93,10 @@ const SelectSchedule: React.FC<ISelectScheduleProps> = ({ schedules }) => {
       }
       title="Quelles sont vos disponibilités ?"
     >
+      <p className="mb-6">
+        Vous pouvez sélectionnez plusieurs créneaux pour votre rendez-vous. Cela
+        permet de maximiser vos chances d&apos;avoir un prestataire disponible.
+      </p>
       {isDateView ? (
         <div className="sm:flex sm:flex-wrap grid grid-cols-2 gap-3">
           {schedules.map((schedule) => (

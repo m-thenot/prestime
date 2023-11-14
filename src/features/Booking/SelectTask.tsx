@@ -14,14 +14,26 @@ interface ISelectTaskProps {
 
 const SelectTask: React.FC<ISelectTaskProps> = ({ tasks, service }) => {
   const [taskSelected, setTaskSelected] = useState(tasks[0]?.id);
-  const { booking, setBooking } = useBooking();
+  const { booking, setBooking, skipProviderSelection } = useBooking();
   const router = useRouter();
+
+  useEffect(() => {
+    // Reset booking if it is not the same service
+    if (booking && booking?.service?.slug !== service.slug) {
+      setBooking(null);
+    }
+  }, [booking]);
+
+  useEffect(() => {
+    router.prefetch(`/booking/${service.slug}/description`);
+  }, []);
 
   const onSelect = () => {
     setBooking({
       ...booking,
       service: service,
       task: tasks.find((task) => task.id === taskSelected),
+      ...(skipProviderSelection ? { taskProvider: null } : {}),
     });
     router.push(`/booking/${service.slug}/description`);
   };
@@ -34,9 +46,26 @@ const SelectTask: React.FC<ISelectTaskProps> = ({ tasks, service }) => {
     >
       <RadioGroup
         options={tasks.map((task) => {
-          return { value: task.id, label: task.name };
+          return {
+            value: task.id,
+            node: skipProviderSelection ? (
+              <div className="ml-3">
+                {task.name}
+                {task.recommended_price && (
+                  <>
+                    -{" "}
+                    <span className="font-semibold">
+                      {task.recommended_price} DJF
+                    </span>
+                  </>
+                )}
+              </div>
+            ) : (
+              <span className="ml-3">{task.name}</span>
+            ),
+          };
         })}
-        onChange={(value) => setTaskSelected(value)}
+        onChange={(value) => setTaskSelected(value as number)}
         defaultValue={booking?.task?.id}
       />
     </StepContent>

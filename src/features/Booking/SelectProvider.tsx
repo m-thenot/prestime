@@ -4,11 +4,10 @@ import Stars from "@components/Stars";
 import { useBooking } from "@contexts/booking";
 import { getAllTaskProvidersByTask } from "@services/task-provider";
 import { sum } from "radash";
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import StepContent from "./StepContent";
 import Image from "next/image";
 import AvatarImage from "@images/avatar.svg";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useQuery } from "react-query";
 import Loader from "@components/Loader";
@@ -29,6 +28,11 @@ const SelectProvider: React.FC = () => {
     }
   );
 
+  useEffect(() => {
+    booking?.service?.slug &&
+      router.prefetch(`/booking/${booking.service.slug}/schedule`);
+  }, [booking]);
+
   const onSelect = () => {
     setBooking({
       ...booking,
@@ -47,9 +51,14 @@ const SelectProvider: React.FC = () => {
           value: 0,
           node: (
             <div className="ml-3 w-full">
-              <p className="font-bold mb-1">Faîtes nous confiance</p>
+              <div className="flex items-center justify-between">
+                <p className="font-bold mb-1">Faîtes nous confiance</p>
+                <p className="mb-0 font-bold text-lg">
+                  {booking?.task?.recommended_price} DJF
+                </p>
+              </div>
               <p>
-                EasyService sélectionnera le meilleur prestataire selon vos
+                Prestime sélectionnera le meilleur prestataire selon vos
                 disponibilités
               </p>
             </div>
@@ -81,13 +90,14 @@ const SelectProvider: React.FC = () => {
                     <Stars averageRating={rating} />
                   </div>
                 </div>
-                <Link
+                {/*   <Link
                   href="/login"
                   className="text-sm font-semibold hidden sm:block"
                   target="_blank"
                 >
                   Voir son profil complet
-                </Link>
+                </Link> */}
+                <p className="mb-0 font-bold text-lg">{tp.price} DJF</p>
               </div>
               <p className="text-gray-500 text-sm mt-3 line-clamp-3">
                 {tp.provider.description}
@@ -117,15 +127,16 @@ const SelectProvider: React.FC = () => {
             center={false}
             options={options!}
             defaultValue={booking?.taskProvider?.id || 0}
-            onChange={(value) => setTaskProvider(value)}
+            onChange={(value) => setTaskProvider(value as number)}
             dividers={[
               {
                 id: 0,
-                node: (
-                  <p className="my-4 text-center" key={0}>
-                    Ou
-                  </p>
-                ),
+                node:
+                  taskProviders && taskProviders.length > 0 ? (
+                    <p className="my-4 text-center" key={0}>
+                      Ou
+                    </p>
+                  ) : null,
               },
             ]}
           />

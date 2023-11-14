@@ -8,7 +8,7 @@ interface IButtonProps
     HTMLButtonElement
   > {
   children: React.ReactNode;
-  variant?: "primary" | "secondary" | "transparent" | "link";
+  variant?: "primary" | "secondary" | "transparent" | "link" | "none";
   isLoading?: boolean;
   hasMinWidth?: boolean;
 }
@@ -16,9 +16,10 @@ interface IButtonProps
 interface ILinkButtonProps {
   href: string;
   children: React.ReactNode;
-  variant?: "primary" | "secondary" | "transparent" | "link";
+  variant?: "primary" | "secondary" | "transparent" | "link" | "none";
   hasMinWidth?: boolean;
   className?: string;
+  isUnderlined?: boolean;
 }
 
 const classnames = {
@@ -27,6 +28,7 @@ const classnames = {
   secondary: "bg-white text-primary-100 border border-primary-100 px-4  h-11",
   transparent: "bg-transparent px-4 font-semibold",
   link: "bg-transparent h-auto px-0 hover:opacity-50 text-left",
+  none: "",
 };
 
 const Button: React.FC<IButtonProps> = ({
@@ -56,14 +58,17 @@ export const LinkButton: React.FC<ILinkButtonProps> = ({
   variant = "primary",
   className = "",
   hasMinWidth = false,
+  isUnderlined = false,
   href,
 }) => {
   return (
     <Link
       href={href}
-      className={`max-w-md rounded-lg flex items-center justify-center !no-underline	transition duration-200 ease-in-out ${
-        classnames[variant]
-      } ${hasMinWidth ? "min-w-[220px]" : ""}  ${className}`}
+      className={`max-w-md rounded-lg flex items-center justify-center ${
+        isUnderlined ? "underline" : "!no-underline"
+      } 	transition duration-200 ease-in-out ${classnames[variant]} ${
+        hasMinWidth ? "min-w-[220px]" : ""
+      }  ${className}`}
     >
       {children}
     </Link>

@@ -3,6 +3,7 @@ import Geocode from "react-geocode";
 import { IAddress } from "types/address";
 import Loader from "./Loader";
 import { logger } from "@utils/logger";
+import { getAddressComponent } from "@utils/address";
 
 Geocode.setApiKey(process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY!);
 Geocode.setLanguage("fr");
@@ -17,14 +18,14 @@ const styleContainer = {
 interface IMapPickerProps {
   address: IAddress;
   setAddress: React.Dispatch<React.SetStateAction<IAddress>>;
+  isLoaded: Boolean;
 }
 
-const MapPicker: React.FC<IMapPickerProps> = ({ address, setAddress }) => {
-  const { isLoaded } = useJsApiLoader({
-    id: "google-map-script",
-    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY!,
-  });
-
+const MapPicker: React.FC<IMapPickerProps> = ({
+  address,
+  setAddress,
+  isLoaded,
+}) => {
   const onDragEnd = (e: google.maps.MapMouseEvent) => {
     const lat = e.latLng?.lat();
     const lng = e.latLng?.lng();
@@ -36,6 +37,15 @@ const MapPicker: React.FC<IMapPickerProps> = ({ address, setAddress }) => {
 
           if (address.lat !== lat || address.lng !== lng) {
             setAddress({
+              city: getAddressComponent(
+                response.results[0].address_components,
+                "locality"
+              ),
+              country: getAddressComponent(
+                response.results[0].address_components,
+                "country"
+              ),
+
               coord: {
                 lat,
                 lng,

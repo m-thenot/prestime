@@ -12,7 +12,7 @@ const GalleryServices: React.FC<IGalleryServicesProps> = async ({
   const services = await getAllServicesByCategory(categoryId);
 
   return (
-    <section className="py-12">
+    <section className="container py-12">
       <h2 className="mb-4">Nos cours particuliers</h2>
       <div className="grid justify-between gap-3 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {services.map((service) => (

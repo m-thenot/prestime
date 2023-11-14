@@ -3,13 +3,13 @@
 import Button from "@components/Button";
 import Input from "@components/Input";
 import InputPassword from "@components/InputPassword";
-import { createCustomer } from "@services/customer";
-import { logger } from "@utils/logger";
-import supabase from "@utils/supabase/supabase-browser";
 import { EMAIL_REGEX } from "constants/form";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import InputPhoneNumber from "@components/InputPhoneNumber";
+import useSignUp from "@hooks/useSignUp";
+import { UserType } from "types/user";
+import useRedirectToReferrer from "@hooks/useRedirectToReferrer";
 
 interface SignUpInputs {
   firstname: string;
@@ -24,46 +24,36 @@ interface ISignUpProps {
   onClickLogin?: () => void;
 }
 
-const SignUp: React.FC<ISignUpProps> = ({ isEmbedded, onClickLogin }) => {
+const SignUp: React.FC<ISignUpProps> = ({
+  isEmbedded = false,
+  onClickLogin,
+}) => {
   const {
     register,
     handleSubmit,
     control,
     formState: { errors },
   } = useForm<SignUpInputs>();
+  const redirectToReferrer = useRedirectToReferrer();
 
-  const onSubmit = async ({
-    email,
-    password,
-    lastname,
-    firstname,
-    phoneNumber,
-  }: SignUpInputs) => {
-    try {
-      const { data } = await supabase.auth.signUp({
-        email,
-        password,
-      });
-
-      if (data.user) {
-        await createCustomer({
-          user_id: data.user.id,
-          firstname,
-          lastname,
-          phone_number: phoneNumber,
-        });
-      }
-    } catch (error) {
-      logger.error(error);
+  const onSignUp = () => {
+    if (!isEmbedded) {
+      redirectToReferrer();
     }
   };
 
+  const { onSubmit, isLoading } = useSignUp(UserType.CUSTOMER, onSignUp);
+
   return (
     <form
-      className="items-center flex flex-col"
+      className={`items-center flex flex-col ${isEmbedded ? "" : "container"} `}
       onSubmit={handleSubmit(onSubmit)}
     >
-      <h1 className="mb-2">Créez votre compte</h1>
+      {isEmbedded ? (
+        <h2 className="mb-2">Créez votre compte</h2>
+      ) : (
+        <h1 className="mb-2">Créez votre compte</h1>
+      )}
 
       <Input
         label="Prénom"
@@ -106,7 +96,7 @@ const SignUp: React.FC<ISignUpProps> = ({ isEmbedded, onClickLogin }) => {
         })}
       />
 
-      <Button className="w-full mt-6" type="submit">
+      <Button className="w-full mt-6" type="submit" isLoading={isLoading}>
         Continuer
       </Button>
 

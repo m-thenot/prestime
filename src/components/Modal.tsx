@@ -13,7 +13,7 @@ const Modal: React.FC<IModalProps> = ({ children, onClose }) => {
     <ClientOnlyPortal selector="body">
       <div
         onClick={onClose}
-        className="fixed top-0 left-0 right-0 bg-opacity-60 bg-black flex items-center justify-center w-full h-full"
+        className="fixed top-0 left-0 right-0 bg-opacity-60 bg-black flex items-center justify-center w-full h-full z-50"
       >
         <div
           onClick={(e) => {
@@ -22,9 +22,9 @@ const Modal: React.FC<IModalProps> = ({ children, onClose }) => {
           className="bg-white rounded-lg p-6"
         >
           <div className="flex justify-end">
-            <Button variant="transparent" onClick={onClose} className="mb-3">
-              <Close />
-            </Button>
+            <button onClick={onClose} className="mb-3 px-0">
+              <Close width={13} height={13} />
+            </button>
           </div>
           {children}
         </div>

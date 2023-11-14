@@ -30,3 +30,21 @@ export interface ITaskProvider {
   max_estimated_cost: number | null;
   payable_in_advance: boolean;
 }
+
+export interface IProvider {
+  id: number;
+  created_at: number;
+  firstname: string;
+  lastname: string;
+  phone_number: string;
+  user_id: string;
+  is_individual: boolean;
+  description?: string;
+  company_name?: string;
+  financial_id: string;
+}
+
+export type IInsertProvider = Pick<
+  IProvider,
+  "firstname" | "lastname" | "user_id" | "phone_number" | "financial_id"
+>;

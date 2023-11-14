@@ -1,5 +1,11 @@
 import { Document } from "@contentful/rich-text-types";
 
+export interface IFaqPageFields {
+  faqItemsCollection: {
+    items: IFaqFields[];
+  };
+}
+
 export interface IFaqFields {
   /** question */
   question: string;
@@ -34,6 +40,8 @@ export interface IServiceBannerFields {
   /** title */
   title: string;
 
+  bookCta?: string;
+
   /** subtitle */
   subtitle: {
     json: Document;
@@ -48,4 +56,33 @@ interface IContentfulImage {
   width: number;
   height: number;
   title: string;
+}
+
+export interface IBecomeProfessionalFields {
+  seo: ISEOFields;
+  title: string;
+  argument: {
+    json: Document;
+  };
+  howItWorks: IHowItWorksFields;
+
+  /** FAQ */
+  faqCollection: {
+    items: IFaqFields[];
+  };
+}
+
+export interface IHowItWorksFields {
+  title: string;
+  tagLabel: string;
+  itemsCollection: {
+    items: IHowItWorksItemsFields[];
+  };
+}
+
+export interface IHowItWorksItemsFields {
+  title: string;
+  text: {
+    json: Document;
+  };
 }
