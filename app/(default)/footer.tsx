@@ -23,7 +23,10 @@ const SocialNetworks = ({ label }: { label: string }) => (
   <>
     <p className="font-bold mb-5 sm:mb-3">{label}</p>
     <div className="flex">
-      <Link href="" className="mr-6 sm:mr-3">
+      <Link
+        href="https://www.facebook.com/profile.php?id=61553204382707"
+        className="mr-6 sm:mr-3"
+      >
         <Facebook />
       </Link>
       <Link href="">

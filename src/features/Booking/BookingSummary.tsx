@@ -20,7 +20,7 @@ const BookingSummary: React.FC = () => {
   return (
     <>
       <section
-        className={`section-booking sm:ml-16 sm:min-w-[250px] transition-transform duration-300	fixed sm:static bottom-[65px] ${
+        className={`section-booking sm:ml-16 sm:min-w-[250px] sm:-z-10 transition-transform duration-300	fixed sm:static bottom-[65px] ${
           isSummaryOpen ? "translate-y-0" : "translate-y-full"
         } sm:translate-y-0 left-0 w-full sm:w-auto px-5 pb-5 bg-white sm:block`}
       >
