@@ -106,7 +106,10 @@ const BookingSummary: React.FC = () => {
 
         {booking?.taskProvider !== undefined && (
           <h3 className="font-semibold mt-4">
-            Total: {price ? `${price} DJF` : "Sur devis"}
+            Total:{" "}
+            {price
+              ? `${price} DJF ${booking.task?.is_hourly_price ? "/ heure" : ""}`
+              : "Sur devis"}
           </h3>
         )}
       </section>

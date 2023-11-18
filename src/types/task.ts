@@ -9,4 +9,5 @@ export interface ITask {
   id: number;
   name: string;
   recommended_price: number | null;
+  is_hourly_price: boolean;
 }

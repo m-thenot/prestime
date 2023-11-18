@@ -18,7 +18,7 @@ import { logger } from "@utils/logger";
 loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
 
 const paymentMethods = [
-  {
+  /*   {
     value: PaymentMethod.CREDIT_CARD,
     node: (
       <>
@@ -39,7 +39,7 @@ const paymentMethods = [
         </style>
       </>
     ),
-  },
+  }, */
   {
     value: PaymentMethod.CASH,
     label: "Cash",
@@ -49,7 +49,7 @@ const paymentMethods = [
 const SelectPayment: React.FC = () => {
   const { booking } = useBooking();
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>(
-    PaymentMethod.CREDIT_CARD
+    PaymentMethod.CASH
   );
   const searchParams = useSearchParams();
   const formRef = useRef<HTMLFormElement>(null);
@@ -112,7 +112,7 @@ const SelectPayment: React.FC = () => {
           options={paymentMethods}
           hasTwoColumns
           onChange={(value) => setPaymentMethod(value as PaymentMethod)}
-          defaultValue={PaymentMethod.CREDIT_CARD}
+          defaultValue={PaymentMethod.CASH}
         />
         <input
           type="hidden"

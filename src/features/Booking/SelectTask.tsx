@@ -55,7 +55,8 @@ const SelectTask: React.FC<ISelectTaskProps> = ({ tasks, service }) => {
                   <>
                     -{" "}
                     <span className="font-semibold">
-                      {task.recommended_price} DJF
+                      {task.recommended_price} DJF{" "}
+                      {task.is_hourly_price ? "/ heure" : ""}
                     </span>
                   </>
                 )}
