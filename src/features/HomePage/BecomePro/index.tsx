@@ -1,9 +1,16 @@
 "use client";
 
 import { LinkButton } from "@components/Button";
+import { useUser } from "@contexts/user";
 import React from "react";
 
 const BecomePro: React.FC = () => {
+  const { user } = useUser();
+
+  if (user) {
+    return null;
+  }
+
   return (
     <section className="section-bg">
       <div className="container flex flex-col items-center px-8">
