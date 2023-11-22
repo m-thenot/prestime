@@ -1,5 +1,6 @@
 "use client";
 import Hotjar from "@hotjar/browser";
+import { GA_TRACKING_ID } from "@utils/tracking";
 import Script from "next/script";
 import { useEffect } from "react";
 
@@ -12,11 +13,12 @@ const Tracking: React.FC = () => {
   }, []);
 
   return (
-    <Script
-      id="fb-pixel"
-      strategy="afterInteractive"
-      dangerouslySetInnerHTML={{
-        __html: `
+    <>
+      <Script
+        id="fb-pixel"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
     n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -28,8 +30,28 @@ const Tracking: React.FC = () => {
     fbq('init', '1774956386278965');
     fbq('track', 'PageView');
     `,
-      }}
-    />
+        }}
+      />
+
+      <Script
+        strategy="afterInteractive"
+        src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
+      />
+      <Script
+        id="gtag-init"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
+                      window.dataLayer = window.dataLayer || [];
+                      function gtag(){dataLayer.push(arguments);}
+                      gtag('js', new Date());
+                      gtag('config', '${GA_TRACKING_ID}', {
+                      page_path: window.location.pathname,
+                      });
+                    `,
+        }}
+      />
+    </>
   );
 };
 

@@ -18,15 +18,17 @@ export default async function RootLayout({
   const categories = await getAllCategoriesWithServices();
 
   return (
-    <LayoutContainer>
+    <>
       <Analytics />
       <Tracking />
-      <ServicesProvider categories={categories}>
-        <Header />
-        <main>{children}</main>
-        <Footer />
-      </ServicesProvider>
-    </LayoutContainer>
+      <LayoutContainer>
+        <ServicesProvider categories={categories}>
+          <Header />
+          <main>{children}</main>
+          <Footer />
+        </ServicesProvider>
+      </LayoutContainer>
+    </>
   );
 }
 

@@ -10,6 +10,7 @@ import InputPhoneNumber from "@components/InputPhoneNumber";
 import useSignUp from "@hooks/useSignUp";
 import { UserType } from "types/user";
 import useRedirectToReferrer from "@hooks/useRedirectToReferrer";
+import { trackEvent } from "@utils/tracking";
 
 interface SignUpInputs {
   firstname: string;
@@ -40,6 +41,7 @@ const SignUp: React.FC<ISignUpProps> = ({
     if (!isEmbedded) {
       redirectToReferrer();
     }
+    trackEvent("sign_up", { method: "email" });
   };
 
   const { onSubmit, isLoading } = useSignUp(UserType.CUSTOMER, onSignUp);

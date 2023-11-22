@@ -13,19 +13,21 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <LayoutContainer classNames="sm:bg-background">
-      <Header />
-      <Analytics />
+    <>
       <Tracking />
-      <main className="px-5 mb-4 sm:px-10 container">
-        <div className="flex justify-between">
-          <BookingProvider>
-            {children}
-            <BookingSummary />
-          </BookingProvider>
-        </div>
-      </main>
-    </LayoutContainer>
+      <Analytics />
+      <LayoutContainer classNames="sm:bg-background">
+        <Header />
+        <main className="px-5 mb-4 sm:px-10 container">
+          <div className="flex justify-between">
+            <BookingProvider>
+              {children}
+              <BookingSummary />
+            </BookingProvider>
+          </div>
+        </main>
+      </LayoutContainer>
+    </>
   );
 }
 

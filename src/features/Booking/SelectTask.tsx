@@ -1,6 +1,7 @@
 "use client";
 import RadioGroup from "@components/RadioGroup";
 import { useBooking } from "@contexts/booking";
+import { trackEvent } from "@utils/tracking";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { IService } from "types/service";
@@ -26,6 +27,7 @@ const SelectTask: React.FC<ISelectTaskProps> = ({ tasks, service }) => {
 
   useEffect(() => {
     router.prefetch(`/booking/${service.slug}/description`);
+    trackEvent("begin_checkout");
   }, []);
 
   const onSelect = () => {
