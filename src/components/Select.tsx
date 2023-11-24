@@ -1,19 +1,15 @@
 import theme from "constants/theme";
 import React from "react";
-import Select, { ActionMeta, MultiValue } from "react-select";
+import Select, {
+  ActionMeta,
+  GroupBase,
+  MultiValue,
+  OptionsOrGroups,
+} from "react-select";
 import colors from "tailwindcss/colors";
 
-const options = [
-  { value: "plumber", label: "Plombier" },
-  { value: "electrician", label: "Électricien" },
-  { value: "hairdresser", label: "Coiffeur" },
-  { value: "painter", label: "Peintre" },
-  { value: "A/C technician", label: "Technicien climatisation" },
-  { value: "teacher", label: "Professeur particulier" },
-  { value: "sport coach", label: "Coach sportif" },
-];
-
 interface ISelectProps {
+  options?: OptionsOrGroups<any, GroupBase<any>>;
   label?: string;
   placeholder?: string;
   isClearable?: boolean;
@@ -29,6 +25,7 @@ const CustomSelect: React.FC<ISelectProps> = ({
   placeholder = "",
   isClearable = true,
   required,
+  options,
   value,
   onChange,
 }) => {

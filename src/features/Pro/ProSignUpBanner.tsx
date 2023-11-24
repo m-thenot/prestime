@@ -15,6 +15,28 @@ import { useEffect } from "react";
 import { useController, useForm } from "react-hook-form";
 import { UserType } from "types/user";
 
+const options = [
+  { value: "baby-sitter", label: "Baby-sitter" },
+  { value: "private-driver", label: "Chauffeur privé" },
+  { value: "cook", label: "Chef cuisinier" },
+  { value: "sport coach", label: "Coach sportif" },
+  { value: "hairdresser", label: "Coiffeur" },
+  { value: "electrician", label: "Électricien" },
+  { value: "housekeeper", label: "Femme de ménage" },
+  { value: "gardener", label: "Jardinier" },
+  { value: "bricklayer", label: "Maçon" },
+  { value: "massage-therapist", label: "Masseur" },
+  { value: "make-up-artist", label: "Maquilleuse" },
+  { value: "carpenter", label: "Menuisier" },
+  { value: "painter", label: "Peintre" },
+  { value: "photographer", label: "Photographe" },
+  { value: "plumber", label: "Plombier" },
+  { value: "teacher", label: "Professeur particulier" },
+  { value: "locksmith", label: "Serrurier" },
+  { value: "air-conditioning-repair", label: "Technicien climatisation" },
+  { value: "other", label: "Autre" },
+];
+
 interface SignUpInputs {
   firstname: string;
   lastname: string;
@@ -89,6 +111,7 @@ const ProSignUpBanner: React.FC<IProSignUpBannerProps> = ({
               onChange={jobsOnChange}
               value={jobsValue}
               required
+              options={options}
             />
 
             <InputPhoneNumber errors={errors} control={control} />

@@ -14,6 +14,10 @@ const CarouselServices: React.FC<ICarouselServicesProps> = async ({
 }) => {
   const services = await getAllServicesByCategory(category.id);
 
+  if (services && services.length === 0) {
+    return null;
+  }
+
   return <CarouselServicesClient services={services} title={category.title} />;
 };
 
