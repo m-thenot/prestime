@@ -21,7 +21,7 @@ const Header: React.FC = () => {
     <header className="container items-center flex justify-between mb-8 sm:mb-12">
       <Link
         href="/"
-        className="text-xl sm:text-2xl font-extrabold hover:no-underline translate-y-1"
+        className="text-xl sm:text-2xl font-extrabold hover:no-underline translate-y-1 sm:translate-y-0"
       >
         <div className="hidden sm:block">
           <Image src={Logo} alt="" priority width={150} height={39} />

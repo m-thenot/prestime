@@ -11,18 +11,8 @@ export type Schema = {
       'country': string;
       'customer': number;
     };
-    nested: {
-      'customer_through_customer': Schema['customer']['plain'] & Schema['customer']['nested'];
-    };
-    flat: {
-      'customer_through_customer:id': number;
-      'customer_through_customer:created_at': string;
-      'customer_through_customer:firstname': string;
-      'customer_through_customer:lastname': string;
-      'customer_through_customer:user_id': string;
-      'customer_through_customer:phone_number': string;
-      'customer_through_customer:financial_id': string;
-    };
+    nested: {};
+    flat: {};
   };
   'appointment': {
     plain: {
@@ -35,7 +25,6 @@ export type Schema = {
     };
     nested: {
       'provider_through_provider': Schema['provider']['plain'] & Schema['provider']['nested'];
-      'customer_through_customer': Schema['customer']['plain'] & Schema['customer']['nested'];
       'address_through_address': Schema['address']['plain'] & Schema['address']['nested'];
     };
     flat: {
@@ -49,13 +38,6 @@ export type Schema = {
       'provider_through_provider:description': string;
       'provider_through_provider:user_id': string;
       'provider_through_provider:financial_id': string;
-      'customer_through_customer:id': number;
-      'customer_through_customer:created_at': string;
-      'customer_through_customer:firstname': string;
-      'customer_through_customer:lastname': string;
-      'customer_through_customer:user_id': string;
-      'customer_through_customer:phone_number': string;
-      'customer_through_customer:financial_id': string;
       'address_through_address:id': number;
       'address_through_address:created_at': string;
       'address_through_address:city': string;
@@ -64,13 +46,6 @@ export type Schema = {
       'address_through_address:longitude': number;
       'address_through_address:country': string;
       'address_through_address:customer': number;
-      'address_through_address:customer_through_customer:id': number;
-      'address_through_address:customer_through_customer:created_at': string;
-      'address_through_address:customer_through_customer:firstname': string;
-      'address_through_address:customer_through_customer:lastname': string;
-      'address_through_address:customer_through_customer:user_id': string;
-      'address_through_address:customer_through_customer:phone_number': string;
-      'address_through_address:customer_through_customer:financial_id': string;
     };
   };
   'category': {
@@ -108,12 +83,16 @@ export type Schema = {
       'appointment': number;
       'payment': number;
       'comment': string;
+      'provider': number;
+      'customer': number;
     };
     nested: {
       'task_provider_through_task_provider': Schema['task_provider']['plain'] & Schema['task_provider']['nested'];
       'task_through_task': Schema['task']['plain'] & Schema['task']['nested'];
       'appointment_through_appointment': Schema['appointment']['plain'] & Schema['appointment']['nested'];
       'payment_through_payment': Schema['payment']['plain'] & Schema['payment']['nested'];
+      'provider_through_provider': Schema['provider']['plain'] & Schema['provider']['nested'];
+      'customer_through_customer': Schema['customer']['plain'] & Schema['customer']['nested'];
     };
     flat: {
       'task_provider_through_task_provider:id': number;
@@ -139,6 +118,7 @@ export type Schema = {
       'task_provider_through_task_provider:task_through_task:name': string;
       'task_provider_through_task_provider:task_through_task:recommended_price': number;
       'task_provider_through_task_provider:task_through_task:service': number;
+      'task_provider_through_task_provider:task_through_task:is_hourly_price': boolean;
       'task_provider_through_task_provider:task_through_task:service_through_service:id': number;
       'task_provider_through_task_provider:task_through_task:service_through_service:created_at': string;
       'task_provider_through_task_provider:task_through_task:service_through_service:title': string;
@@ -155,6 +135,7 @@ export type Schema = {
       'task_through_task:name': string;
       'task_through_task:recommended_price': number;
       'task_through_task:service': number;
+      'task_through_task:is_hourly_price': boolean;
       'task_through_task:service_through_service:id': number;
       'task_through_task:service_through_service:created_at': string;
       'task_through_task:service_through_service:title': string;
@@ -182,13 +163,6 @@ export type Schema = {
       'appointment_through_appointment:provider_through_provider:description': string;
       'appointment_through_appointment:provider_through_provider:user_id': string;
       'appointment_through_appointment:provider_through_provider:financial_id': string;
-      'appointment_through_appointment:customer_through_customer:id': number;
-      'appointment_through_appointment:customer_through_customer:created_at': string;
-      'appointment_through_appointment:customer_through_customer:firstname': string;
-      'appointment_through_appointment:customer_through_customer:lastname': string;
-      'appointment_through_appointment:customer_through_customer:user_id': string;
-      'appointment_through_appointment:customer_through_customer:phone_number': string;
-      'appointment_through_appointment:customer_through_customer:financial_id': string;
       'appointment_through_appointment:address_through_address:id': number;
       'appointment_through_appointment:address_through_address:created_at': string;
       'appointment_through_appointment:address_through_address:city': string;
@@ -197,18 +171,28 @@ export type Schema = {
       'appointment_through_appointment:address_through_address:longitude': number;
       'appointment_through_appointment:address_through_address:country': string;
       'appointment_through_appointment:address_through_address:customer': number;
-      'appointment_through_appointment:address_through_address:customer_through_customer:id': number;
-      'appointment_through_appointment:address_through_address:customer_through_customer:created_at': string;
-      'appointment_through_appointment:address_through_address:customer_through_customer:firstname': string;
-      'appointment_through_appointment:address_through_address:customer_through_customer:lastname': string;
-      'appointment_through_appointment:address_through_address:customer_through_customer:user_id': string;
-      'appointment_through_appointment:address_through_address:customer_through_customer:phone_number': string;
-      'appointment_through_appointment:address_through_address:customer_through_customer:financial_id': string;
       'payment_through_payment:id': number;
       'payment_through_payment:created_at': string;
       'payment_through_payment:updated_at': string;
       'payment_through_payment:state': string;
       'payment_through_payment:method': string;
+      'provider_through_provider:id': number;
+      'provider_through_provider:created_at': string;
+      'provider_through_provider:firstname': string;
+      'provider_through_provider:lastname': string;
+      'provider_through_provider:phone_number': string;
+      'provider_through_provider:is_individual': boolean;
+      'provider_through_provider:company_name': string;
+      'provider_through_provider:description': string;
+      'provider_through_provider:user_id': string;
+      'provider_through_provider:financial_id': string;
+      'customer_through_customer:id': number;
+      'customer_through_customer:created_at': string;
+      'customer_through_customer:firstname': string;
+      'customer_through_customer:lastname': string;
+      'customer_through_customer:user_id': string;
+      'customer_through_customer:phone_number': string;
+      'customer_through_customer:financial_id': string;
     };
   };
   'payment': {
@@ -298,6 +282,7 @@ export type Schema = {
       'name': string;
       'recommended_price': number;
       'service': number;
+      'is_hourly_price': boolean;
     };
     nested: {
       'service_through_service': Schema['service']['plain'] & Schema['service']['nested'];
@@ -347,6 +332,7 @@ export type Schema = {
       'task_through_task:name': string;
       'task_through_task:recommended_price': number;
       'task_through_task:service': number;
+      'task_through_task:is_hourly_price': boolean;
       'task_through_task:service_through_service:id': number;
       'task_through_task:service_through_service:created_at': string;
       'task_through_task:service_through_service:title': string;

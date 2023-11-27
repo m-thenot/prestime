@@ -6,12 +6,12 @@ import InputPassword from "@components/InputPassword";
 import InputPhoneNumber from "@components/InputPhoneNumber";
 import RichText from "@components/RichText";
 import CustomSelect from "@components/Select";
-import { Document } from "@contentful/rich-text-types";
+import { BLOCKS, Document } from "@contentful/rich-text-types";
 import useSignUp from "@hooks/useSignUp";
 import { Check } from "@icons";
 import { EMAIL_REGEX } from "constants/form";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { ReactNode, useEffect } from "react";
 import { useController, useForm } from "react-hook-form";
 import { UserType } from "types/user";
 
@@ -83,8 +83,21 @@ const ProSignUpBanner: React.FC<IProSignUpBannerProps> = ({
           <h1 className="text-center md:text-left mb-8">{title}</h1>
           <RichText
             document={claims}
-            textClassName="mb-0"
-            iconList={<Check />}
+            customOptions={{
+              renderNode: {
+                [BLOCKS.PARAGRAPH]: (_node: any, children: ReactNode) => (
+                  <p className="mb-0">{children}</p>
+                ),
+                [BLOCKS.LIST_ITEM]: (_node: any, children: ReactNode) => (
+                  <li className="flex items-center mb-5">
+                    <span className="mr-4">
+                      <Check />
+                    </span>
+                    {children}
+                  </li>
+                ),
+              },
+            }}
           />
         </div>
         <div className="md:w-1/2 w-full max-w-sm bg-white px-6 py-8 shadow-lg">
