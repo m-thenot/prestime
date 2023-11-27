@@ -22,9 +22,25 @@ const Banner: React.FC<IBannerProps> = ({ content, slug }) => {
           textClassName="mt-5 text-slate-500"
         />
         {content.bookCta && (
-          <LinkButton href={`/booking/${slug}`} className="mt-5 max-w-xs">
-            {content.bookCta}
-          </LinkButton>
+          <div className="z-10 sm:relative fixed bottom-0 py-5 px-5 bg-white w-screen -translate-x-5 sm:px-0 sm:py-0 sm:w-auto sm:translate-x-0">
+            <LinkButton
+              href={`/booking/${slug}`}
+              className="sm:mt-5 sm:max-w-xs"
+            >
+              {content.bookCta}
+            </LinkButton>
+
+            {content.proLink && (
+              <LinkButton
+                variant="link"
+                isUnderlined
+                href="/pro/sign-up"
+                className="mt-3 sm:mt-4 font-semibold sm:max-w-xs"
+              >
+                {content.proLink}
+              </LinkButton>
+            )}
+          </div>
         )}
       </div>
       <div className="relative ml-16 mr-6 hidden md:block">

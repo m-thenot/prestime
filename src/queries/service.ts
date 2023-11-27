@@ -24,5 +24,6 @@ banner{
     json
   }
   bookCta
+  proLink
 }
 `;

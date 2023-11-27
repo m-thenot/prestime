@@ -42,6 +42,8 @@ export interface IServiceBannerFields {
 
   bookCta?: string;
 
+  proLink?: string;
+
   /** subtitle */
   subtitle: {
     json: Document;
