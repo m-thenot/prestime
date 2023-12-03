@@ -9,7 +9,6 @@ import CustomSelect from "@components/Select";
 import { BLOCKS, Document } from "@contentful/rich-text-types";
 import useSignUp from "@hooks/useSignUp";
 import { Check } from "@icons";
-import { EMAIL_REGEX } from "constants/form";
 import { useRouter } from "next/navigation";
 import { ReactNode, useEffect } from "react";
 import { useController, useForm } from "react-hook-form";
@@ -40,7 +39,6 @@ const options = [
 interface SignUpInputs {
   firstname: string;
   lastname: string;
-  email: string;
   password: string;
   phoneNumber: string;
   jobs: any;
@@ -128,20 +126,6 @@ const ProSignUpBanner: React.FC<IProSignUpBannerProps> = ({
             />
 
             <InputPhoneNumber errors={errors} control={control} />
-
-            <Input
-              label="Email"
-              errors={errors}
-              autoComplete="email"
-              type="email"
-              {...register("email", {
-                required: true,
-                pattern: {
-                  value: EMAIL_REGEX,
-                  message: "Le format de l'email est incorrect.",
-                },
-              })}
-            />
 
             <InputPassword
               errors={errors}

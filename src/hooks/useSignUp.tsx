@@ -10,29 +10,28 @@ import { toast } from "react-toastify";
 interface SignUpInputs {
   firstname: string;
   lastname: string;
-  email: string;
   password: string;
   phoneNumber: string;
   jobs?: { value: string; label: string }[];
 }
 
-export type UserMutation = (
+export type UserMutation =
   | Omit<InsertCustomer, "financial_id">
   | (Omit<IInsertProvider, "financial_id"> & {
       jobs?: string[];
-    })
-) & { email: string };
+    });
 
 const useSignUp = (type: UserType, onSignUp: () => void) => {
   const [isLoading, setIsLoading] = useState(false);
   const { mutate } = useMutation({
-    mutationFn: async (user: UserMutation & { email: string }) => {
+    mutationFn: async (user: UserMutation) => {
       const requestOptions = {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ user, type }),
       };
       const response = await fetch("/api/sign-up", requestOptions);
+
       if (!response.ok) {
         throw new Error(response.statusText);
       }
@@ -51,7 +50,6 @@ const useSignUp = (type: UserType, onSignUp: () => void) => {
   };
 
   const onSubmit = async ({
-    email,
     password,
     lastname,
     firstname,
@@ -60,8 +58,8 @@ const useSignUp = (type: UserType, onSignUp: () => void) => {
   }: SignUpInputs) => {
     try {
       setIsLoading(true);
-      const { data } = await supabase.auth.signUp({
-        email,
+      const { data, error } = await supabase.auth.signUp({
+        phone: phoneNumber,
         password,
         options: {
           data: {
@@ -69,6 +67,10 @@ const useSignUp = (type: UserType, onSignUp: () => void) => {
           },
         },
       });
+
+      if (error) {
+        throw error;
+      }
 
       if (data.user) {
         mutate(
@@ -78,7 +80,6 @@ const useSignUp = (type: UserType, onSignUp: () => void) => {
             lastname,
             phone_number: phoneNumber,
             jobs: jobs?.map((job) => job.value),
-            email,
           },
           {
             onSuccess: async () => {

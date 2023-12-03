@@ -3,7 +3,6 @@
 import Button from "@components/Button";
 import Input from "@components/Input";
 import InputPassword from "@components/InputPassword";
-import { EMAIL_REGEX } from "constants/form";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import InputPhoneNumber from "@components/InputPhoneNumber";
@@ -15,7 +14,6 @@ import { trackEvent } from "@utils/tracking";
 interface SignUpInputs {
   firstname: string;
   lastname: string;
-  email: string;
   password: string;
   phoneNumber: string;
 }
@@ -72,20 +70,6 @@ const SignUp: React.FC<ISignUpProps> = ({
       />
 
       <InputPhoneNumber errors={errors} control={control} />
-
-      <Input
-        label="Email"
-        errors={errors}
-        autoComplete="email"
-        type="email"
-        {...register("email", {
-          required: true,
-          pattern: {
-            value: EMAIL_REGEX,
-            message: "Le format de l'email est incorrect.",
-          },
-        })}
-      />
 
       <InputPassword
         errors={errors}

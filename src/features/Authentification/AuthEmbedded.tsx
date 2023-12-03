@@ -3,7 +3,7 @@ import SignUp from "./SignUp";
 import Login from "./Login";
 
 const AuthEmbedded: React.FC = () => {
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogin, setIsLogin] = useState(false);
 
   return isLogin ? (
     <Login isEmbedded onClickSignUp={() => setIsLogin(false)} />

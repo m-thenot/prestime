@@ -4,6 +4,7 @@ import Button from "@components/Button";
 import FormError from "@components/FormError";
 import Input from "@components/Input";
 import InputPassword from "@components/InputPassword";
+import InputPhoneNumber from "@components/InputPhoneNumber";
 import useRedirectToReferrer from "@hooks/useRedirectToReferrer";
 import supabase from "@utils/supabase/supabase-browser";
 import Link from "next/link";
@@ -14,6 +15,7 @@ import { useMutation } from "react-query";
 interface LoginInputs {
   email: string;
   password: string;
+  phoneNumber: string;
 }
 
 interface ILoginProps {
@@ -25,14 +27,15 @@ const Login: React.FC<ILoginProps> = ({ isEmbedded, onClickSignUp }) => {
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
   } = useForm<LoginInputs>();
   const [areInvalidCredentials, setAreInvalidCredentials] = useState(false);
   const redirectToReferrer = useRedirectToReferrer();
   const { mutate, isLoading } = useMutation(
-    async ({ email, password }: LoginInputs) => {
+    async ({ phoneNumber, password }: LoginInputs) => {
       const { data, error } = await supabase.auth.signInWithPassword({
-        email,
+        phone: phoneNumber,
         password,
       });
 
@@ -63,13 +66,7 @@ const Login: React.FC<ILoginProps> = ({ isEmbedded, onClickSignUp }) => {
         <FormError errorMessage="Email ou mot de passe incorrect" />
       )}
 
-      <Input
-        label="Email"
-        autoComplete="email"
-        type="email"
-        {...register("email")}
-        errors={errors}
-      />
+      <InputPhoneNumber errors={errors} control={control} />
 
       <InputPassword errors={errors} {...register("password")} />
 
