@@ -17,10 +17,12 @@ interface ICreateCustomerRequest {
 /* Create customer */
 export async function POST(request: Request) {
   const body: ICreateCustomerRequest = await request.json();
-  const { firstname, lastname, phone_number, user_id, email } = body.user;
+  const { firstname, lastname, phone_number, user_id } = body.user;
 
   try {
-    const stripeCustomer = await stripe.customers.create({ email });
+    const stripeCustomer = await stripe.customers.create({
+      phone: phone_number,
+    });
 
     const { error } =
       body.type === UserType.CUSTOMER
