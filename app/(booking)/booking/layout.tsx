@@ -6,6 +6,7 @@ import { BookingProvider } from "@contexts/booking";
 import { defaultMetadata, defaultViewport } from "@utils/defaultMetadata";
 import { Analytics } from "@vercel/analytics/react";
 import Tracking from "@components/Tracking";
+import ContactButton from "@components/ContactButton";
 
 export default async function RootLayout({
   children,
@@ -26,6 +27,7 @@ export default async function RootLayout({
             </BookingProvider>
           </div>
         </main>
+        <ContactButton />
       </LayoutContainer>
     </>
   );
